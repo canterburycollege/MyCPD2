@@ -10,5 +10,5 @@ echo $OUTPUT->header();
 include ('../templates/header.php');
 include ('../templates/nav_bar.php');
 
-echo "<h1>Hub</h1>";
+echo "<h1>Mandatory & Contractual Training</h1>";
 echo $OUTPUT->footer();

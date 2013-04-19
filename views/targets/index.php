@@ -9,6 +9,5 @@ $PAGE->set_context($context);
 echo $OUTPUT->header();
 include ('../templates/header.php');
 include ('../templates/nav_bar.php');
-
-echo "<h1>Hub</h1>";
+echo "<h1>Targets</h1>";
 echo $OUTPUT->footer();
