@@ -10,4 +10,5 @@ class HubModel extends BaseModel
     }
 }
 
-?>
+/* End of file hub.php */
+/* Location: ./models/hub.php */

@@ -22,4 +22,5 @@ class ViewModel {
     }
 }
 
-?>
+/* End of file ViewModel.php */
+/* Location: ./system/ViewModel.php */

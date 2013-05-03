@@ -23,4 +23,5 @@ class ErrorController extends BaseController
     }
 }
 
-?>
+/* End of file error.php */
+/* Location: ./controllers/error.php */

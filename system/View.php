@@ -39,4 +39,5 @@ class View {
     }
 }
 
-?>
+/* End of file View.php */
+/* Location: ./system/View.php */

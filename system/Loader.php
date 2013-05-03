@@ -71,4 +71,5 @@ class Loader {
     }
 }
 
-?>
+/* End of file Loader.php */
+/* Location: ./system/Loader.php */

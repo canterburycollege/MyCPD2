@@ -14,4 +14,5 @@ class ErrorModel extends BaseModel
     }
 }
 
-?>
+/* End of file error.php */
+/* Location: ./models/error.php */

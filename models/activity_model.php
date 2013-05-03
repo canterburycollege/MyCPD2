@@ -5,7 +5,7 @@
  * 
  * Interacts with database
  */
-class Activity_model extends Model {
+class ActivityModel extends BaseModel {
 
     protected $tbl_activity = 'activity';
     protected $tbl_cpd_type = 'cpd_type';
@@ -107,5 +107,5 @@ class Activity_model extends Model {
 
 }
 
-/* End of file activity_model.php */
-/* Location: ./models/activity_model.php */
+/* End of file activity.php */
+/* Location: ./models/activity.php */

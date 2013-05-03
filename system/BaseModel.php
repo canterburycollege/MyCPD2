@@ -23,5 +23,5 @@ class BaseModel {
     }
 }
 
-/* End of file Model.php */
-/* Location: ./system/core/Model.php */
+/* End of file BaseModel.php */
+/* Location: ./system/BaseModel.php */
