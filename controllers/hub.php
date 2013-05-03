@@ -8,10 +8,10 @@
  */
 class HubController extends BaseController
 {
-    //add to the parent constructor
+
     public function __construct($action, $urlValues) {
         parent::__construct($action, $urlValues);
-        
+
         //create the model object
         require("models/hub.php");
         $this->model = new HubModel();
@@ -21,6 +21,11 @@ class HubController extends BaseController
     protected function index()
     {
         $this->view->output($this->model->index());
+    }
+    
+    public function view(){
+        echo "<p>urlValues:</p>";
+        print_r( $this->urlValues);
     }
 }
 /* End of file hub.php */
