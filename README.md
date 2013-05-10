@@ -17,4 +17,3 @@ define('PASSWORD', 'yourdbpassword');
 ?>
 
 Place outside the webroot e.g. /srv/www/mycpd_config/database.php
->>>>>>> master
