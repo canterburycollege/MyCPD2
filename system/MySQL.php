@@ -6,17 +6,16 @@
  * @author rhardy
  */
 
+// require database credentials
+require_once 'c:\wamp\mycpd2_config\database.php';
+
 
 class MySQL extends mysqli {
-
-    public function close(){
-        mysqli_close($this->conn);
-    } 
     
+    protected $conn;
     
-    
-    public function connect($host,$user,$pwd,$db)
-    {
+    public function __construct($host,$user,$pwd,$db) {
+        parent::__construct($host,$user,$pwd,$db);
         if ( $link = mysqli_connect($host, $user, $pwd, $db) ) {
             $this->conn = $link;
         } else {
@@ -24,24 +23,7 @@ class MySQL extends mysqli {
             . mysqli_connect_error());
         }
     } 
-    
-    
-    
-    public function copy_table($table){
-        
-        $table_copy = $table . '_copy';
-            
-        $sql_1 = "DROP TABLE IF EXISTS $table_copy";
-        $this->execute($sql_1);
-            
-        $sql_2 = "
-            CREATE TABLE $table_copy 
-            SELECT * FROM $table";
-        $this->execute($sql_2);
-        
-    }
-
-
+   
 
     public function execute($sql){
         $result = mysqli_query($this->conn,$sql);
