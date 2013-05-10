@@ -1,6 +1,6 @@
 <?php
 
-require_once 'C:wamp\www\MyCPD2\system\DbConnectionRegistry.php';
+require_once SYSPATH .'DbConnectionRegistry.php';
 
 class ActivityModel extends BaseModel
 {
