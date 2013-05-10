@@ -12,7 +12,7 @@ class View {
     //establish view location on object creation
     public function __construct($controllerClass, $action) {
         $controllerName = str_replace("Controller", "", $controllerClass);
-        $this->viewFile = "views/" . $controllerName . "/" . $action . ".php";
+        $this->viewFile = "views/" . strtolower($controllerName) . "/" . $action . ".php";
 
     }
                
