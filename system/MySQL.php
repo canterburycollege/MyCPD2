@@ -23,8 +23,8 @@ class MySQL extends mysqli {
             . mysqli_connect_error());
         }
     } 
-   
 
+    
     public function execute($sql){
         $result = mysqli_query($this->conn,$sql);
         if (!$result) {

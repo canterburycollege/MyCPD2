@@ -72,63 +72,56 @@ form br {
     border:2px solid;
     padding:4px;
     font:100% verdana,arial,sans-serif;
-<<<<<<< HEAD
-    background: #F5FFFA;
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
- .fieldset-auto-width {
-         display: inline-block;
-    }
-    
-    .target {
-        background:#c0deed;
-    }
-    
-    body {
-        background:#c0deed;
-        font:100% verdana,arial,sans-serif;
-    }
-    
-    label {
-        padding-bottom: 6px;
-        
-    }
-    
-    .profilelogin {
-        font-size: 1.4em;
-        font-weight: bold;
-        letter-spacing: none;
-        padding-right: 10px;
-    }
-    
-    .breadcrumb {
-      padding-top: 6px; 
-    }
-    
-    .title {
-        text-align: center;
-        padding-top: 6px;
-    }
-    
-    #sectiontitle {
-        padding-left: 20px;
-        padding-top: 20px;
-    }
-    
-    .jcontrolsleft2 {
-       font-weight: 500;
-font-size: 13px;
-float: left;
-border-width: 0px;
-overflow: hidden;
-height: 35px;
-width: 100%; 
-    }
-=======
-    background: #F5FFFA
+.fieldset-auto-width {
+    display: inline-block;
+}
 
+.target {
+    background:#c0deed;
+}
+
+body {
+    background:#c0deed;
+    font:100% verdana,arial,sans-serif;
+}
+
+label {
+    padding-bottom: 6px;
+
+}
+
+.profilelogin {
+    font-size: 1.4em;
+    font-weight: bold;
+    letter-spacing: none;
+    padding-right: 10px;
+}
+
+.breadcrumb {
+    padding-top: 6px; 
+}
+
+.title {
+    text-align: center;
+    padding-top: 6px;
+}
+
+#sectiontitle {
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.jcontrolsleft2 {
+    font-weight: 500;
+    font-size: 13px;
+    float: left;
+    border-width: 0px;
+    overflow: hidden;
+    height: 35px;
+    width: 100%; 
+    background: #F5FFFA
 }
 
 .fieldset-auto-width {
@@ -174,4 +167,3 @@ tr.odd {
 tr.even { 
     background-color: #FDFDF0; 
 }
->>>>>>> CPDimpact-patch
