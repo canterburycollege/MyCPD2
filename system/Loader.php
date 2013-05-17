@@ -16,8 +16,7 @@ class Loader {
     
     //store the URL request values on object creation
     public function __construct() {
-        $this->urlValues = $_GET;
-        
+         $this->urlValues = $_GET;
         if ($this->urlValues['controller'] == "") {
             $this->controllerName = "hub";
             $this->controllerClass = "HubController";
