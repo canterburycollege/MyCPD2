@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Controller for reports
+ * Controller for targets
  * 
- * Loads models and views required by reports
+ * Loads models and views required by targets
  */
-class ReportController extends BaseController
+class TargetController extends BaseController
 {
 
     public function __construct($action, $urlValues) {
         parent::__construct($action, $urlValues);
 
         //create the model object
-        require("models/report.php");
-        $this->model = new ReportModel();
+        require("models/target.php");
+        $this->model = new TargetModel();
     }
     
     //default method
@@ -26,5 +26,5 @@ class ReportController extends BaseController
         $this->view->output($this->model->view());
     }
 }
-/* End of file report.php */
-/* Location: ./report.php */
+/* End of file target.php */
+/* Location: ./target.php */

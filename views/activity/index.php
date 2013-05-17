@@ -1,4 +1,3 @@
-<h1>MyCPD Hub</h1>
-<p>-- insert nav bar here --</p>
+<?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
+<h1><?= $viewModel->get('heading1'); ?></h1>
 <p>-- insert content here --</p>
-<p>Default page for activities</p>

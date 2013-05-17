@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Controller for reports
+ * Controller for mandatory & contractual training
  * 
- * Loads models and views required by reports
+ * Loads models and views required by mandatory & contractual training
  */
-class ReportController extends BaseController
+class MandatoryController extends BaseController
 {
 
     public function __construct($action, $urlValues) {
         parent::__construct($action, $urlValues);
 
         //create the model object
-        require("models/report.php");
-        $this->model = new ReportModel();
+        require("models/mandatory.php");
+        $this->model = new MandatoryModel();
     }
     
     //default method
@@ -26,5 +26,5 @@ class ReportController extends BaseController
         $this->view->output($this->model->view());
     }
 }
-/* End of file report.php */
-/* Location: ./report.php */
+/* End of file mandatory.php */
+/* Location: ./mandatory.php */

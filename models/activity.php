@@ -20,16 +20,22 @@ class ActivityModel extends BaseModel
     public function index()
     {   
         $this->viewModel->set("pageTitle","MyCPD Hub");
+        $this->viewModel->set("heading1","Activities");
         return $this->viewModel; 
     }
     
     
     public function view(){
-        $sql = "SELECT * FROM v_activity";
+        $employee_id = 1;
+        
+        $sql = "SELECT * FROM v_activity WHERE employee_id = {$employee_id}";
         
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql,'OBJECT');
-        
+        if (empty($results)) {
+            // initialize array to prevent php warning msg.
+            $results = Array();
+        }
         $this->viewModel->set("pageTitle","MyCPD Hub");
         $this->viewModel->set("heading1","Activities");
         $this->viewModel->set("activities",$results);
