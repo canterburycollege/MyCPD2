@@ -1,20 +1,19 @@
 <?php
 
 /**
- * Controller for hub
+ * Controller for reports
  * 
- * Loads models and views required by hub
- * 
+ * Loads models and views required by reports
  */
-class HubController extends BaseController
+class ReportController extends BaseController
 {
 
     public function __construct($action, $urlValues) {
         parent::__construct($action, $urlValues);
 
         //create the model object
-        require("models/hub.php");
-        $this->model = new HubModel();
+        require("models/report.php");
+        $this->model = new ReportModel();
     }
     
     //default method
@@ -27,5 +26,5 @@ class HubController extends BaseController
         $this->view->output($this->model->view());
     }
 }
-/* End of file hub.php */
+/* End of file report.php */
 /* Location: ./hub.php */
