@@ -12,10 +12,12 @@
 
 // define config vars
 define('BASEPATH', __DIR__ . DIRECTORY_SEPARATOR); // path to this directory
-define('DS', DIRECTORY_SEPARATOR); // window & linux ude different seperators
+define('DS', DIRECTORY_SEPARATOR); // window & linux use different seperators
 define('SYSPATH', BASEPATH . 'system' . DS);
-
-
+define('DBCONF', BASEPATH .'..'.DS.'..'.DS.'..'.DS.'mycpd_config'.DS);
+echo "BASE: ".BASEPATH."<br>";
+echo "SYSPATH: ".SYSPATH."<br>";
+echo "DBCONF:" .DBCONF;
 require(SYSPATH . 'BaseController.php');  
 require(SYSPATH . 'BaseModel.php');
 require(SYSPATH . 'View.php');

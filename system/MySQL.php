@@ -7,8 +7,8 @@
  */
 
 // require database credentials
-require_once 'c:\wamp\mycpd2_config\database.php';
-
+//require_once 'c:\wamp\mycpd2_config\database.php';
+require_once '/srv/www/mycpd_config/database.php';
 
 class MySQL extends mysqli {
     
