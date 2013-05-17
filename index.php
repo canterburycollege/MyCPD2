@@ -14,7 +14,7 @@
 define('BASEPATH', __DIR__ . DIRECTORY_SEPARATOR); // path to this directory
 define('DS', DIRECTORY_SEPARATOR); // window & linux ude different seperators
 define('SYSPATH', BASEPATH . 'system' . DS);
-define('CONFIGPATH', BASEPATH . '..' . DS . '..' . DS);
+define('CONFIGPATH', 'C:\wamp\mycpd2_config\\'); // path for config files
 
 require(SYSPATH . 'BaseController.php');  
 require(SYSPATH . 'BaseModel.php');

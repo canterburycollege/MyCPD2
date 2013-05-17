@@ -16,7 +16,7 @@ class DbConnectionRegistry {
         switch ($db){
             case 'mycpd':
                 // require database credentials
-                require_once 'C:\wamp\mycpd2_config\database.php';
+                require_once CONFIGPATH . 'database.php';
                 require_once 'MySQL.php';
                 $dbConn = new MySQL(HOSTNAME, USERNAME, PASSWORD, DATABASE);
                 break;
