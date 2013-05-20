@@ -20,6 +20,12 @@ class DbConnectionRegistry {
                 require_once 'MySQL.php';
                 $dbConn = new MySQL(HOSTNAME, USERNAME, PASSWORD, DATABASE);
                 break;
+           case 'moodle':
+                // require database credentials
+                require_once CONFIGPATH . 'moodle-database.php';
+                require_once 'MySQL.php';
+                $dbConn = new MySQL(HOSTNAME, USERNAME, PASSWORD, DATABASE);
+                break;
             default:
                 $dbConn = NULL;
                 echo '<h1>Error in DbConnectionRegistry: Unable to connect to 
