@@ -1,7 +1,5 @@
-<?php require_once('/srv/www/htdocs/moodle/config.php'); ?>
-<link href="<?= base_url('/assets/css/default.css') ?>" rel="stylesheet" type="text/css">
-<div class='news'>
-<?php foreach ($news as $news_item): ?>    
-<?= $news_item['description'] ?>
+
+<?php foreach ($viewModel->get('news') as $row): ?>
+ <div class="news"><?= $row->description?></div>
 <?php endforeach; ?>
-</div>
+

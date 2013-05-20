@@ -1,31 +1,31 @@
 <?php
 
 /**
- * Controller for targets
+ * Controller for activity
  * 
- * Loads models and views required by targets
+ * Loads models and views required by activity
+ * 
  */
-class TargetController extends BaseController
+class NewsController extends BaseController
 {
 
     public function __construct($action, $urlValues) {
         parent::__construct($action, $urlValues);
 
         //create the model object
-        require("models/target.php");
         require("models/news.php");
-        $this->model = new TargetModel();
-        $this->model2 = new NewsModel();
+        $this->model = new NewsModel();
     }
     
-   public function create(){
-        $this->view->output($this->model->create());
+    public function edit(){
+        //Todo: Check to ensure this is an MyCPD admin user.
+        $this->view->output($this->model->edit());
     }
     
     public function delete(){
         $this->view->output($this->model->delete());
     }
-    
+
     //default method
     protected function index()
     {
@@ -33,9 +33,8 @@ class TargetController extends BaseController
     }
     
     public function view(){
-        
-        $this->view->output($this->model->view()); 
+        $this->view->output($this->model->view());
     }
 }
-/* End of file target.php */
-/* Location: ./target.php */
+/* End of file activity.php */
+/* Location: ./activity.php */
