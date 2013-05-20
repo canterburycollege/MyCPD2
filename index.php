@@ -11,14 +11,14 @@
  */
 
 // define file paths
-define('CONFIGPATH', 'C:\wamp\mycpd2_config\\'); // path for config files
+define('CONFIGPATH', '/srv/www/mycpd_config/'); // path for config files
 define('DS', DIRECTORY_SEPARATOR); // window & linux ude different seperators
 define('BASEPATH', __DIR__ . DS); // path to this directory
 define('SYSPATH', BASEPATH . 'system' . DS);
 define('TEMPLATEPATH', BASEPATH . 'views' . DS . 'templates' . DS);
 
 // define url paths
-define('BASEURL', '/MyCPD2/');
+define('BASEURL', '/moodle/MyCPD/');
 
 // load system files
 require(SYSPATH . 'BaseController.php');  
