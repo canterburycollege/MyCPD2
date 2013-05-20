@@ -10,10 +10,11 @@
     });
     
 </script>
-
+<?php foreach ($viewModel->get('news') as $row): ?>
+ <div class="news"><?= $row->description?></div>
+<?php endforeach; ?>   
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
-<?php echo "ID parameter: ".$_GET['id']; ?>
-<h1><?= $viewModel->get('heading1'); ?></h1>
+<h1><img src="<?= BASEURL . '/assets/pix/plan2.png' ?>" alt="Target icon"><?= $viewModel->get('heading1'); ?></h1>
 <div id="div_activities">
     <table id="table_detail">
         <thead>

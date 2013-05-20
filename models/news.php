@@ -42,7 +42,7 @@ class NewsModel extends BaseModel
         }
 
         $this->viewModel->set("news",$results);
-        
+     
         return $this->viewModel;
     }
 }
