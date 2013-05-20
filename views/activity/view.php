@@ -1,4 +1,4 @@
-<script type="text/javascript" src="http://localhost/MyCPD2/assets/js/DataTables/media/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="<?= BASEURL ?>/assets/js/DataTables/media/js/jquery.dataTables.js"></script>
 
 <script>
     $(document).ready(function(){
