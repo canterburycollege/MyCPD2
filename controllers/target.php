@@ -16,6 +16,14 @@ class TargetController extends BaseController
         $this->model = new TargetModel();
     }
     
+   public function create(){
+        $this->view->output($this->model->create());
+    }
+    
+    public function delete(){
+        $this->view->output($this->model->delete());
+    }
+    
     //default method
     protected function index()
     {

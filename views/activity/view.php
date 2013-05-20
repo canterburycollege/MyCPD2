@@ -8,10 +8,11 @@
         //auto fill fiter from get for linking. 
         filter.fnFilter( '<?php echo $_GET['id']; ?>' ); 
     });
+    
 </script>
 
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
-
+<?php echo "ID parameter: ".$_GET['id']; ?>
 <h1><?= $viewModel->get('heading1'); ?></h1>
 <div id="div_activities">
     <table id="table_detail">
