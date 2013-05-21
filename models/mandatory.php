@@ -1,4 +1,5 @@
 <?php
+require_once SYSPATH . 'DbConnectionRegistry.php';
 
 class MandatoryModel extends BaseModel {
 
@@ -10,12 +11,33 @@ class MandatoryModel extends BaseModel {
     }
 
     public function view() {
+
+        $userid = '2528';
+
+        $sql = "SELECT title, value FROM v_scores WHERE userid = $userid";
+
+        $dbConn = DbConnectionRegistry::getInstance('moodle');
+        $results = $dbConn->get_all($sql, 'OBJECT');
+        if (empty($results)) {
+            // initialize array to prevent php warning msg.
+            $results = Array();
+        }
         $this->viewModel->set("pageTitle", "MyCPD Hub");
         $this->viewModel->set("heading1", "Mandatory & Contractual Training");
+        $this->viewModel->set("mandatory", $results);
         return $this->viewModel;
     }
 
+    
+    
+    
+    
 }
 
 /* End of file mandatory.php */
 /* Location: ./models/mandatory.php */
+
+
+
+
+
