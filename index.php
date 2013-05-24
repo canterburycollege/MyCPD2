@@ -22,6 +22,7 @@ define('TEMPLATEPATH', BASEPATH . 'views' . DS . 'templates' . DS);
 define('BASEURL', '/moodle/MyCPD/');
 
 // load system files
+require(SYSPATH . 'Authentication.php');
 require(SYSPATH . 'BaseController.php');  
 require(SYSPATH . 'BaseModel.php');
 require(SYSPATH . 'View.php');
@@ -29,6 +30,7 @@ require(SYSPATH . 'ViewModel.php');
 require(SYSPATH . 'Loader.php');
 
 // bootstrap
+$auth = new Authentication(); // force login to moodle and make user object
 $loader = new Loader(); 
 $controller = $loader->createController(); 
 $controller->executeAction(); 
