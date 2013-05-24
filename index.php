@@ -19,8 +19,7 @@ define('SYSPATH', BASEPATH . 'system' . DS);
 define('TEMPLATEPATH', BASEPATH . 'views' . DS . 'templates' . DS);
 
 // define url paths
-##define('BASEURL', '/moodle/MyCPD/');
-define('BASEURL', '/MyCPD2/'); // rh local test version
+define('BASEURL', '/moodle/MyCPD/');
 
 // load system files
 require(SYSPATH . 'BaseController.php');  
