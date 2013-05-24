@@ -30,7 +30,7 @@
             <tbody>
                 <?php foreach ($viewModel->get('activities') as $row): ?>
                     <tr>
-                        <td><? $id=$row->title; ?><a href="../../activity/view?id=<?= $id?>"><?= $row->title ?></a></td>
+                        <td><a href="../../activity/view/<?= $row->id ?>"><?= $row->title ?></a></td>
                         <td><?= $row->title_ext ?></td>
                         <td><?= $row->description ?></td>
                         <td><?= $row->status ?></td>

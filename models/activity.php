@@ -25,10 +25,10 @@ class ActivityModel extends BaseModel
     }
     
     
-    public function view(){
+    public function view($id){
         $employee_id = 1;
         
-        $sql = "SELECT * FROM v_activity WHERE employee_id = {$employee_id}";
+        $sql = "SELECT * FROM v_activity WHERE target_id = {$id}";
         
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql,'OBJECT');

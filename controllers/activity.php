@@ -32,7 +32,9 @@ class ActivityController extends BaseController
     }
     
     public function view(){
-        $this->view->output($this->model->view());
+        print_r($_GET);
+        $id = $_GET['id'];
+        $this->view->output($this->model->view($id));
     }
 }
 /* End of file activity.php */
