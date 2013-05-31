@@ -1,35 +1,26 @@
 <?php
 
 /**
- * Class used to handle user authenication
+ * Class used to handle user authenication and get required moodle variables
  *
  * @author rhardy
  */
 class Authentication {
     
-    /**
-     *
-     * @moodle_user object 
-     */
-    private $moodle_user;
-    
     public function __construct(){
-        $this->set_moodle_user();
+        $this->set_moodle_vars();
     }
     
-    public function get_moodle_user(){
-        return $this->moodle_user;
-    }
-    
-    private function set_moodle_user(){
-        require '/srv/www/htdocs/moodle/config.php';
+    private function set_moodle_vars(){
+        require '/../../config.php';
         if($USER->id == 0){
             // goto moodle login page
             require_login();
-        } else {
-            // logged in as user: {$USER->id};
-            $this->moodle_user = $USER;
-        }
+        } 
+        // set moodle vars
+        $_SESSION['USER'] = $USER;
+        $_SESSION['OUTPUT'] = $OUTPUT;
+        $_SESSION['PAGE'] = $PAGE;
     }
 }
 

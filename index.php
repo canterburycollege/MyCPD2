@@ -33,7 +33,8 @@ require(SYSPATH . 'ViewModel.php');
 require(SYSPATH . 'Loader.php');
 
 // bootstrap
-$auth = new Authentication(); // force login to moodle and make user object
+// force login to moodle and save required moodle vars to session
+$auth = new Authentication(); 
 $loader = new Loader(); 
 $controller = $loader->createController(); 
 $controller->executeAction(); 
