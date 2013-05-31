@@ -41,7 +41,11 @@
                     <td><?= $row->planned_date ?></td>
                     <td><?= $row->completed_date ?></td>
                     <td><?= $row->evaluation_url ?></td>
-                    <td>Edit(url) | Delete(url)</td>
+                    <td><a href="<?= BASEURL ?>activity/update/<?= $row->id ?>">Update</a> 
+                        | 
+                        <a href="<?= BASEURL ?>activity/delete/<?= $row->id ?>">Delete</a> 
+                    </td>
+                    
                 </tr>
             <?php endforeach; ?>
         </tbody>

@@ -1,52 +1,64 @@
-<form name="update_form" method="POST">
-    <p>update activity</p>
+<?php
+$activity = $viewModel->get('activity');
+$target_options = $viewModel->get('target_options');
+$priority_options = $viewModel->get('priority_options');
+?>
+
+<h1>Update Activity</h1>
+<form>
     <table>
         <thead>
             <tr>
                 <th>Field</th>
-                <th>Existing Value</th>
+                <th>Existing value</th>
                 <th>New Value</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <th>Target this CPD addresses:</th>
+                <td>Target this CPD addresses: </td>
                 <td><?= $activity->target ?></td>
-                <td>-- select --</td>
+                <td><select name="target">
+                        <?= $target_options ?>
+                    </select>
+                </td>
             </tr>
             <tr>
-                <th>Title of CPD activity/event:</th>
-                <td><?= $row->x ?></td>
-                <td>-- textbox --</td>
+                <td>Title of CPD activity/event: </td>
+                <td><?= $activity->title ?></td>
+                <td>--textbox--</td>
             </tr>
             <tr>
-                <th>Intended Learning Outcomes for teacher:</th>
-                <td><?= $activity->x ?></td>
-                <td>-- textbox --</td>
+                <td>Intended learning outcomes for teacher: </td>
+                <td><?= $activity->learning_outcomes ?></td>
+                <td>--textbox--</td>
             </tr>
             <tr>
-                <th>Intended Impact on student outcomes:</th>
-                <td><?= $activity->x ?></td>
-                <td>-- textbox --</td>
+                <td>Intended impact on student outcomes: </td>
+                <td><?= $activity->impact ?></td>
+                <td>--textbox--</td>
             </tr>
             <tr>
-                <th>Priority level:</th>
-                <td><?= $activity->x ?></td>
-                <td>-- select --</td>
+                <td>Priority level: </td>
+                <td><?= $activity->priority_type ?></td>
+                <td><select name="priority_type">
+                        <?= $priority_options ?>
+                    </select>
+                </td>
             </tr>
             <tr>
-                <th>Target Date:</th>
-                <td><?= $activity->x ?></td>
-                <td>-- calendar --</td>
+                <td>Target date: </td>
+                <td><?= $activity->planned_date ?></td>
+                <td>--calendar--</td>
             </tr>
             <tr>
-                <th>Completed?:</th>
-                <td><?= $activity->x ?></td>
-                <td>-- calendar --</td>
+                <td>Completed? </td>
+                <td><?= $activity->completed_date ?></td>
+                <td>--calendar--</td>
             </tr>
         </tbody>
     </table>
-
-<input type="submit" value="Submit" name="Submit" />
-<input type="reset" value="Cancel" name="Cancel" />
+    <br/>
+    <input type="submit" value="Submit" />
+    <input type="reset" value="Cancel" />
 </form>
