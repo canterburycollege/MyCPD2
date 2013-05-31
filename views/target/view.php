@@ -28,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($viewModel->get('activities') as $row): ?>
+                <?php foreach ($viewModel->get('targets') as $row): ?>
                     <tr>
                         <td><a href="../../activity/view/<?= $row->id ?>"><?= $row->title ?></a></td>
                         <td><?= $row->title_ext ?></td>

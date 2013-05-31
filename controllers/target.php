@@ -36,6 +36,11 @@ class TargetController extends BaseController
         
         $this->view->output($this->model->view()); 
     }
+    
+        public function update(){
+        
+        $this->view->output($this->model->update(1)); 
+    }
 }
 /* End of file target.php */
 /* Location: ./target.php */

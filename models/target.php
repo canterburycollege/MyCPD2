@@ -34,11 +34,30 @@ class TargetModel extends BaseModel {
         }
         $this->viewModel->set("pageTitle", "MyCPD Hub");
         $this->viewModel->set("heading1", "Targets");
-        $this->viewModel->set("activities", $results);
+        $this->viewModel->set("targets", $results);
 
         return $this->viewModel;
     }
 
+        public function update($id) {
+        $employee_id = 1;
+
+        $sql = "SELECT * FROM v_targets_with_status WHERE employee_id = {$employee_id} AND id = {$id}";
+
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results = $dbConn->get_all($sql, 'OBJECT');
+        if (empty($results)) {
+            // initialize array to prevent php warning msg.
+            $results = Array();
+        }
+        $this->viewModel->set("pageTitle", "MyCPD Hub");
+        $this->viewModel->set("heading1", "Update target");
+        $this->viewModel->set("targets", $results);
+
+        return $this->viewModel;
+    }
+    
+    
 }
 
 /* End of file target.php */
