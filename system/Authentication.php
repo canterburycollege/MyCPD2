@@ -12,7 +12,7 @@ class Authentication {
     }
     
     private function set_moodle_vars(){
-        require '/../../config.php';
+        require MOODLECONFIGFILE;
         if($USER->id == 0){
             // goto moodle login page
             require_login();
