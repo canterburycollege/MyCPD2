@@ -12,7 +12,8 @@ class Authentication {
     }
     
     private function set_moodle_vars(){
-        require '/../../config.php';
+        //require '/../../config.php';
+        require '/srv/www/htdocs/moodle/config.php';
         if($USER->id == 0){
             // goto moodle login page
             require_login();
@@ -21,6 +22,8 @@ class Authentication {
         $_SESSION['USER'] = $USER;
         $_SESSION['OUTPUT'] = $OUTPUT;
         $_SESSION['PAGE'] = $PAGE;
+        $_SESSION['CONTEXT'] = $CONTEXT;
+        $_SESSION['CONTEXT_SYSTEM'] = $CONTEXT_SYSTEM;
     }
 }
 

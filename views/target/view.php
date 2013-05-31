@@ -36,8 +36,7 @@
                         <td><?= $row->status ?></td>
                         <td><?= $row->target_date ?></td>
                         <td>
-                            <input type="button" value="Edit" name="edit" id="edit">
-                            <input type="button" value="Delete" name="delete" id="delete">
+                            <a href="../../target/update/<?= $row->id ?>">(Update)</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

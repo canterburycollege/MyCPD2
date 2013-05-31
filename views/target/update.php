@@ -1,3 +1,5 @@
+<!-- Todo: check you have permission to edit -->
+
 <script type="text/javascript" src="<?= BASEURL . '/assets/js/tiny_mce/tiny_mce.js' ?>"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 
@@ -24,22 +26,25 @@
 <?php endforeach; ?>   
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
 <h1><img src="<?= BASEURL . '/assets/pix/target.gif' ?>" alt="Target icon"><?= $viewModel->get('heading1'); ?></h1>
-<div id="div_activities">
+<div>
     <form>
 
         <?php foreach ($viewModel->get('targets') as $row): ?>
-            <table>
+            <table id="edit">
                 <tr>
-                    <td><input id="title_ext" value="<?= $row->title_ext ?>"></td>
+                    <td><label>Title: </label><input id="title_ext" value="<?= $row->title_ext ?>"></td>
                 </tr>
                 <tr>
-                    <td><textarea id="description"><?= $row->description ?></textarea></td>
+                    <td><label>Description: </label><textarea id="description" cols="80" rows="20"><?= $row->description ?></textarea></td>
                 </tr>
                 <tr>
-                    <td><input id="status" value="<?= $row->status ?>"></td>
+                    <td><label>Status: </label><select id="status" value="<?= $row->status ?>"><option><?= $row->status ?><option></select></td>
                 </tr>
                 <tr>
-                    <td><input name="target_date" id="target_date" value="<?= $row->target_date ?>"></td>
+                    <td><label>Date: </label><input name="target_date" id="target_date" value="<?= $row->target_date ?>"></td>
                 </tr>
             <?php endforeach; ?>
+                <tr>
+                    <td align="center"><input type="submit" name="submit" value="Update target" /></td>
+                </tr> 
     </form>

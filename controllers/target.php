@@ -39,7 +39,7 @@ class TargetController extends BaseController
     
         public function update(){
         
-        $this->view->output($this->model->update(1)); 
+        $this->view->output($this->model->update(2)); 
     }
 }
 /* End of file target.php */
