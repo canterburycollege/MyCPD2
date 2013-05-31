@@ -43,17 +43,22 @@ class TargetModel extends BaseModel {
         $employee_id = 1;
 
         $sql = "SELECT * FROM v_targets_with_status WHERE employee_id = {$employee_id} AND id = {$id}";
-
+        $sql2 = "SELECT * FROM target_status";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
+        $results2 = $dbConn->get_all($sql2, 'OBJECT');
         if (empty($results)) {
             // initialize array to prevent php warning msg.
             $results = Array();
         }
+        if (empty($results2)) {
+            // initialize array to prevent php warning msg.
+            $results2 = Array();
+        }
         $this->viewModel->set("pageTitle", "MyCPD Hub");
         $this->viewModel->set("heading1", "Update target");
         $this->viewModel->set("targets", $results);
-
+        $this->viewModel->set("targets2", $results2);
         return $this->viewModel;
     }
     

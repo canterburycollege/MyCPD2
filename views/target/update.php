@@ -38,10 +38,15 @@
                     <td><label>Description: </label><textarea id="description" cols="80" rows="20"><?= $row->description ?></textarea></td>
                 </tr>
                 <tr>
-                    <td><label>Status: </label><select id="status" value="<?= $row->status ?>"><option><?= $row->status ?><option></select></td>
-                </tr>
-                <tr>
                     <td><label>Date: </label><input name="target_date" id="target_date" value="<?= $row->target_date ?>"></td>
+                </tr>                <tr>
+                    <td><label>Status: </label><select id="status" value="<?= $row->target_id ?>"><option><?= $row->status ?><option>
+                        
+                        <?php foreach ($viewModel->get('targets2') as $row): ?>
+                                <option value="<?= $row->id ?>"><?= $row->title ?></option>
+                        <?php endforeach; ?>
+                        
+                        </select></td>
                 </tr>
             <?php endforeach; ?>
                 <tr>
