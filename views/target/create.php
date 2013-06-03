@@ -25,36 +25,32 @@
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
 <h1><img src="<?= BASEURL . '/assets/pix/target.gif' ?>" alt="Target icon"><?= $viewModel->get('heading1'); ?></h1>
 <div>
-<<<<<<< HEAD
-    <form method="target_update.php" action="post">
-=======
     <form method="post">
->>>>>>> target
 
-        <?php foreach ($viewModel->get('targets') as $row): ?>
+  
             <table id="edit">
-                                <tr>
-                    <td><label>Target Tag: </label><input name="title" id="title_ext" value="<?= $row->title ?>"></td>
+                <tr>
+                    <td><label>Target Tag: </label><input name="title" id="title"></td>
                 </tr>
                 <tr>
-                    <td><label>Title: </label><input name="title_ext" id="title_ext" value="<?= $row->title_ext ?>"></td>
+                    <td><label>Title: </label><input name="title_ext" id="title_ext"></td>
                 </tr>
                 <tr>
-                    <td><label>Description: </label><textarea name="description" id="description" cols="80" rows="20"><?= $row->description ?></textarea></td>
+                    <td><label>Description: </label><textarea name="description" id="description" cols="80" rows="20"></textarea></td>
                 </tr>
                 <tr>
-                    <td><label>Date: </label><input name="target_date" name="target_date" id="target_date" value="<?= $row->target_date ?>"></td>
+                    <td><label>Date: </label><input name="target_date" name="target_date" id="target_date"></td>
                 </tr>                <tr>
-                    <td><label>Status: </label><select name="status" id="status"><option value="<?= $row->target_id ?>"><?= $row->status ?><option>
+                    <td><label>Status: </label><select name="status" id="status">
                         
-                        <?php foreach ($viewModel->get('targets2') as $row): ?>
+                        <?php foreach ($viewModel->get('targets') as $row): ?>
                                 <option value="<?= $row->id ?>"><?= $row->title ?></option>
                         <?php endforeach; ?>
                         
                         </select></td>
                 </tr>
-            <?php endforeach; ?>
+         
                 <tr>
-                    <td align="center"><input type="submit" name="submit" value="Update target" /></td>
+                    <td align="center"><input type="submit" name="submit" value="Create target" /></td>
                 </tr> 
     </form>
