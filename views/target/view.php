@@ -9,9 +9,7 @@
         filter.fnFilter('<?php echo $_GET['id']; ?>');
     });
 </script>
-<?php foreach ($viewModel->get('news') as $row): ?>
- <div class="news"><?= $row->description?></div>
-<?php endforeach; ?>   
+ 
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
 <h1><img src="<?= BASEURL . '/assets/pix/target.gif' ?>" alt="Target icon"><?= $viewModel->get('heading1'); ?></h1>
 <div id="div_activities">
@@ -24,7 +22,8 @@
                     <th>Description</th>
                     <th>Status</th>
                     <th>Date Due</th>
-                    <th>Actions</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -35,11 +34,12 @@
                         <td><?= $row->description ?></td>
                         <td><?= $row->status ?></td>
                         <td><?= $row->target_date ?></td>
-                        <td>
-                            <a href="../../target/update/<?= $row->id ?>">(Update)</a>
-                        </td>
+                        <td><a href="../../target/update/<?= $row->id ?>">(Update)</a> </td>
+                        <td><a href="../../target/delete/<?= $row->id ?>">(Delete)</a> </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </form>
+    
+    <a href ="../../target/create">Create a new target</a>

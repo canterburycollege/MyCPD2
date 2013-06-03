@@ -26,8 +26,8 @@ class Authentication {
         $_SESSION['USER'] = $USER;
         $_SESSION['OUTPUT'] = $OUTPUT;
         $_SESSION['PAGE'] = $PAGE;
-        $_SESSION['CONTEXT'] = $CONTEXT;
-        $_SESSION['CONTEXT_SYSTEM'] = $CONTEXT_SYSTEM;
+     //   $_SESSION['CONTEXT'] = $CONTEXT;
+     //   $_SESSION['CONTEXT_SYSTEM'] = $CONTEXT_SYSTEM;
     }
 }
 
