@@ -28,6 +28,7 @@ class Authentication {
         $_SESSION['PAGE'] = $PAGE;
         $_SESSION['CONTEXT'] = $CONTEXT;
         $_SESSION['CONTEXT_SYSTEM'] = $CONTEXT_SYSTEM;
+        print_r($CONTEXT_SYSTEM);
     }
 }
 

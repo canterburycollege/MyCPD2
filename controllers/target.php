@@ -38,8 +38,8 @@ class TargetController extends BaseController
     }
     
         public function update(){
-        
-        $this->view->output($this->model->update(2)); 
+        $id = $_GET['id'];
+        $this->view->output($this->model->update($id)); 
     }
 }
 /* End of file target.php */

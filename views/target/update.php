@@ -27,7 +27,7 @@
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
 <h1><img src="<?= BASEURL . '/assets/pix/target.gif' ?>" alt="Target icon"><?= $viewModel->get('heading1'); ?></h1>
 <div>
-    <form>
+    <form method="target_update.php" action="post">
 
         <?php foreach ($viewModel->get('targets') as $row): ?>
             <table id="edit">
