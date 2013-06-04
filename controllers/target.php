@@ -23,7 +23,6 @@ class TargetController extends BaseController {
             $this->view->output($this->model->create());
     }
 
-    
     public function delete() {
         $id = $_GET['id'];
         $this->view->output($this->model->delete($id));
@@ -38,12 +37,6 @@ class TargetController extends BaseController {
 
         $this->view->output($this->model->view());
     }
-<<<<<<< HEAD
-    
-        public function update(){
-        $id = $_GET['id'];
-        $this->view->output($this->model->update($id)); 
-=======
 
     public function update() {
         $id = $_GET['id'];
@@ -52,10 +45,9 @@ class TargetController extends BaseController {
         }
         else
             $this->view->output($this->model->update($id));
->>>>>>> target
     }
 
 }
 
 /* End of file target.php */
-/* Location: ./target.php */
+    /* Location: ./target.php */

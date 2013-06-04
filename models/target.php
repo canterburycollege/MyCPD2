@@ -43,7 +43,7 @@ class TargetModel extends BaseModel {
                 employee_id) VALUES ('{$title}','{$title_ext}','{$description}', '{$target_date}', '{$status}', '{$employee_id}')";
 
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
-echo $sql;
+//echo $sql;
 
         $dbConn->execute($sql);
 
@@ -51,7 +51,7 @@ echo $sql;
 
         echo "Target created OK.";
 //todo: Fix broken link after redirect.
-//header( 'Location: ../view' ) ;
+header( 'Location: ../view' ) ;
     }
 
     public function delete($id) {
