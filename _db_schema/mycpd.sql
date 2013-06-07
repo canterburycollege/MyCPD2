@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.6
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 07, 2013 at 08:56 AM
--- Server version: 5.1.66-community-log
--- PHP Version: 5.3.10
+-- Generation Time: Jun 07, 2013 at 10:07 AM
+-- Server version: 5.5.24-log
+-- PHP Version: 5.4.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -92,7 +92,7 @@ INSERT INTO `cpd_type` (`id`, `description`, `sort_order`) VALUES
 CREATE TABLE IF NOT EXISTS `employee` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `display_name` varchar(50) NOT NULL,
-  `moodle_user_id` int(11) NOT NULL,
+  `moodle_user_id` bigint(10) NOT NULL,
   `mycpd_access_group` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
@@ -103,6 +103,46 @@ CREATE TABLE IF NOT EXISTS `employee` (
 
 INSERT INTO `employee` (`id`, `display_name`, `moodle_user_id`, `mycpd_access_group`) VALUES
 (1, 'Treesa Green', 99, 'test');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `manager`
+--
+
+CREATE TABLE IF NOT EXISTS `manager` (
+  `moodle_user_id` bigint(10) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`moodle_user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `manager_group`
+--
+
+CREATE TABLE IF NOT EXISTS `manager_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `manager` bigint(10) NOT NULL COMMENT 'also moodle user id',
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `manager` (`manager`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `manager_group_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `manager_group_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `manager_group` int(11) NOT NULL,
+  `moodle_user_id` bigint(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `manager_group` (`manager_group`,`moodle_user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -285,6 +325,12 @@ ALTER TABLE `activity`
   ADD CONSTRAINT `activity_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`),
   ADD CONSTRAINT `Learning_plan_detail_ibfk_2` FOREIGN KEY (`target_id`) REFERENCES `target` (`id`),
   ADD CONSTRAINT `Learning_plan_detail_ibfk_3` FOREIGN KEY (`priority_type_id`) REFERENCES `priority_type` (`id`);
+
+--
+-- Constraints for table `manager_group`
+--
+ALTER TABLE `manager_group`
+  ADD CONSTRAINT `manager_group_ibfk_1` FOREIGN KEY (`manager`) REFERENCES `manager` (`moodle_user_id`);
 
 --
 -- Constraints for table `target`
