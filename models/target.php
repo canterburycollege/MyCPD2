@@ -43,14 +43,15 @@ class TargetModel extends BaseModel {
 
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $dbConn->execute($sql);
-        header('Location: view');
+        header('Location: /moodle/MyCPD/target/view/');
     }
 
     public function delete($id) {
         $sql = "DELETE FROM target WHERE id = '{$id}'";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $dbConn->execute($sql);
-        header('Location: /view');
+
+        header('Location: /moodle/MyCPD/target/view/');
     }
 
     //data passed to the home index view
