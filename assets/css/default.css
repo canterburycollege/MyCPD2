@@ -170,3 +170,11 @@ tr.odd {
 tr.even { 
     background-color: #FDFDF0; 
 }
+
+#edit {
+    width: 900px;
+}
+
+#title_ext {
+    width: 581px;
+}
