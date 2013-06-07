@@ -9,9 +9,7 @@
         filter.fnFilter('<?php echo $_GET['id']; ?>');
     });
 </script>
-<?php foreach ($viewModel->get('news') as $row): ?>
- <div class="news"><?= $row->description?></div>
-<?php endforeach; ?>   
+
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
 <h1><img src="<?= BASEURL . '/assets/pix/target.gif' ?>" alt="Target icon"><?= $viewModel->get('heading1'); ?></h1>
 <div id="div_activities">
