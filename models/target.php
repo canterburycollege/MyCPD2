@@ -104,7 +104,7 @@ class TargetModel extends BaseModel {
     }
 
     public function updated($id) {
-        $employee_id = $_SESSION['USER']->id;
+        $moodle_user_id = $_SESSION['USER']->id;
         $title = $_POST['title'];
         $title_ext = $_POST['title_ext'];
         $description = $_POST['description'];

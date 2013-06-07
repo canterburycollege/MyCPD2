@@ -12,9 +12,9 @@ class MandatoryModel extends BaseModel {
 
     public function view() {
 
-        $userid = '2528';
-
-        $sql = "SELECT title, value FROM v_scores WHERE userid = $userid";
+        $moodle_user_id = $_SESSION['USER']->id;
+//Todo: remove duplicate values.
+        $sql = "SELECT title, value FROM v_scores WHERE userid = $moodle_user_id";
 
         $dbConn = DbConnectionRegistry::getInstance('moodle');
         $results = $dbConn->get_all($sql, 'OBJECT');
