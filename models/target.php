@@ -33,7 +33,6 @@ class TargetModel extends BaseModel {
         $target_date = $_POST['target_date'];
         $status = $_POST['status'];
 
-
         $sql = "INSERT INTO target 
                 (title,
                 title_ext,
@@ -43,26 +42,15 @@ class TargetModel extends BaseModel {
                 employee_id) VALUES ('{$title}','{$title_ext}','{$description}', '{$target_date}', '{$status}', '{$employee_id}')";
 
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
-//echo $sql;
-
         $dbConn->execute($sql);
-
-
-
-        echo "Target created OK.";
-//todo: Fix broken link after redirect.
-header( 'Location: ../view' ) ;
+        header('Location: view');
     }
 
     public function delete($id) {
         $sql = "DELETE FROM target WHERE id = '{$id}'";
-
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
-
-
         $dbConn->execute($sql);
-        echo "Target deleted OK.";
-        header('Location: ../view');
+        header('Location: /view');
     }
 
     //data passed to the home index view
