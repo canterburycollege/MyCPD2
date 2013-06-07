@@ -13,7 +13,7 @@
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
 <h1><img src="<?= BASEURL . '/assets/pix/contract.png' ?>" alt="Mandatory icon"><?= $viewModel->get('heading1'); ?></h1>
  
-<div id="div_activities">
+<div id="results">
     <form>
         <table id="table_detail">
             <thead>
