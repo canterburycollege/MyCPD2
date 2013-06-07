@@ -24,8 +24,9 @@ class TargetModel extends BaseModel {
     }
 
     public function created() {
+        $moodle_user_id = $_SESSION['USER']->id;
         $this->viewModel->set("pageTitle", "Create Target");
-        $employee_id = 1;
+        $employee_id = $_SESSION['USER']->id;
 
         $title = $_POST['title'];
         $title_ext = $_POST['title_ext'];
@@ -39,7 +40,7 @@ class TargetModel extends BaseModel {
                 description,
                 target_date,
                 status_id,
-                employee_id) VALUES ('{$title}','{$title_ext}','{$description}', '{$target_date}', '{$status}', '{$employee_id}')";
+                moodle_user_id) VALUES ('{$title}','{$title_ext}','{$description}', '{$target_date}', '{$status}', '{$moodle_user_id}')";
 
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $dbConn->execute($sql);
@@ -62,9 +63,9 @@ class TargetModel extends BaseModel {
     }
 
     public function view() {
-        $employee_id = 1;
+        $moodle_user_id = $_SESSION['USER']->id;
 
-        $sql = "SELECT * FROM v_targets_with_status WHERE employee_id = {$employee_id}";
+        $sql = "SELECT * FROM v_targets_with_status WHERE moodle_user_id = {$moodle_user_id}";
 
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
@@ -80,9 +81,9 @@ class TargetModel extends BaseModel {
     }
 
     public function update($id) {
-        $employee_id = 1;
+        $employee_id = $_SESSION['USER']->id;
 
-        $sql = "SELECT * FROM v_targets_with_status WHERE employee_id = {$employee_id} AND id = {$id}";
+        $sql = "SELECT * FROM v_targets_with_status WHERE moodle_user_id = {$moodle_user_id} AND id = {$id}";
         $sql2 = "SELECT * FROM target_status";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
@@ -103,7 +104,7 @@ class TargetModel extends BaseModel {
     }
 
     public function updated($id) {
-        $employee_id = 1;
+        $employee_id = $_SESSION['USER']->id;
         $title = $_POST['title'];
         $title_ext = $_POST['title_ext'];
         $description = $_POST['description'];
@@ -117,7 +118,7 @@ class TargetModel extends BaseModel {
                 description = '{$description}',
                 target_date = '{$target_date}',
                 status_id = '{$status}'
-                WHERE employee_id = {$employee_id} AND id = {$id}";
+                WHERE moodle_user_id = {$moodle_user_id} AND id = {$id}";
 
 
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
@@ -127,9 +128,8 @@ class TargetModel extends BaseModel {
             // initialize array to prevent php warning msg.
             $results = Array();
         }
-        echo "Target updated OK.";
-//todo: Fix broken link after redirect.
-        header('Location: ../view');
+
+        header('Location: /moodle/MyCPD/target/view/');
     }
 
 }
