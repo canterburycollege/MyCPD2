@@ -10,6 +10,16 @@
         filter.fnFilter('<?php echo $_GET['id']; ?>');
        
     });
+
+function confirmPost()
+{
+var agree=confirm("Are you sure you want to delete this target?");
+if (agree)
+return true ;
+else
+return false ;
+}
+
 </script>
  
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
@@ -37,7 +47,7 @@
                         <td><?= $row->status ?></td>
                         <td><?= $row->target_date ?></td>
                         <td><a href="../../target/update/<?= $row->id ?>">(Update)</a> </td>
-                        <td><a href="../../target/delete/<?= $row->id ?>">(Delete)</a> </td>
+                        <td><a href="../../target/delete/<?= $row->id ?>" onClick="return confirmPost()">(Delete)</a> </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

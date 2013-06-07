@@ -50,7 +50,7 @@ class TargetModel extends BaseModel {
         $sql = "DELETE FROM target WHERE id = '{$id}'";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $dbConn->execute($sql);
-        header('Location: ../view');
+        header('Location: /view');
     }
 
     //data passed to the home index view
