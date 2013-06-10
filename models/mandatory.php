@@ -14,7 +14,7 @@ class MandatoryModel extends BaseModel {
 
         $moodle_user_id = $_SESSION['USER']->id;
 //Todo: remove duplicate values.
-        $sql = "SELECT title, value FROM v_scores WHERE userid = $moodle_user_id";
+        $sql = "SELECT title, value, course FROM v_scores WHERE userid = $moodle_user_id";
 
         $dbConn = DbConnectionRegistry::getInstance('moodle');
         $results = $dbConn->get_all($sql, 'OBJECT');
