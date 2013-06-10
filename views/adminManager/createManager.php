@@ -1,10 +1,32 @@
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script>
+    $(function() {
+        $("#moodle_user_name").autocomplete({
+           // use full url - to avoid conflict with redirect
+           // note that &term= is appended
+           source: "http://localhost/moodle/MyCPD/index.php?controller=adminManager&action=getUsers",
+           minLength: 2,
+           noCache: true,
+           select: function(event, ui) {
+            // populate hidden field with user id
+            $('#moodle_user_id').val(ui.item.id);
+        }
+        });
+    });
+</script>
+
 <h1>Create New Manager Form</h1>
 <form method="POST">
     <table>
         <tr>
+            <td><label>moodle_user_name: </label>
+                <input type="text" name="moodle_user_id" id="moodle_user_name" value="" />
+            </td>
+        </tr>
+        <tr>
             <td><label>moodle_user_id: </label>
-                <input type="text" name="moodle_user_id" value="" />
-                @todo - get list from moodle
+                <input type="text" name="moodle_user_id" id="moodle_user_id" value="" />
+                @todo - hidden, after testing
             </td>
         </tr>
         <tr>

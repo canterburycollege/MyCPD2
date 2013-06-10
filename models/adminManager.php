@@ -54,6 +54,17 @@ class AdminManagerModel extends BaseModel {
         header('Location: ' . BASEURL . 'adminManager/viewManagers');
     }
     
+    public function getUsers($search_term){
+        $rows = array(
+            array('id'=>'1', 'label'=>'jsmith'),
+            array('id'=>'2', 'label'=>'ajones'),
+            array('id'=>'3', 'label'=>'tgreen'),
+            array('id'=>'4', 'label'=>'abrown')
+        );
+        
+        echo json_encode($rows);
+    }
+    
     public function viewGroups($manager_id){
         
     }

@@ -31,11 +31,9 @@ class AdminManagerController extends BaseController {
      */
     public function createManager() {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            echo 'x';
             $this->view->output($this->model->createManager());
         }
         else {
-            echo 'y';
             $this->view->output($this->model->createManagerForm());
         }
     }
@@ -48,6 +46,14 @@ class AdminManagerController extends BaseController {
     public function deleteManager() {
         $moodle_user_id = $_GET['id'];
         $this->view->output($this->model->deleteManager($moodle_user_id));
+    }
+    
+    /**
+     *  @todo - get $rows from database 
+     */
+    public function getUsers(){
+        $search_term = $_GET['term']; // this is search term
+        $this->model->getUsers($search_term);
     }
     
     //default method
