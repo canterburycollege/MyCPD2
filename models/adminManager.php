@@ -54,15 +54,18 @@ class AdminManagerModel extends BaseModel {
         header('Location: ' . BASEURL . 'adminManager/viewManagers');
     }
     
+
     public function getUsers($search_term){
-        $rows = array(
-            array('id'=>'1', 'label'=>'jsmith'),
-            array('id'=>'2', 'label'=>'ajones'),
-            array('id'=>'3', 'label'=>'tgreen'),
-            array('id'=>'4', 'label'=>'abrown')
-        );
+        $sql = "
+            SELECT  id, CONCAT(firstname,' ',lastname) AS label  
+            FROM    mdl_user
+            WHERE   CONCAT(firstname,lastname) LIKE '%".$search_term."%'
+            ORDER BY 2";
         
-        echo json_encode($rows);
+        $dbConn = DbConnectionRegistry::getInstance('moodle');
+        $results = $dbConn->get_all($sql, 'ARRAY');
+        
+        echo json_encode($results);
     }
     
     public function viewGroups($manager_id){

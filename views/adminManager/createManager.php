@@ -19,24 +19,15 @@
 <form method="POST">
     <table>
         <tr>
-            <td><label>moodle_user_name: </label>
+            <td><label>Name: </label>
                 <input type="text" name="moodle_user_id" id="moodle_user_name" value="" />
+                - start typing manager's firstname or surname
             </td>
         </tr>
         <tr>
             <td><label>moodle_user_id: </label>
                 <input type="text" name="moodle_user_id" id="moodle_user_id" value="" />
                 @todo - hidden, after testing
-            </td>
-        </tr>
-        <tr>
-            <td><label>firstname: </label>
-                --firstname displayed here
-            </td>
-        </tr>
-        <tr>
-            <td><label>surname: </label>
-                --surname displayed here
             </td>
         </tr>
         <tr>
