@@ -81,7 +81,7 @@ class TargetModel extends BaseModel {
     }
 
     public function update($id) {
-        $employee_id = $_SESSION['USER']->id;
+        $moodle_user_id = $_SESSION['USER']->id;
 
         $sql = "SELECT * FROM v_targets_with_status WHERE moodle_user_id = {$moodle_user_id} AND id = {$id}";
         $sql2 = "SELECT * FROM target_status";
