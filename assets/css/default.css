@@ -33,7 +33,7 @@ td,th  {
     background-color: lightpink;
 }
 
-form label { 
+#standard label { 
     display: block;  /* block float the labels to left column, set a width */
     float: left; 
     width: 150px; 
