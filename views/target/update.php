@@ -1,5 +1,9 @@
 <!-- Todo: check you have permission to edit -->
 
+<?php
+$status_options = $viewModel->get('status_options');
+?>
+
 <script type="text/javascript" src="<?= BASEURL . '/assets/js/tiny_mce/tiny_mce.js' ?>"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 
@@ -28,7 +32,7 @@
 
     <form method="post">
 
-        <?php foreach ($viewModel->get('targets') as $row): ?>
+        <?php foreach ($viewModel->get('status') as $row): ?>
             <table id="edit">
                                 <tr>
                     <td><label>Target Tag: </label><input name="title" id="title_ext" value="<?= $row->title ?>"></td>
@@ -42,13 +46,7 @@
                 <tr>
                     <td><label>Date: </label><input name="target_date" name="target_date" id="target_date" value="<?= $row->target_date ?>"></td>
                 </tr>                <tr>
-                    <td><label>Status: </label><select name="status" id="status"><option value="<?= $row->target_id ?>"><?= $row->status ?><option>
-                        
-                        <?php foreach ($viewModel->get('targets2') as $row): ?>
-                                <option value="<?= $row->id ?>"><?= $row->title ?></option>
-                        <?php endforeach; ?>
-                        
-                        </select></td>
+                    <td><label>Status: </label><select name="status"><?= $status_options ?></select></td>
                 </tr>
             <?php endforeach; ?>
                 <tr>
