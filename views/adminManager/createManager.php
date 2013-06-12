@@ -16,7 +16,7 @@
 </script>
 
 <h1>Create New Manager Form</h1>
-<form method="POST">
+<form method="POST" action="">
     <table>
         <tr>
             <td><label>Name: </label>

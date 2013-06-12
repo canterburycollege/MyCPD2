@@ -32,6 +32,7 @@ class AdminManagerController extends BaseController {
     public function createManager() {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->view->output($this->model->createManager());
+            header('Location: http://localhost/moodle/MyCPD/adminManager/viewManagers/');
         }
         else {
             $this->view->output($this->model->createManagerForm());

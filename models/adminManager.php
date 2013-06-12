@@ -32,9 +32,7 @@ class AdminManagerModel extends BaseModel {
 
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $dbConn->execute($sql);
-        header('Location: viewManagers');
         
-        //return $this->viewModel;
     }
     
     public function createManagerForm(){
@@ -74,9 +72,15 @@ class AdminManagerModel extends BaseModel {
 
     public function viewManagers() {
         
-        $sql = "SELECT * FROM manager";
+        $sql = "
+            SELECT  u.firstname,
+                    u.lastname,
+                    m.description
+            FROM    mycpd.manager m
+                    JOIN moodle.mdl_user u
+                        ON m.moodle_user_id = u.id";
 
-        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $dbConn = DbConnectionRegistry::getInstance('host');
         $results = $dbConn->get_all($sql, 'OBJECT');
         if (empty($results)) {
             // initialize array to prevent php warning msg.
