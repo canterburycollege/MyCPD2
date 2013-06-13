@@ -37,9 +37,10 @@ class AdminManagerModel extends BaseModel {
         return $this->viewModel;
     }
 
-        public function deleteGroup(){
-        $this->viewModel->set("pageTitle", "MyCPD Admin");
-        return $this->viewModel;
+    public function deleteGroup($id){
+        $sql = "DELETE FROM manager_group WHERE id ='{$id}'";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $dbConn->execute($sql);
     }
     
     public function deleteManager($moodle_user_id){
@@ -91,12 +92,28 @@ class AdminManagerModel extends BaseModel {
         return $this->viewModel;
     }
     
-    public function viewGroups($manager_id){
-        
+    public function viewGroups($moodle_user_id){
+        $sql = "
+            SELECT  id,
+                    manager,
+                    description
+            FROM    manager_group
+            WHERE   manager = '{$moodle_user_id}'";
+            
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results = $dbConn->get_all($sql, 'OBJECT');
+        if (empty($results)) {
+            // initialize array to prevent php warning msg.
+            $results = Array();
+        }
+        $this->viewModel->set("pageTitle", "MyCPD Admin");
+        $this->viewModel->set("groups", $results);
+
+        return $this->viewModel;
+            
     }
 
     public function viewManagers() {
-        
         $sql = "
             SELECT  u.id as moodle_user_id,
                     u.firstname,

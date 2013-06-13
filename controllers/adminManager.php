@@ -23,7 +23,14 @@ class AdminManagerController extends BaseController {
      * Create group to be used to assign users
      */
     public function createGroup(){
-        $this->view->output($this->model->createGroup());
+        $moodle_user_id = $_GET['id'];
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $this->model->createGroup($moodle_user_id);
+            header('Location: ' . BASEURL . 'adminManager/viewManagers');
+        }
+        else {
+            $this->view->output($this->model->createGroupForm());
+        }
     }
     
     /**
@@ -41,7 +48,7 @@ class AdminManagerController extends BaseController {
     
     public function deleteGroup(){
         $id = $_GET['id'];
-        $this->view->output($this->model->deleteGroup());
+        $this->view->output($this->model->deleteGroup($id));
     }
 
     public function deleteManager() {
@@ -85,8 +92,8 @@ class AdminManagerController extends BaseController {
     }
     
     public function viewGroups(){
-        $manager_id = $_GET['id'];
-        $this->view->output($this->model->view($manager_id));
+        $moodle_user_id = $_GET['id'];
+        $this->view->output($this->model->viewGroups($moodle_user_id));
     }
     
     public function viewManagers(){
