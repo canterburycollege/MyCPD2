@@ -1,10 +1,11 @@
 <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
 <script>
     $(function() {
         $("#moodle_user_name").autocomplete({
            // use full url - to avoid conflict with redirect
            // note that &term= is appended
-           source: "http://localhost/moodle/MyCPD/index.php?controller=adminManager&action=getUsers",
+           source: BASE_URL + "index.php?controller=adminManager&action=getUsers",
            minLength: 2,
            noCache: true,
            select: function(event, ui) {
