@@ -5,7 +5,7 @@
         $("#moodle_user_name").autocomplete({
            // use full url - to avoid conflict with redirect
            // note that &term= is appended
-           source: BASE_URL + "index.php?controller=adminManager&action=getUsers",
+           source: BASE_URL + "index.php?controller=adminManager&action=getMoodleUsers",
            minLength: 2,
            noCache: true,
            select: function(event, ui) {

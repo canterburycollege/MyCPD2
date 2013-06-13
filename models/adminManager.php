@@ -16,8 +16,6 @@ class AdminManagerModel extends BaseModel {
     }
     
     public function createManager(){
-        $this->viewModel->set("pageTitle", "MyCPD Admin");
-        
         $moodle_user_id = $_POST['moodle_user_id'];
         $description = $_POST['description'];
         
@@ -32,7 +30,6 @@ class AdminManagerModel extends BaseModel {
 
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $dbConn->execute($sql);
-        
     }
     
     public function createManagerForm(){
@@ -49,11 +46,10 @@ class AdminManagerModel extends BaseModel {
         $sql = "DELETE FROM manager WHERE moodle_user_id = '{$moodle_user_id}'";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $dbConn->execute($sql);
-        header('Location: ' . BASEURL . 'adminManager/viewManagers');
     }
     
 
-    public function getUsers($search_term){
+    public function getMoodleUsers($search_term){
         $sql = "
             SELECT  id, CONCAT(firstname,' ',lastname) AS label  
             FROM    mdl_user
@@ -62,8 +58,37 @@ class AdminManagerModel extends BaseModel {
         
         $dbConn = DbConnectionRegistry::getInstance('moodle');
         $results = $dbConn->get_all($sql, 'ARRAY');
-        
-        echo json_encode($results);
+
+        return $results;
+    }
+    
+    public function updateManager($moodle_user_id){
+        $description = $_POST['description'];
+        $sql = "
+            UPDATE  manager 
+            SET     description = '{$description}'
+            WHERE   moodle_user_id = {$moodle_user_id}
+            ";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $dbConn->execute($sql);
+    }
+    
+    public function updateManagerForm($moodle_user_id){
+        $sql = "
+            SELECT  m.moodle_user_id,
+                    CONCAT(u.firstname,' ',u.lastname) as display_name,
+                    m.description
+            FROM    moodle.mdl_user u
+                    JOIN mycpd.manager m
+                        ON u.id = m.moodle_user_id
+            WHERE   m.moodle_user_id = {$moodle_user_id}
+            ";
+            
+        $dbConn = DbConnectionRegistry::getInstance('host');
+        $results = $dbConn->get_all($sql, 'OBJECT');   
+        $this->viewModel->set("pageTitle", "MyCPD Admin");
+        $this->viewModel->set("manager", $results[0]);
+        return $this->viewModel;
     }
     
     public function viewGroups($manager_id){
@@ -73,7 +98,8 @@ class AdminManagerModel extends BaseModel {
     public function viewManagers() {
         
         $sql = "
-            SELECT  u.firstname,
+            SELECT  u.id as moodle_user_id,
+                    u.firstname,
                     u.lastname,
                     m.description
             FROM    mycpd.manager m

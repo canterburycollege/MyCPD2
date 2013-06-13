@@ -31,8 +31,8 @@ class AdminManagerController extends BaseController {
      */
     public function createManager() {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $this->view->output($this->model->createManager());
-            header('Location: http://localhost/moodle/MyCPD/adminManager/viewManagers/');
+            $this->model->createManager();
+            header('Location: ' . BASEURL . 'adminManager/viewManagers');
         }
         else {
             $this->view->output($this->model->createManagerForm());
@@ -46,15 +46,17 @@ class AdminManagerController extends BaseController {
 
     public function deleteManager() {
         $moodle_user_id = $_GET['id'];
-        $this->view->output($this->model->deleteManager($moodle_user_id));
+        $this->model->deleteManager($moodle_user_id);
+        header('Location: ' . BASEURL . 'adminManager/viewManagers');
     }
     
     /**
-     *  @todo - get $rows from database 
+     * Get list of moodle users and format for use in jQuery autocomplete
      */
-    public function getUsers(){
+    public function getMoodleUsers(){
         $search_term = $_GET['term']; // this is search term
-        $this->model->getUsers($search_term);
+        $users = $this->model->getMoodleUsers($search_term);
+        echo json_encode($users);
     }
     
     //default method
@@ -72,8 +74,14 @@ class AdminManagerController extends BaseController {
     }
     
     public function updateManager() {
-        $id = $_GET['id'];
-        $this->view->output($this->model->updateManager($id));
+        $moodle_user_id = $_GET['id'];
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $this->model->updateManager($moodle_user_id);
+            header('Location: ' . BASEURL . 'adminManager/viewManagers');
+        }
+        else {
+            $this->view->output($this->model->updateManagerForm($moodle_user_id));
+        }
     }
     
     public function viewGroups(){
