@@ -188,3 +188,7 @@ p{
     margin-top: 0px;
     margin-bottom: 0px;
 }
+
+.dataTables_info {
+    font-size: 10px;
+}
