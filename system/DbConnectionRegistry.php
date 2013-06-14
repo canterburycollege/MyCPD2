@@ -13,26 +13,22 @@ class DbConnectionRegistry {
     private function __construct(){}
     
     private static function connect($db){
+        // require database credentials
+        require_once CONFIGPATH . 'database.php';
+        // require database driver class
+        require_once 'MySQL.php';
+        
         switch ($db){
             case 'mycpd':
-                // require database credentials
-                require_once CONFIGPATH . 'database.php';
-                require_once 'MySQL.php';
-                $dbConn = new MySQL(HOSTNAME, USERNAME, PASSWORD, DATABASE);
+                $dbConn = new MySQL(MYCPD_HOSTNAME, MYCPD_USERNAME, MYCPD_PASSWORD, MYCPD_DATABASE);
                 break;
            case 'moodle':
-                // require database credentials
-                require_once CONFIGPATH . 'moodle-database.php';
-                require_once 'MySQL.php';
-                $dbConn = new MySQL(HOSTNAME, USERNAME, PASSWORD, DATABASE);
+                $dbConn = new MySQL(MOODLE_HOSTNAME, MOODLE_USERNAME, MOODLE_PASSWORD, MOODLE_DATABASE);
                 break;
             case 'host':
                 // connection at host level, rather than specific database
-                // use to enable distributed queries across several databases
-                // require database credentials
-                require_once CONFIGPATH . 'host-database.php';
-                require_once 'MySQL.php';
-                $dbConn = new MySQL(HOSTNAME, USERNAME, PASSWORD);
+                // to enable distributed queries across several databases
+                $dbConn = new MySQL(HOST_HOSTNAME, HOST_USERNAME, HOST_PASSWORD);
                 break;
             default:
                 $dbConn = NULL;
