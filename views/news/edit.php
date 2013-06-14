@@ -1,3 +1,4 @@
+<!--todo: Check if admin -->
 <script type="text/javascript" src="<?= BASEURL.'/assets/js/tiny_mce/tiny_mce.js'?>"></script>
 <script type="text/javascript">
 tinyMCE.init({

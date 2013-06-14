@@ -1,20 +1,19 @@
 <?php
 //require_once('/srv/www/htdocs/moodle/config.php');
 //require_login();
+$sitecontext = get_context_instance(CONTEXT_SYSTEM);
 $strmymoodle = get_string('myhome');
 $USER = $_SESSION['USER'];
+$user = $_SESSION['USER'];
 $CONTEXT = $_SESSION['CONTEXT'];
 $PAGE = $_SESSION['PAGE'];
 $OUTPUT = $_SESSION['OUTPUT'];
 $CONTEXT_SYSTEM = $_SESSION['CONTEXT_SYSTEM'];
-
-print_r($CONTEXT_SYSTEM);
-
 $userid = $USER->id;  // Owner of the page
 $context = get_context_instance(CONTEXT_USER, $USER->id);
-$header = "$SITE->shortname: $strmymoodle";
+$header = "MyCPD";
 $context = get_context_instance(CONTEXT_SYSTEM);  // So we even see non-sticky blocks
-print_r($USER);
+
 // Start setting up the page
 $params = array();
 $PAGE->set_context($context);

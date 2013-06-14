@@ -37,6 +37,11 @@ class TargetController extends BaseController {
 
         $this->view->output($this->model->view());
     }
+    
+        public function viewM() {
+
+        $this->view->output($this->model->view());
+    }
 
     public function update() {
         $id = $_GET['id'];

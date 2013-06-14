@@ -40,6 +40,10 @@ class ActivityController extends BaseController {
         $this->view->output($this->model->view($id));
     }
 
+    public function archive() {
+        $this->view->output($this->model->archive());
+    }
+
 }
 
 /* End of file activity.php */

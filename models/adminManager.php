@@ -54,7 +54,8 @@ class AdminManagerModel extends BaseModel {
         $sql = "
             SELECT  id, CONCAT(firstname,' ',lastname) AS label  
             FROM    mdl_user
-            WHERE   CONCAT(firstname,lastname) LIKE '%".$search_term."%'
+            WHERE   CONCAT(firstname,' ',lastname) LIKE '%".$search_term."%'
+                    AND email NOT LIKE '%@student%'
             ORDER BY 2";
         
         $dbConn = DbConnectionRegistry::getInstance('moodle');
