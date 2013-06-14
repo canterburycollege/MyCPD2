@@ -106,6 +106,45 @@ INSERT INTO `employee` (`id`, `display_name`, `moodle_user_id`, `mycpd_access_gr
 (1, 'Treesa Green', 99, 'test'),
 (2, 'Nathan Friend', 2528, 'test');
 
+
+--
+-- Table structure for table `manager`
+--
+
+CREATE TABLE IF NOT EXISTS `manager` (
+  `moodle_user_id` bigint(10) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`moodle_user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `manager_group`
+--
+
+CREATE TABLE IF NOT EXISTS `manager_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `manager` bigint(10) NOT NULL COMMENT 'also moodle user id',
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `manager` (`manager`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `manager_group_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `manager_group_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `manager_group` int(11) NOT NULL,
+  `moodle_user_id` bigint(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `manager_group` (`manager_group`,`moodle_user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 -- --------------------------------------------------------
 
 --
