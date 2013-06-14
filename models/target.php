@@ -4,6 +4,30 @@ require_once SYSPATH . 'DbConnectionRegistry.php';
 
 class TargetModel extends BaseModel {
 
+    // @todo move to own helper file
+    private function html_select_options($options, $selected_id) {
+        $html = '';
+        foreach ($options as $option) {
+            if ($option->id == $selected_id) {
+                $html .= '<option value="' . $option->id . '" selected>';
+            } else {
+                $html .= '<option value="' . $option->id . '">';
+            }
+            $html .= $option->title . '</option>';
+        }
+        return $html;
+    }
+    
+        private function get_status() {
+        /* @todo add IN clause to select only given user's targets */
+        $sql = "SELECT  id, title
+                FROM    target_status";
+
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results = $dbConn->get_all($sql, 'OBJECT');
+        return $results;
+    }
+    
     public function create() {
         $this->viewModel->set("pageTitle", "Create Target");
         $employee_id = 1;
@@ -81,25 +105,24 @@ class TargetModel extends BaseModel {
     }
 
     public function update($id) {
-        $employee_id = $_SESSION['USER']->id;
+        $moodle_user_id = $_SESSION['USER']->id;
 
         $sql = "SELECT * FROM v_targets_with_status WHERE moodle_user_id = {$moodle_user_id} AND id = {$id}";
-        $sql2 = "SELECT * FROM target_status";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
-        $results2 = $dbConn->get_all($sql2, 'OBJECT');
+        
         if (empty($results)) {
             // initialize array to prevent php warning msg.
             $results = Array();
         }
-        if (empty($results2)) {
-            // initialize array to prevent php warning msg.
-            $results2 = Array();
-        }
+
+        $status = $this->get_status();
+        $selected_status = $results[0]->status_id;
+        $this->viewModel->set("status_options", $this->html_select_options($status, $selected_status));
+        
         $this->viewModel->set("pageTitle", "MyCPD Hub");
         $this->viewModel->set("heading1", "Update target");
-        $this->viewModel->set("targets", $results);
-        $this->viewModel->set("targets2", $results2);
+        $this->viewModel->set("status", $results);
         return $this->viewModel;
     }
 
@@ -111,7 +134,6 @@ class TargetModel extends BaseModel {
         $target_date = $_POST['target_date'];
         $status = $_POST['status'];
 
-
         $sql = "UPDATE target SET
                 title = '{$title}',
                 title_ext = '{$title_ext}',
@@ -120,9 +142,7 @@ class TargetModel extends BaseModel {
                 status_id = '{$status}'
                 WHERE moodle_user_id = {$moodle_user_id} AND id = {$id}";
 
-
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
-
         $dbConn->execute($sql);
         if (empty($results)) {
             // initialize array to prevent php warning msg.

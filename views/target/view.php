@@ -4,7 +4,7 @@
     $(document).ready(function() {
         filter = $('#table_detail').dataTable({
             "bJQueryUI": true,
-            "sPaginationType": "full_numbers",
+             "bPaginate": false,
         });
         //auto fill fiter from get for linking. 
         filter.fnFilter('<?php echo $_GET['id']; ?>');

@@ -9,7 +9,7 @@
     });
 </script>
 
-
+<?php include MOODLECONFIGFILE ?>
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
 <h1><img src="<?= BASEURL . '/assets/pix/contract.png' ?>" alt="Mandatory icon"><?= $viewModel->get('heading1'); ?></h1>
  
@@ -26,7 +26,7 @@
             <tbody>
                 <?php foreach ($viewModel->get('mandatory') as $row): ?>
                     <tr>
-                        <td><?= $row->title; ?></a></td>
+                        <td><a href="<?= $CFG->wwwroot?>/course/view.php?id=<?= $row->course ?>"><?= $row->title; ?></a></td>
                         <td><?= $row->value ?></td>
                         <?php //todo: add grey for not attempted. ?>
                         <td align='center'><?php if($row->value >=80){ echo "<img src='".BASEURL."assets/pix/green.png' height='24' width='24'>"; } else { echo "<img src='".BASEURL."assets/pix/red.png' height='24' width='24'>";} ?></td>
