@@ -23,7 +23,14 @@ class AdminManagerController extends BaseController {
      * Create group to be used to assign users
      */
     public function createGroup(){
-        $this->view->output($this->model->createGroup());
+        $moodle_user_id = $_GET['id'];
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $this->model->createGroup($moodle_user_id);
+            header('Location: ' . BASEURL . 'adminManager/viewManagers');
+        }
+        else {
+            $this->view->output($this->model->createGroupForm());
+        }
     }
     
     /**
@@ -31,23 +38,32 @@ class AdminManagerController extends BaseController {
      */
     public function createManager() {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            echo 'x';
-            $this->view->output($this->model->createManager());
+            $this->model->createManager();
+            header('Location: ' . BASEURL . 'adminManager/viewManagers');
         }
         else {
-            echo 'y';
             $this->view->output($this->model->createManagerForm());
         }
     }
     
     public function deleteGroup(){
         $id = $_GET['id'];
-        $this->view->output($this->model->deleteGroup());
+        $this->view->output($this->model->deleteGroup($id));
     }
 
     public function deleteManager() {
         $moodle_user_id = $_GET['id'];
-        $this->view->output($this->model->deleteManager($moodle_user_id));
+        $this->model->deleteManager($moodle_user_id);
+        header('Location: ' . BASEURL . 'adminManager/viewManagers');
+    }
+    
+    /**
+     * Get list of moodle users and format for use in jQuery autocomplete
+     */
+    public function getMoodleUsers(){
+        $search_term = $_GET['term']; // this is search term
+        $users = $this->model->getMoodleUsers($search_term);
+        echo json_encode($users);
     }
     
     //default method
@@ -65,13 +81,19 @@ class AdminManagerController extends BaseController {
     }
     
     public function updateManager() {
-        $id = $_GET['id'];
-        $this->view->output($this->model->updateManager($id));
+        $moodle_user_id = $_GET['id'];
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $this->model->updateManager($moodle_user_id);
+            header('Location: ' . BASEURL . 'adminManager/viewManagers');
+        }
+        else {
+            $this->view->output($this->model->updateManagerForm($moodle_user_id));
+        }
     }
     
     public function viewGroups(){
-        $manager_id = $_GET['id'];
-        $this->view->output($this->model->view($manager_id));
+        $moodle_user_id = $_GET['id'];
+        $this->view->output($this->model->viewGroups($moodle_user_id));
     }
     
     public function viewManagers(){

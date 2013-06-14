@@ -26,6 +26,14 @@ class DbConnectionRegistry {
                 require_once 'MySQL.php';
                 $dbConn = new MySQL(HOSTNAME, USERNAME, PASSWORD, DATABASE);
                 break;
+            case 'host':
+                // connection at host level, rather than specific database
+                // use to enable distributed queries across several databases
+                // require database credentials
+                require_once CONFIGPATH . 'host-database.php';
+                require_once 'MySQL.php';
+                $dbConn = new MySQL(HOSTNAME, USERNAME, PASSWORD);
+                break;
             default:
                 $dbConn = NULL;
                 echo '<h1>Error in DbConnectionRegistry: Unable to connect to 

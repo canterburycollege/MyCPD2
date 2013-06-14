@@ -22,10 +22,7 @@ define('SYSPATH', BASEPATH . 'system' . DS);
 define('TEMPLATEPATH', BASEPATH . 'views' . DS . 'templates' . DS);
 
 // define url paths
-define('BASEURL', '/moodle/MyCPD/');
-
-//define('BASEURL', '/MyCPD2/'); // rh local test version
-
+define('BASEURL', 'http://localhost/moodle/MyCPD/'); // rh local test
 
 // load system files
 require(SYSPATH . 'Authentication.php');

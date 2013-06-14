@@ -27,7 +27,7 @@
             <?php foreach ($viewModel->get('managers') as $row): ?>
                 <tr>
                     <td><?= $row->firstname ?></td>
-                    <td><?= $row->surname ?></td>
+                    <td><?= $row->lastname ?></td>
                     <td><?= $row->description ?></td>
                     <td><a href="<?= BASEURL ?>adminManager/updateManager/<?= $row->moodle_user_id ?>">Update</a> 
                         | 
