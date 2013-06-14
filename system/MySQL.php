@@ -10,7 +10,7 @@ class MySQL extends mysqli {
 
     protected $conn;
 
-    public function __construct($host, $user, $pwd, $db) {
+    public function __construct($host, $user, $pwd, $db=NULL) {
         parent::__construct($host, $user, $pwd, $db);
         if ($link = mysqli_connect($host, $user, $pwd, $db)) {
             $this->conn = $link;
