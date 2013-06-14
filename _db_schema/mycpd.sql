@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.5.6
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 07, 2013 at 10:09 AM
--- Server version: 5.5.24-log
--- PHP Version: 5.4.3
+-- Generation Time: Jun 14, 2013 at 12:53 PM
+-- Server version: 5.1.66-community-log
+-- PHP Version: 5.3.10
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `activity` (
   KEY `priority_type_id` (`priority_type_id`),
   KEY `employee_id` (`employee_id`),
   KEY `cpd_type_id` (`cpd_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `activity`
@@ -58,7 +58,8 @@ INSERT INTO `activity` (`id`, `employee_id`, `title`, `provider`, `learning_outc
 (3, 1, ' Parents evening            ', '', 'Some really important learning outcomes                        ', '2013-03-01', 1, 4, 'Review dyslexia strategies', 8, '2013-03-19', '', '0.00', 0),
 (4, 1, 'Claro read training', '', 'Understand the uses of Claro read, how to integrate into lessons and basic awareness of features', '2013-04-19', 1, 4, 'Integration of learning support technology for dyslexic students', 7, NULL, NULL, '0.00', NULL),
 (5, 1, 'Peer Observation', '', 'See Colleague C teaching level 1 class using Interactive whiteboard', '2013-03-27', 1, 1, 'Transfer good practice to my level 1 session next Wednesday as part of group assessment task', 8, NULL, NULL, '0.00', NULL),
-(6, 1, 'Visit Stakeholder X', '', 'Organise enrichment activity for level 3 following meeting with Colleagues A and B', '2013-06-01', 1, 2, 'Experience a day in the life at Stakeholder X, gain employability skills and experience', 8, NULL, NULL, '0.00', NULL);
+(6, 1, 'Visit Stakeholder X', '', 'Organise enrichment activity for level 3 following meeting with Colleagues A and B', '2013-06-01', 1, 2, 'Experience a day in the life at Stakeholder X, gain employability skills and experience', 8, NULL, NULL, '0.00', NULL),
+(7, 1, 'An old activity', '0 ', 'Just a test', '2011-06-01', 1, 2, 'Test data', 8, '2012-11-09', NULL, '0.00', 0);
 
 -- --------------------------------------------------------
 
@@ -92,57 +93,18 @@ INSERT INTO `cpd_type` (`id`, `description`, `sort_order`) VALUES
 CREATE TABLE IF NOT EXISTS `employee` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `display_name` varchar(50) NOT NULL,
-  `moodle_user_id` bigint(10) NOT NULL,
+  `moodle_user_id` int(11) NOT NULL,
   `mycpd_access_group` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `employee`
 --
 
 INSERT INTO `employee` (`id`, `display_name`, `moodle_user_id`, `mycpd_access_group`) VALUES
-(1, 'Treesa Green', 99, 'test');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `manager`
---
-
-CREATE TABLE IF NOT EXISTS `manager` (
-  `moodle_user_id` bigint(10) NOT NULL,
-  `description` varchar(100) NOT NULL,
-  PRIMARY KEY (`moodle_user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `manager_group`
---
-
-CREATE TABLE IF NOT EXISTS `manager_group` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `manager` bigint(10) NOT NULL COMMENT 'also moodle user id',
-  `description` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `manager` (`manager`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `manager_group_detail`
---
-
-CREATE TABLE IF NOT EXISTS `manager_group_detail` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `manager_group` int(11) NOT NULL,
-  `moodle_user_id` bigint(10) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `manager_group` (`manager_group`,`moodle_user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+(1, 'Treesa Green', 99, 'test'),
+(2, 'Nathan Friend', 2528, 'test');
 
 -- --------------------------------------------------------
 
@@ -195,22 +157,21 @@ CREATE TABLE IF NOT EXISTS `target` (
   `title_ext` varchar(150) DEFAULT NULL,
   `description` varchar(600) DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
-  `employee_id` int(20) DEFAULT NULL,
+  `moodle_user_id` int(20) DEFAULT NULL,
   `target_date` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `targets_ibfk_2` (`status_id`),
-  KEY `targets_ibfk_1` (`employee_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+  KEY `targets_ibfk_1` (`moodle_user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
 
 --
 -- Dumping data for table `target`
 --
 
-INSERT INTO `target` (`id`, `title`, `title_ext`, `description`, `status_id`, `employee_id`, `target_date`) VALUES
-(1, '1 Teaching and Learning', 'Assessment and Feedback', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<div>&middot; Use a range of assessment methods which evaluate the learning in the classroom every 10 minutes.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Provide effective written feedback for assignments within 4 days of submission.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Use verbal praise and recognition in the classroom environment...</div>\r\n</body>\r\n</html>', 7, 1, '16/05/2013'),
-(2, '2 ACR/Departmental', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>&middot; Liaise with Christine Bunting in ALS regarding the adjustments for dyslexia needed for resources.</p>\r\n<p>&middot; Ensure all lesson plans include the differentiated activities and assessments for students X and Y.</p>\r\n<p>&middot; Share the lesson plan in advance with their LSP.</p>\r\n</body>\r\n</html>', 7, 1, '30/04/2013'),
-(4, '3 Student focus', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html>\n<head>\n</head>\n<body>\n<p>&middot; Feedback states students leave due to lack of enrichment activities and resources available on the VLE.</p>\n<p>&middot; Work with manager to identify good practice</p>\n<p>&middot; peer observe colleague with desired use of ILT</p>\n<p>&middot; Work with colleagues A and B to design 3 enrichment activities and trips which address the employability skills of teamwork, problem solving and communication.</p>\n</body>\n</html>', 7, 1, '18/07/2013'),
-(18, '2', '2', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>2</p>\r\n</body>\r\n</html>', 7, 1, '04/06/2013');
+INSERT INTO `target` (`id`, `title`, `title_ext`, `description`, `status_id`, `moodle_user_id`, `target_date`) VALUES
+(1, '1 Teaching and Learning', 'Assessment and Feedback', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<div>&middot; Use a range of assessment methods which evaluate the learning in the classroom every 10 minutes.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Provide effective written feedback for assignments within 4 days of submission.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Use verbal praise and recognition in the classroom environment...</div>\r\n</body>\r\n</html>', 7, 2528, '14/05/2013'),
+(2, '2 ACR/Departmental', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>&middot; Liaise with Christine Bunting in ALS regarding the adjustments for dyslexia needed for resources.</p>\r\n<p>&middot; Ensure all lesson plans include the differentiated activities and assessments for students X and Y.</p>\r\n<p>&middot; Share the lesson plan in advance with their LSP.</p>\r\n</body>\r\n</html>', 8, 2528, '30/04/2013'),
+(4, '3 Student focus', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html>\n<head>\n</head>\n<body>\n<p>&middot; Feedback states students leave due to lack of enrichment activities and resources available on the VLE.</p>\n<p>&middot; Work with manager to identify good practice</p>\n<p>&middot; peer observe colleague with desired use of ILT</p>\n<p>&middot; Work with colleagues A and B to design 3 enrichment activities and trips which address the employability skills of teamwork, problem solving and communication.</p>\n</body>\n</html>', 7, 2528, '18/07/2013');
 
 -- --------------------------------------------------------
 
@@ -260,6 +221,17 @@ CREATE TABLE IF NOT EXISTS `v_activity` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `v_scores`
+--
+CREATE TABLE IF NOT EXISTS `v_scores` (
+`title` varchar(255)
+,`value` longtext
+,`course` bigint(10) unsigned
+,`userid` bigint(10) unsigned
+);
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `v_targets_with_status`
 --
 CREATE TABLE IF NOT EXISTS `v_targets_with_status` (
@@ -267,24 +239,10 @@ CREATE TABLE IF NOT EXISTS `v_targets_with_status` (
 ,`title` varchar(150)
 ,`title_ext` varchar(150)
 ,`description` varchar(600)
-,`status` varchar(50)
-,`employee_id` int(20)
-,`target_id` int(11)
+,`status_id` int(11)
+,`moodle_user_id` int(20)
 ,`target_date` varchar(20)
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `v_targets_with_status2`
---
-CREATE TABLE IF NOT EXISTS `v_targets_with_status2` (
-`id` int(11)
-,`title` varchar(150)
-,`title_ext` varchar(150)
-,`description` varchar(600)
 ,`status` varchar(50)
-,`employee_id` int(20)
-,`target_date` varchar(20)
 );
 -- --------------------------------------------------------
 
@@ -298,20 +256,20 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`%` SQL SECURITY DEFINER VIEW `
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_targets_with_status`
+-- Structure for view `v_scores`
 --
-DROP TABLE IF EXISTS `v_targets_with_status`;
+DROP TABLE IF EXISTS `v_scores`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`%` SQL SECURITY DEFINER VIEW `v_targets_with_status` AS select `target`.`id` AS `id`,`target`.`title` AS `title`,`target`.`title_ext` AS `title_ext`,`target`.`description` AS `description`,`target_status`.`title` AS `status`,`target`.`employee_id` AS `employee_id`,`target`.`status_id` AS `target_id`,`target`.`target_date` AS `target_date` from (`target` join `target_status` on((`target`.`status_id` = `target_status`.`id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_scores` AS select `moodledev1`.`mdl_scorm_scoes`.`title` AS `title`,`moodledev1`.`mdl_scorm_scoes_track`.`value` AS `value`,`moodledev1`.`mdl_scorm`.`course` AS `course`,`moodledev1`.`mdl_scorm_scoes_track`.`userid` AS `userid` from ((`moodledev1`.`mdl_scorm_scoes_track` join `moodledev1`.`mdl_scorm_scoes` on((`moodledev1`.`mdl_scorm_scoes_track`.`scoid` = `moodledev1`.`mdl_scorm_scoes`.`id`))) join `moodledev1`.`mdl_scorm` on((`moodledev1`.`mdl_scorm_scoes_track`.`scormid` = `moodledev1`.`mdl_scorm`.`id`))) where ((`moodledev1`.`mdl_scorm_scoes_track`.`element` = 'cmi.core.score.raw') and ((`moodledev1`.`mdl_scorm`.`course` = '328') or (`moodledev1`.`mdl_scorm`.`course` = '333') or (`moodledev1`.`mdl_scorm`.`course` = '334') or (`moodledev1`.`mdl_scorm`.`course` = '335') or (`moodledev1`.`mdl_scorm`.`course` = '336') or (`moodledev1`.`mdl_scorm`.`course` = '337') or (`moodledev1`.`mdl_scorm`.`course` = '338') or (`moodledev1`.`mdl_scorm`.`course` = '339') or (`moodledev1`.`mdl_scorm`.`course` = '340') or (`moodledev1`.`mdl_scorm`.`course` = '1910')));
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_targets_with_status2`
+-- Structure for view `v_targets_with_status`
 --
-DROP TABLE IF EXISTS `v_targets_with_status2`;
+DROP TABLE IF EXISTS `v_targets_with_status`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`%` SQL SECURITY DEFINER VIEW `v_targets_with_status2` AS select `target`.`id` AS `id`,`target`.`title` AS `title`,`target`.`title_ext` AS `title_ext`,`target`.`description` AS `description`,`target_status`.`title` AS `status`,`target`.`employee_id` AS `employee_id`,`target`.`target_date` AS `target_date` from (`target` join `target_status` on((`target`.`status_id` = `target_status`.`id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`%` SQL SECURITY DEFINER VIEW `v_targets_with_status` AS select `target`.`id` AS `id`,`target`.`title` AS `title`,`target`.`title_ext` AS `title_ext`,`target`.`description` AS `description`,`target`.`status_id` AS `status_id`,`target`.`moodle_user_id` AS `moodle_user_id`,`target`.`target_date` AS `target_date`,`target_status`.`title` AS `status` from (`target` join `target_status` on((`target`.`status_id` = `target_status`.`id`)));
 
 --
 -- Constraints for dumped tables
@@ -327,18 +285,11 @@ ALTER TABLE `activity`
   ADD CONSTRAINT `Learning_plan_detail_ibfk_3` FOREIGN KEY (`priority_type_id`) REFERENCES `priority_type` (`id`);
 
 --
--- Constraints for table `manager_group`
---
-ALTER TABLE `manager_group`
-  ADD CONSTRAINT `manager_group_ibfk_1` FOREIGN KEY (`manager`) REFERENCES `manager` (`moodle_user_id`);
-
---
 -- Constraints for table `target`
 --
 ALTER TABLE `target`
-  ADD CONSTRAINT `target_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`),
   ADD CONSTRAINT `target_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `target_status` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */ ;
