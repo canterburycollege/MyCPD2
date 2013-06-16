@@ -11,9 +11,9 @@
  */
 
 // define file paths
-//define('CONFIGPATH', '/srv/www/mycpd_config/'); // path for config files
 define('CONFIGPATH', 'C:/wamp/mycpd2_config/'); // rh local test version
 define('MOODLECONFIGFILE','C:/wamp/www/moodle/config.php'); // rh local test version
+////define('CONFIGPATH', '/srv/www/mycpd_config/'); // path for config files
 //define('MOODLECONFIGFILE','/srv/www/htdocs/moodle/config.php'); 
 
 define('DS', DIRECTORY_SEPARATOR); // window & linux ude different seperators

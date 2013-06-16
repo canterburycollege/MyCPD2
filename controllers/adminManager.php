@@ -20,13 +20,22 @@ class AdminManagerController extends BaseController {
     }
     
     /**
+     * Get list of staff and format for use in jQuery autocomplete
+     */
+    public function ajaxStaffList(){
+        $search_term = $_GET['term']; // this is search term
+        $staff_list = $this->model->ajaxStaffList($search_term);
+        echo json_encode($staff_list);
+    }
+    
+    /**
      * Create group to be used to assign new group to manager
      */
     public function createGroup(){
         $manager = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->createGroup($manager);
-            header('Location: ' . BASEURL . 'adminManager/viewManagers');
+            header('Location: ' . BASEURL . 'adminManager/viewGroups/' . $manager);
         }
         else {
             $this->view->output($this->model->createGroupForm($manager));
@@ -40,10 +49,10 @@ class AdminManagerController extends BaseController {
         $group = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->createGroupDetail($group);
-            header('Location: ' . BASEURL . 'adminManager/viewManagers');
+            header('Location: ' . BASEURL . 'adminManager/viewGroups/' . $group);
         }
         else {
-            $this->view->output($this->model->createGroupDetailForm());
+            $this->view->output($this->model->createGroupDetailForm($group));
         }
     }
     
@@ -53,7 +62,8 @@ class AdminManagerController extends BaseController {
     public function createManager() {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->createManager();
-            header('Location: ' . BASEURL . 'adminManager/viewManagers');
+            $manager = $_POST['moodle_user_id'];
+            header('Location: ' . BASEURL . 'adminManager/createGroup/' . $manager);
         }
         else {
             $this->view->output($this->model->createManagerForm());
@@ -62,22 +72,13 @@ class AdminManagerController extends BaseController {
     
     public function deleteGroup(){
         $id = $_GET['id'];
-        $this->view->output($this->model->deleteGroup($id));
+        $this->model->deleteGroup($id);
     }
 
     public function deleteManager() {
         $moodle_user_id = $_GET['id'];
         $this->model->deleteManager($moodle_user_id);
         header('Location: ' . BASEURL . 'adminManager/viewManagers');
-    }
-    
-    /**
-     * Get list of moodle users and format for use in jQuery autocomplete
-     */
-    public function getMoodleUsers(){
-        $search_term = $_GET['term']; // this is search term
-        $users = $this->model->getMoodleUsers($search_term);
-        echo json_encode($users);
     }
     
     //default method
@@ -110,6 +111,12 @@ class AdminManagerController extends BaseController {
         $this->view->output($this->model->viewGroups($manager));
     }
     
+    public function viewGroupDetails(){
+        $group = $_GET['id'];
+        $this->view->output($this->model->viewGroupDetails($group));
+    }
+
+
     public function viewManagers(){
         $this->view->output($this->model->viewManagers());
     }

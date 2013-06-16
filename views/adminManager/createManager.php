@@ -2,10 +2,10 @@
 
 <script>
     $(function() {
-        $("#moodle_user_name").autocomplete({
-           // use full url - to avoid conflict with redirect
+        $("#displayname").autocomplete({
+           // use full url - to avoid conflict with routing
            // note that &term= is appended
-           source: BASE_URL + "index.php?controller=adminManager&action=getMoodleUsers",
+           source: BASE_URL + "index.php?controller=adminManager&action=ajaxStaffList",
            minLength: 2,
            noCache: true,
            select: function(event, ui) {
@@ -18,17 +18,13 @@
 
 <h1>Create New Manager Form</h1>
 <form method="POST" action="">
+    <!-- hidden field populated after autcomplete is selected -->
+    <input type="hidden" name="moodle_user_id" id="moodle_user_id" value="" />
     <table>
         <tr>
             <td><label>Name: </label>
-                <input type="text" name="moodle_user_id" id="moodle_user_name" value="" />
+                <input type="text" name="displayname" id="displayname" value="" />
                 - start typing manager's firstname or surname
-            </td>
-        </tr>
-        <tr>
-            <td><label>moodle_user_id: </label>
-                <input type="text" name="moodle_user_id" id="moodle_user_id" value="" />
-                @todo - hidden, after testing
             </td>
         </tr>
         <tr>
