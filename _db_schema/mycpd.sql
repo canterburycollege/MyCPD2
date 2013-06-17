@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.6
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 14, 2013 at 12:53 PM
--- Server version: 5.1.66-community-log
--- PHP Version: 5.3.10
+-- Generation Time: Jun 17, 2013 at 12:58 PM
+-- Server version: 5.5.24-log
+-- PHP Version: 5.3.13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -106,6 +106,7 @@ INSERT INTO `employee` (`id`, `display_name`, `moodle_user_id`, `mycpd_access_gr
 (1, 'Treesa Green', 99, 'test'),
 (2, 'Nathan Friend', 2528, 'test');
 
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `manager`
@@ -116,6 +117,13 @@ CREATE TABLE IF NOT EXISTS `manager` (
   `description` varchar(100) NOT NULL,
   PRIMARY KEY (`moodle_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `manager`
+--
+
+INSERT INTO `manager` (`moodle_user_id`, `description`) VALUES
+(43, 'test 123');
 
 -- --------------------------------------------------------
 
@@ -129,7 +137,14 @@ CREATE TABLE IF NOT EXISTS `manager_group` (
   `description` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `manager` (`manager`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `manager_group`
+--
+
+INSERT INTO `manager_group` (`id`, `manager`, `description`) VALUES
+(1, 43, 'test group');
 
 -- --------------------------------------------------------
 
@@ -265,8 +280,21 @@ CREATE TABLE IF NOT EXISTS `v_activity` (
 CREATE TABLE IF NOT EXISTS `v_scores` (
 `title` varchar(255)
 ,`value` longtext
-,`course` bigint(10) unsigned
-,`userid` bigint(10) unsigned
+,`course` bigint(10)
+,`userid` bigint(10)
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `v_staff`
+--
+CREATE TABLE IF NOT EXISTS `v_staff` (
+`id` bigint(10)
+,`username` varchar(100)
+,`firstname` varchar(100)
+,`lastname` varchar(100)
+,`displayname` varchar(201)
+,`email` varchar(100)
 );
 -- --------------------------------------------------------
 
@@ -304,6 +332,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`%` SQL SECURITY DEFINER VIEW `
 -- --------------------------------------------------------
 
 --
+-- Structure for view `v_staff`
+--
+DROP TABLE IF EXISTS `v_staff`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_staff` AS select `moodle`.`mdl_user`.`id` AS `id`,`moodle`.`mdl_user`.`username` AS `username`,`moodle`.`mdl_user`.`firstname` AS `firstname`,`moodle`.`mdl_user`.`lastname` AS `lastname`,concat(`moodle`.`mdl_user`.`firstname`,' ',`moodle`.`mdl_user`.`lastname`) AS `displayname`,`moodle`.`mdl_user`.`email` AS `email` from `moodle`.`mdl_user` where (not((`moodle`.`mdl_user`.`email` like '%@student%')));
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `v_targets_with_status`
 --
 DROP TABLE IF EXISTS `v_targets_with_status`;
@@ -331,4 +368,4 @@ ALTER TABLE `target`
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */ ;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
