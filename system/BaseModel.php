@@ -15,11 +15,19 @@ class BaseModel {
         $this->viewModel = new ViewModel();
 	$this->commonViewData();
     }
-
+    
     //establish viewModel data that is required for all views in this method (i.e. the main template)
-    protected function commonViewData() {
-	
-    //e.g. $this->viewModel->set("mainMenu",array("Home" => "/home", "Help" => "/help"));
+    protected function commonViewData() { 
+        // get news
+        require_once SYSPATH . 'DbConnectionRegistry.php';
+        $sql = "SELECT * FROM news";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $news = $dbConn->get_all($sql, 'OBJECT');
+        if (empty($news)) {
+            // initialize array to prevent php warning msg.
+            $news = Array();
+        }
+	$this->viewModel->set("news", $news);
     }
 }
 
