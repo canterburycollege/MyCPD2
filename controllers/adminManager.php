@@ -9,14 +9,13 @@
 class AdminManagerController extends BaseController {
     
     public function __construct($action, $urlValues) {
+        $this->authorisation();
+        
         parent::__construct($action, $urlValues);
-
+        
         //create the model object
         require("models/adminManager.php");
         $this->model = new AdminManagerModel();
-        /**
-         * @todo Accessible by admin only
-         */
     }
     
     /**
@@ -28,6 +27,21 @@ class AdminManagerController extends BaseController {
         echo json_encode($staff_list);
     }
     
+    /**
+     * Check that logged-in user is in admin group
+     * 
+     * @todo - ad form & select from db
+     */
+    public function authorisation(){
+        $USER = $_SESSION['USER'];
+        $logged_in_user = $USER->id;
+        $admin_users = array(2);
+        if(!in_array($logged_in_user,$admin_users)){
+            echo '<h3>Error: You [' . $USER->username . '] are not authorised to view this page</h3>';
+            exit;
+        }
+    }
+
     /**
      * Create group to be used to assign new group to manager
      */
