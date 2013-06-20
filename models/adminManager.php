@@ -15,11 +15,6 @@ class AdminManagerModel extends BaseModel {
             SELECT  id, displayname AS label  
             FROM    v_staff
             WHERE   displayname LIKE '%".$search_term."%'
-                    /* exclude any staff already in manager table */
-                    AND id NOT IN (
-                        SELECT  moodle_user_id
-                        FROM    manager
-                        )
             ORDER BY 2";
         
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
@@ -78,7 +73,8 @@ class AdminManagerModel extends BaseModel {
         $dbConn->execute($sql);
     }
     
-    public function createGroupDetailForm(){
+    public function createGroupDetailForm($group){
+        
         $this->viewModel->set("pageTitle", "MyCPD Admin");
         return $this->viewModel;
     }
