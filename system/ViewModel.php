@@ -20,6 +20,8 @@ class ViewModel {
             return null;
         }
     }
+    
+
 }
 
 /* End of file ViewModel.php */
