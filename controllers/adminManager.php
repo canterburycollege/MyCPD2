@@ -63,7 +63,7 @@ class AdminManagerController extends BaseController {
         $group = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->createGroupDetail($group);
-            header('Location: ' . BASEURL . 'adminManager/viewGroups/' . $group);
+            header('Location: ' . BASEURL . 'adminManager/viewGroupDetails/' . $group);
         }
         else {
             $this->view->output($this->model->createGroupDetailForm($group));

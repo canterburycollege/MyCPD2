@@ -164,22 +164,38 @@ class AdminManagerModel extends BaseModel {
     }
     
     public function viewGroupDetails($group){
-        $sql = "
-            SELECT  d.id,
-                    d.manager_group,
-                    d.moodle_user_id
+        // sql to get staff rows
+        $sql1 = "
+            SELECT  s.displayname
             FROM    manager_group_detail d
+                    JOIN v_staff s
+                        ON d.moodle_user_id = s.id
             WHERE   d.manager_group = {$group}";
             
+        // sql to get group row
+        $sql2 = "
+            SELECT  m.displayname as managerName,
+                    g.description as groupName
+            FROM    manager_group g
+                    JOIN v_staff m
+                        ON g.manager = m.id
+            WHERE   g.id = {$group}";
+            
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
-        $results = $dbConn->get_all($sql, 'OBJECT');
-        if (empty($results)) {
+        $staffRows = $dbConn->get_all($sql1, 'OBJECT');
+        $groupRow = $dbConn->get_all($sql2, 'OBJECT');
+        if (empty($staffRows)) {
             // initialize array to prevent php warning msg.
-            $results = Array();
+            $staffRows = Array();
+        }
+        if (empty($groupRow)) {
+            // initialize array to prevent php warning msg.
+            $groupRow = Array();
         }
         
         $this->viewModel->set("pageTitle", "MyCPD Admin");
-        $this->viewModel->set("groupDetails", $results);
+        $this->viewModel->set("staffRows", $staffRows);
+        $this->viewModel->set("groupRow", $groupRow[0]);
         $this->viewModel->set("group_id",$group);
 
         return $this->viewModel;

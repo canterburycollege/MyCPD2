@@ -1,8 +1,8 @@
 <?php include_once TEMPLATEPATH . 'nav_bar_admin.php'; ?>
-
+<?php $groupRow = $viewModel->get('groupRow'); ?>
 <h1>Maintain Groups Details</h1>
 <div id="div_groups">
-    <h2></h2>
+    <h2><?= $groupRow->managerName ?>: <?= $groupRow->groupName ?></h2>
     <table id="table_detail">
         <thead>
             <tr>
@@ -11,10 +11,9 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($viewModel->get('groupDetails') as $row): ?>
+            <?php foreach ($viewModel->get('staffRows') as $row): ?>
                 <tr>
-                    <td><?= $row->description ?></td>
-                    <td></td>
+                    <td><?= $row->displayname ?></td>
                     <td><a href="<?= BASEURL ?>adminManager/deleteGroupDetail/<?= $row->id ?>">Delete</a></td>
                 </tr>
                 <?php endforeach; ?>
