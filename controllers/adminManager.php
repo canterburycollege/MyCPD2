@@ -99,6 +99,7 @@ class AdminManagerController extends BaseController {
     protected function index()
     {
         $this->view->output($this->model->index());
+        //$this->view->output($this->model->viewManagers());
     }
     
     /**
