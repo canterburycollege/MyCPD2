@@ -1,12 +1,10 @@
-<?php $manager = $viewModel->get('manager'); ?>
+<?php $manager = $viewModel->get('managerDetails'); ?>
 <h1>Create New Group Form</h1>
+<h2><?= $manager->displayname ?></h2>
 <form method="POST" action="">
     <table>
         <tr>
-            <td><?= $manager->firstname ?></td>
-        </tr>
-        <tr>
-            <td><label>Description: </label>
+            <td><label>Description of new Group: </label>
                 <input type="text" name="description" value="" />
             </td>
         </tr>

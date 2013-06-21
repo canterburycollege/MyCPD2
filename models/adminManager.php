@@ -4,6 +4,25 @@ require_once SYSPATH . 'DbConnectionRegistry.php';
 
 class AdminManagerModel extends BaseModel {
     
+    /**
+     * get array of staff for populating autocomplete
+     * 
+     * @param string $search_term
+     * @return array
+     */
+    public function ajaxStaffList($search_term){
+        $sql = "
+            SELECT  id, displayname AS label  
+            FROM    v_staff
+            WHERE   displayname LIKE '%".$search_term."%'
+            ORDER BY 2";
+        
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results = $dbConn->get_all($sql, 'ARRAY');
+
+        return $results;
+    }
+    
     public function index() {
         $this->viewModel->set("pageTitle", "MyCPD Admin");
         $this->viewModel->set("heading1", "Maintain Managers");
@@ -29,7 +48,7 @@ class AdminManagerModel extends BaseModel {
     
     public function createGroupForm($manager){
         $this->viewModel->set("pageTitle", "MyCPD Admin");
-        $this->viewModel->set('manager',$manager);
+        $this->viewModel->set('managerDetails',$this->getStaffDetails($manager));
         return $this->viewModel;
     }
     
@@ -54,7 +73,8 @@ class AdminManagerModel extends BaseModel {
         $dbConn->execute($sql);
     }
     
-    public function createGroupDetailForm(){
+    public function createGroupDetailForm($group){
+        
         $this->viewModel->set("pageTitle", "MyCPD Admin");
         return $this->viewModel;
     }
@@ -94,20 +114,17 @@ class AdminManagerModel extends BaseModel {
     }
     
     /**
-     * Retrieve details from moodle db, for given user
+     * Retrieve details from moodle db, for given id
      * 
      * @param integer $moodle_user_id
      */
-    public function getMoodleUser($moodle_user_id){
+    public function getStaffDetails($moodle_user_id){
         $sql = "
-            SELECT  id,
-                    firstname,
-                    lastname,
-                    email
-            FROM    mdl_user
+            SELECT  *
+            FROM    v_staff
             WHERE   id = {$moodle_user_id}";
             
-        $dbConn = DbConnectionRegistry::getInstance('moodle');
+            $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
         if (empty($results)) {
             // initialize array to prevent php warning msg.
@@ -117,26 +134,6 @@ class AdminManagerModel extends BaseModel {
         return $results[0];
     }
 
-        /**
-     * get array of moodle users for populating autocomplete
-     * 
-     * @param string $search_term
-     * @return array
-     */
-    public function getMoodleUsers($search_term){
-        $sql = "
-            SELECT  id, CONCAT(firstname,' ',lastname) AS label  
-            FROM    mdl_user
-            WHERE   CONCAT(firstname,' ',lastname) LIKE '%".$search_term."%'
-                    AND email NOT LIKE '%@student%'
-            ORDER BY 2";
-        
-        $dbConn = DbConnectionRegistry::getInstance('moodle');
-        $results = $dbConn->get_all($sql, 'ARRAY');
-
-        return $results;
-    }
-    
     public function updateManager($moodle_user_id){
         $description = $_POST['description'];
         $sql = "
@@ -166,10 +163,47 @@ class AdminManagerModel extends BaseModel {
         return $this->viewModel;
     }
     
+    public function viewGroupDetails($group){
+        // sql to get staff rows
+        $sql1 = "
+            SELECT  s.displayname
+            FROM    manager_group_detail d
+                    JOIN v_staff s
+                        ON d.moodle_user_id = s.id
+            WHERE   d.manager_group = {$group}";
+            
+        // sql to get group row
+        $sql2 = "
+            SELECT  m.displayname as managerName,
+                    g.description as groupName
+            FROM    manager_group g
+                    JOIN v_staff m
+                        ON g.manager = m.id
+            WHERE   g.id = {$group}";
+            
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $staffRows = $dbConn->get_all($sql1, 'OBJECT');
+        $groupRow = $dbConn->get_all($sql2, 'OBJECT');
+        if (empty($staffRows)) {
+            // initialize array to prevent php warning msg.
+            $staffRows = Array();
+        }
+        if (empty($groupRow)) {
+            // initialize array to prevent php warning msg.
+            $groupRow = Array();
+        }
+        
+        $this->viewModel->set("pageTitle", "MyCPD Admin");
+        $this->viewModel->set("staffRows", $staffRows);
+        $this->viewModel->set("groupRow", $groupRow[0]);
+        $this->viewModel->set("group_id",$group);
+
+        return $this->viewModel;
+    }
+    
     public function viewGroups($manager){
         $sql = "
             SELECT  id,
-                    manager,
                     description
             FROM    manager_group
             WHERE   manager = '{$manager}'";
@@ -184,7 +218,7 @@ class AdminManagerModel extends BaseModel {
         $this->viewModel->set("pageTitle", "MyCPD Admin");
         $this->viewModel->set("groups", $results);
         // get manager name from moodle
-        $this->viewModel->set("manager", $this->getMoodleUser($manager));
+        $this->viewModel->set("manager", $this->getStaffDetails($manager));
 
         return $this->viewModel;
             

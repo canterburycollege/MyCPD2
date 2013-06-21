@@ -9,16 +9,39 @@
 class AdminManagerController extends BaseController {
     
     public function __construct($action, $urlValues) {
+        $this->authorisation();
+        
         parent::__construct($action, $urlValues);
-
+        
         //create the model object
         require("models/adminManager.php");
         $this->model = new AdminManagerModel();
-        /**
-         * @todo Accessible by admin only
-         */
     }
     
+    /**
+     * Get list of staff and format for use in jQuery autocomplete
+     */
+    public function ajaxStaffList(){
+        $search_term = $_GET['term']; // this is search term
+        $staff_list = $this->model->ajaxStaffList($search_term);
+        echo json_encode($staff_list);
+    }
+    
+    /**
+     * Check that logged-in user is in admin group
+     * 
+     * @todo - ad form & select from db
+     */
+    public function authorisation(){
+        $USER = $_SESSION['USER'];
+        $logged_in_user = $USER->id;
+        $admin_users = array(2);
+        if(!in_array($logged_in_user,$admin_users)){
+            echo '<h3>Error: You [' . $USER->username . '] are not authorised to view this page</h3>';
+            exit;
+        }
+    }
+
     /**
      * Create group to be used to assign new group to manager
      */
@@ -26,7 +49,7 @@ class AdminManagerController extends BaseController {
         $manager = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->createGroup($manager);
-            header('Location: ' . BASEURL . 'adminManager/viewManagers');
+            header('Location: ' . BASEURL . 'adminManager/viewGroups/' . $manager);
         }
         else {
             $this->view->output($this->model->createGroupForm($manager));
@@ -40,10 +63,10 @@ class AdminManagerController extends BaseController {
         $group = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->createGroupDetail($group);
-            header('Location: ' . BASEURL . 'adminManager/viewManagers');
+            header('Location: ' . BASEURL . 'adminManager/viewGroupDetails/' . $group);
         }
         else {
-            $this->view->output($this->model->createGroupDetailForm());
+            $this->view->output($this->model->createGroupDetailForm($group));
         }
     }
     
@@ -53,7 +76,8 @@ class AdminManagerController extends BaseController {
     public function createManager() {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->createManager();
-            header('Location: ' . BASEURL . 'adminManager/viewManagers');
+            $manager = $_POST['moodle_user_id'];
+            header('Location: ' . BASEURL . 'adminManager/createGroup/' . $manager);
         }
         else {
             $this->view->output($this->model->createManagerForm());
@@ -62,7 +86,7 @@ class AdminManagerController extends BaseController {
     
     public function deleteGroup(){
         $id = $_GET['id'];
-        $this->view->output($this->model->deleteGroup($id));
+        $this->model->deleteGroup($id);
     }
 
     public function deleteManager() {
@@ -71,19 +95,11 @@ class AdminManagerController extends BaseController {
         header('Location: ' . BASEURL . 'adminManager/viewManagers');
     }
     
-    /**
-     * Get list of moodle users and format for use in jQuery autocomplete
-     */
-    public function getMoodleUsers(){
-        $search_term = $_GET['term']; // this is search term
-        $users = $this->model->getMoodleUsers($search_term);
-        echo json_encode($users);
-    }
-    
     //default method
     protected function index()
     {
         $this->view->output($this->model->index());
+        //$this->view->output($this->model->viewManagers());
     }
     
     /**
@@ -110,6 +126,12 @@ class AdminManagerController extends BaseController {
         $this->view->output($this->model->viewGroups($manager));
     }
     
+    public function viewGroupDetails(){
+        $group = $_GET['id'];
+        $this->view->output($this->model->viewGroupDetails($group));
+    }
+
+
     public function viewManagers(){
         $this->view->output($this->model->viewManagers());
     }

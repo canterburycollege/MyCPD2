@@ -16,7 +16,8 @@
     });
 </script>
 
-<h1>Create New Manager Form</h1>
+<h1>Add Staff Member to Group Form</h1>
+<h2><?= 'staffMember->displayname' ?></h2>
 <form method="POST" action="">
     <!-- hidden field populated after autcomplete is selected -->
     <input type="hidden" name="moodle_user_id" id="moodle_user_id" value="" />
@@ -24,12 +25,8 @@
         <tr>
             <td><label>Name: </label>
                 <input type="text" name="displayname" id="displayname" value="" />
-                - start typing manager's firstname or surname
+                - start typing staff member's firstname or surname
             </td>
-        </tr>
-        <tr>
-            <td><label>Description: </label>
-                <input type="text" name="description" value="" size="100" /></td>
         </tr>
         <tr>
             <td align="center">

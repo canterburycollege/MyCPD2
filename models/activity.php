@@ -28,7 +28,7 @@ class ActivityModel extends BaseModel {
         $this->viewModel->set("pageTitle", "MyCPD Hub");
         return $this->viewModel;
     }
-
+    
     private function get_priority_types() {
         $sql = "SELECT id, description FROM priority_type ORDER BY sort_order";
 

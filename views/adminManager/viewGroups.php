@@ -3,10 +3,12 @@
 
 <h1>Maintain Manager Groups</h1>
 <div id="div_groups">
+    <h2><?= $manager->displayname ?></h2>
     <table id="table_detail">
         <thead>
             <tr>
                 <th>Description</th>
+                <th>No. of Staff</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -14,11 +16,12 @@
             <?php foreach ($viewModel->get('groups') as $row): ?>
                 <tr>
                     <td><?= $row->description ?></td>
+                    <td></td>
                     <td><a href="<?= BASEURL ?>adminManager/updateGroup/<?= $row->id ?>">Update</a> 
                         | 
                         <a href="<?= BASEURL ?>adminManager/deleteGroup/<?= $row->id ?>">Delete</a>
                         | 
-                        <a href="<?= BASEURL ?>adminManager/viewGroups/<?= $row->id ?>">View Groups</a> 
+                        <a href="<?= BASEURL ?>adminManager/viewGroupDetails/<?= $row->id ?>">View Staff</a> 
                     </td>
                 </tr>
                 <?php endforeach; ?>
