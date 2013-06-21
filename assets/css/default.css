@@ -192,3 +192,12 @@ p{
 .dataTables_info {
     font-size: 10px;
 }
+
+h2 {
+    margin-bottom: 0px;
+    color: #5C5C5C;
+}
+
+ul {
+    margin-top: 1px;
+}
