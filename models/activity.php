@@ -83,19 +83,16 @@ class ActivityModel extends BaseModel {
         return $this->viewModel;
     }
 
-    public function view($id) {
-        $employee_id = 1;
-
-        // set where clause fot target_id
-        if (empty($id)) {
-            $whereTarget = NULL;
-        } else {
-            $whereTarget = " AND target_id = {$id} ";
-        }
+    public function view($logged_in_user) {
         
         //@todo academic_year move to global constant
         $academic_year = "2012/09/03 00:00:00";
-        $sql = " select * from v_activity where planned_date > '{$academic_year}' AND 1=1 {$whereTarget};";
+        $sql = "
+            SELECT  * 
+            FROM    v_activity 
+            WHERE   employee_id = '{$logged_in_user}'
+                    AND planned_date > '{$academic_year}' 
+                    ";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
         if (empty($results)) {
@@ -109,11 +106,15 @@ class ActivityModel extends BaseModel {
         return $this->viewModel;
     }
 
-    public function archive() {
-        $employee_id = 1;
+    public function archive($logged_in_user) {
         //@todo academic_year move to global constant
         $academic_year = "2012/09/03 00:00:00";
-        $sql = "select * from v_activity where planned_date < '{$academic_year}';";
+        $sql = "
+            SELECT  * 
+            FROM    v_activity 
+            WHERE   employee_id = '{$logged_in_user}' 
+                    AND planned_date < '{$academic_year}'
+                ";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
         if (empty($results)) {

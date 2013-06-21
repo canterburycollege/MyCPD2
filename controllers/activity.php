@@ -7,10 +7,14 @@
  * 
  */
 class ActivityController extends BaseController {
+    
+    private $logged_in_user;
 
     public function __construct($action, $urlValues) {
         parent::__construct($action, $urlValues);
-
+        // set logged in user
+        $USER = $_SESSION['USER'];
+        $this->logged_in_user = $USER->id;
         //create the model object
         require("models/activity.php");
         $this->model = new ActivityModel();
@@ -35,12 +39,11 @@ class ActivityController extends BaseController {
     }
 
     public function view() {
-        $id = $_GET['id'];
-        $this->view->output($this->model->view($id));
+        $this->view->output($this->model->view($this->logged_in_user));
     }
 
     public function archive() {
-        $this->view->output($this->model->archive());
+        $this->view->output($this->model->archive($this->logged_in_user));
     }
 
 }
