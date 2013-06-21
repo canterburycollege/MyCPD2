@@ -8,6 +8,9 @@
         <script type="text/javascript" src="http://localhost/moodle/MyCPD/global.js"></script>
     </head>
     <body>
+        <?php foreach ($viewModel->get('news') as $row): ?>
+ <div class="news"><?= $row->description?></div>
+<?php endforeach; ?>
         <?php require($this->viewFile); ?>
     </body>
 </html>

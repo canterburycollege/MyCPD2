@@ -17,7 +17,8 @@ class BaseModel {
     }
     
     //establish viewModel data that is required for all views in this method (i.e. the main template)
-    protected function commonViewData() { 
+    protected function commonViewData() {
+
         // get news
         require_once SYSPATH . 'DbConnectionRegistry.php';
         $sql = "SELECT * FROM news";
@@ -29,6 +30,10 @@ class BaseModel {
         }
 	$this->viewModel->set("news", $news);
     }
+    //e.g. $this->viewModel->set("mainMenu",array("Home" => "/home", "Help" => "/help"));
+    
+    
+    
 }
 
 /* End of file BaseModel.php */
