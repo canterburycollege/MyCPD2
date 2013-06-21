@@ -133,6 +133,33 @@ class AdminManagerModel extends BaseModel {
 
         return $results[0];
     }
+    
+    public function updateGroup($id){
+        $description = $_POST['description'];
+        $sql = "
+            UPDATE  manager_group
+            SET     description = '{$description}'
+            WHERE   id = '{$id}'";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $dbConn->execute($sql);    
+    }
+    
+    public function updateGroupForm($id){
+        $sql = "
+            SELECT  g.description,
+                    (
+                    SELECT  m.displayname
+                    FROM    v_staff m
+                    WHERE   m.id = g.manager
+                    ) AS manager
+            FROM    manager_group g
+            WHERE   g.id = '{$id}'";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results = $dbConn->get_all($sql, 'OBJECT');   
+        $this->viewModel->set("pageTitle", "MyCPD Admin");
+        $this->viewModel->set("group", $results[0]);
+        return $this->viewModel;
+    }
 
     public function updateManager($moodle_user_id){
         $description = $_POST['description'];
@@ -203,10 +230,15 @@ class AdminManagerModel extends BaseModel {
     
     public function viewGroups($manager){
         $sql = "
-            SELECT  id,
-                    description
-            FROM    manager_group
-            WHERE   manager = '{$manager}'";
+            SELECT  mg.id,
+                    mg.description,
+                    (
+                    SELECT  count(*)
+                    FROM    manager_group_detail mgd
+                    WHERE   mgd.manager_group = mg.id
+                    ) AS num_of_staff
+            FROM    manager_group mg
+            WHERE   mg.manager = '{$manager}'";
             
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
@@ -220,8 +252,7 @@ class AdminManagerModel extends BaseModel {
         // get manager name from moodle
         $this->viewModel->set("manager", $this->getStaffDetails($manager));
 
-        return $this->viewModel;
-            
+        return $this->viewModel;            
     }
 
     public function viewManagers() {

@@ -8,6 +8,7 @@
         <thead>
             <tr>
                 <th>Description</th>
+                <th>Section</th>
                 <th>No. of Staff</th>
                 <th>Actions</th>
             </tr>
@@ -16,7 +17,8 @@
             <?php foreach ($viewModel->get('groups') as $row): ?>
                 <tr>
                     <td><?= $row->description ?></td>
-                    <td></td>
+                    <td>$section</td>
+                    <td><?= $row->num_of_staff ?></td>
                     <td><a href="<?= BASEURL ?>adminManager/updateGroup/<?= $row->id ?>">Update</a> 
                         | 
                         <a href="<?= BASEURL ?>adminManager/deleteGroup/<?= $row->id ?>">Delete</a>
