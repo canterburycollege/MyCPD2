@@ -10,10 +10,6 @@
     });
     
 </script>
-
-<?php foreach ($viewModel->get('news') as $row): ?>
- <div class="news"><?= $row->description?></div>
-<?php endforeach; ?>
  
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
  <h1><img src="<?= BASEURL . '/assets/pix/plan2.png' ?>" alt="Target icon"><?= $viewModel->get('heading1'); ?></h1><a href="<?= BASEURL ?>activity/archive/">Archive</a> | Current
