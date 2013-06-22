@@ -23,12 +23,6 @@ class AdminManagerModel extends BaseModel {
         return $results;
     }
     
-    public function index() {
-        $this->viewModel->set("pageTitle", "MyCPD Admin");
-        $this->viewModel->set("heading1", "Maintain Managers");
-        return $this->viewModel;
-    }
-    
     public function createGroup($manager){
         $description = $_POST['description'];
         

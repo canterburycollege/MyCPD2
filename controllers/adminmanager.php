@@ -98,8 +98,7 @@ class AdminManagerController extends BaseController {
     //default method
     protected function index()
     {
-        $this->view->output($this->model->index());
-        //$this->view->output($this->model->viewManagers());
+        header('Location: ' . BASEURL . 'adminManager/viewManagers');
     }
     
     /**
