@@ -258,8 +258,10 @@ class AdminManagerModel extends BaseModel {
         $sql = "
             SELECT  mg.id,
                     (
-                    SELECT  s.description
+                    SELECT  CONCAT(s.description,' (',f.description,')') AS section
                     FROM    section s
+                            JOIN faculty f
+                                ON s.faculty = f.id
                     WHERE   mg.section = s.id
                     ) AS section,
                     mg.description,
