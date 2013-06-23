@@ -15,8 +15,7 @@
     <table id="table_detail">
         <thead>
             <tr>
-                <th>Firstname</th>
-                <th>Surname</th>
+                <th>Manager</th>
                 <th>Description</th>
                 <th>Actions</th>
             </tr>
@@ -24,8 +23,7 @@
         <tbody>
             <?php foreach ($viewModel->get('managers') as $row): ?>
                 <tr>
-                    <td><?= $row->firstname ?></td>
-                    <td><?= $row->lastname ?></td>
+                    <td><?= $row->displayname ?></td>
                     <td><?= $row->description ?></td>
                     <td><a href="<?= BASEURL ?>adminManager/updateManager/<?= $row->moodle_user_id ?>">Update</a> 
                         | 

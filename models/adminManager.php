@@ -291,14 +291,14 @@ class AdminManagerModel extends BaseModel {
     public function viewManagers() {
         $sql = "
             SELECT  u.id as moodle_user_id,
-                    u.firstname,
-                    u.lastname,
+                    u.displayname,
                     m.description
             FROM    mycpd.manager m
-                    JOIN moodle.mdl_user u
-                        ON m.moodle_user_id = u.id";
+                    JOIN v_staff u
+                        ON m.moodle_user_id = u.id
+            ORDER BY u.displayname";
 
-        $dbConn = DbConnectionRegistry::getInstance('host');
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
         if (empty($results)) {
             // initialize array to prevent php warning msg.
