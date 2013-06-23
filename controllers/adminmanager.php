@@ -108,7 +108,7 @@ class AdminManagerController extends BaseController {
         $id = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->updateGroup($id);
-            header('Location: ' . BASEURL . 'adminManager/viewManagers');
+            header('Location: ' . BASEURL . 'adminManager/viewManagers/');
         } else {
             $this->view->output($this->model->updateGroupForm($id));
         }

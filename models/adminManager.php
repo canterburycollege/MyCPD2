@@ -1,6 +1,7 @@
 <?php
 
 require_once SYSPATH . 'DbConnectionRegistry.php';
+require_once SYSPATH . 'formHelper.php';
 
 class AdminManagerModel extends BaseModel {
     
@@ -24,16 +25,16 @@ class AdminManagerModel extends BaseModel {
     }
     
     public function createGroup($manager){
-        $description = $_POST['description'];
-        
         $sql = "
             INSERT INTO manager_group (
                 manager,
+                section,
                 description
                 )
             VALUES (
                 '{$manager}',
-                '{$description}'
+                '{$_POST['section']}',
+                '{$_POST['description']}'
                 )";
                 
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
@@ -43,6 +44,7 @@ class AdminManagerModel extends BaseModel {
     public function createGroupForm($manager){
         $this->viewModel->set("pageTitle", "MyCPD Admin");
         $this->viewModel->set('managerDetails',$this->getStaffDetails($manager));
+        $this->viewModel->set("section_options",html_select_options($this->getSectionOptions()));
         return $this->viewModel;
     }
     
@@ -102,11 +104,36 @@ class AdminManagerModel extends BaseModel {
     }
     
     public function deleteManager($moodle_user_id){
-        $sql = "DELETE FROM manager WHERE moodle_user_id = '{$moodle_user_id}'";
+        $sql = "
+            DELETE FROM manager 
+            WHERE moodle_user_id = '{$moodle_user_id}'";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $dbConn->execute($sql);
     }
     
+    /**
+     * return an array of options to be used in html select
+     * 
+     * @return array
+     */
+    private function getSectionOptions(){
+        $sql = "
+            SELECT  s.id, 
+                    CONCAT(s.description,' (',f.description,')') AS description
+            FROM    section s
+                    JOIN faculty f
+                        ON s.faculty = f.id
+            ORDER BY 2";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results = $dbConn->get_all($sql, 'OBJECT');
+        if (empty($results)) {
+            // initialize array to prevent php warning msg.
+            $results = Array();
+        }
+        
+        return $results;
+    }
+
     /**
      * Retrieve details from moodle db, for given id
      * 
@@ -129,10 +156,12 @@ class AdminManagerModel extends BaseModel {
     }
     
     public function updateGroup($id){
+        $section_id = $_POST['section_id'];
         $description = $_POST['description'];
         $sql = "
             UPDATE  manager_group
-            SET     description = '{$description}'
+            SET     section = '{$section_id}',
+                    description = '{$description}'
             WHERE   id = '{$id}'";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $dbConn->execute($sql);    
@@ -141,6 +170,7 @@ class AdminManagerModel extends BaseModel {
     public function updateGroupForm($id){
         $sql = "
             SELECT  g.description,
+                    g.section AS section_id,
                     (
                     SELECT  m.displayname
                     FROM    v_staff m
@@ -149,9 +179,11 @@ class AdminManagerModel extends BaseModel {
             FROM    manager_group g
             WHERE   g.id = '{$id}'";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
-        $results = $dbConn->get_all($sql, 'OBJECT');   
+        $results = $dbConn->get_all($sql, 'OBJECT'); 
         $this->viewModel->set("pageTitle", "MyCPD Admin");
         $this->viewModel->set("group", $results[0]);
+        $this->viewModel->set("section_options", 
+                html_select_options($this->getSectionOptions(), $results[0]->section_id));
         return $this->viewModel;
     }
 
@@ -225,6 +257,11 @@ class AdminManagerModel extends BaseModel {
     public function viewGroups($manager){
         $sql = "
             SELECT  mg.id,
+                    (
+                    SELECT  s.description
+                    FROM    section s
+                    WHERE   mg.section = s.id
+                    ) AS section,
                     mg.description,
                     (
                     SELECT  count(*)

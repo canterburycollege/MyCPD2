@@ -7,8 +7,8 @@
     <table id="table_detail">
         <thead>
             <tr>
-                <th>Description</th>
                 <th>Section</th>
+                <th>Description</th>
                 <th>No. of Staff</th>
                 <th>Actions</th>
             </tr>
@@ -16,8 +16,8 @@
         <tbody>
             <?php foreach ($viewModel->get('groups') as $row): ?>
                 <tr>
+                    <td><?= $row->section ?></td> 
                     <td><?= $row->description ?></td>
-                    <td>$section</td>
                     <td><?= $row->num_of_staff ?></td>
                     <td><a href="<?= BASEURL ?>adminManager/updateGroup/<?= $row->id ?>">Update</a> 
                         | 
