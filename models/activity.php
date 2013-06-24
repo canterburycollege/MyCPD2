@@ -1,10 +1,11 @@
 <?php
 
 require_once SYSPATH . 'DbConnectionRegistry.php';
+require_once SYSPATH . 'formHelper.php';
 
 class ActivityModel extends BaseModel {
-
     
+
 // @todo move to own helper file
     private function html_select_options($options, $selected_id) {
         $html = '';
@@ -15,16 +16,11 @@ class ActivityModel extends BaseModel {
                 $html .= '<option value="' . $option->id . '">';
             }
             $html .= $option->description . '</option>';
-        }
-        return $html;
-    }
+    }}
+
 
    public function create() {
         $this->viewModel->set("pageTitle", "Create Activity");
-        $moodle_user_id = 1;
-
-
-
         $priority_types = $this->get_priority_types();
         
         $this->viewModel->set("priority_options", $this->html_select_options($priority_types, NULL));
@@ -41,8 +37,11 @@ class ActivityModel extends BaseModel {
         $this->viewModel->set("pageTitle", "Create Activity");
         $this->viewModel->set("heading1", "Create Activity");
         $this->viewModel->set("targets", $results);
-        return $this->viewModel;
-    }
+   }
+   
+   
+   
+
 
     public function created() {
            $moodle_user_id = $_SESSION['USER']->id; 
@@ -116,7 +115,7 @@ echo $sql;
      * @todo check whether only current targets required
      * or maybe use option group to display archived at bottom of list
      */
-    private function get_targets() {
+    private function get_targets($logged_in_user) {
         /* @todo add IN clause to select only given user's targets */
         $sql = "SELECT  id, title AS description 
                 FROM    target
@@ -127,7 +126,7 @@ echo $sql;
         return $results;
     }
 
-    public function index() {
+    public function index($logged_in_user) {
         $this->viewModel->set("pageTitle", "MyCPD Hub");
         $this->viewModel->set("heading1", "Activities");
         return $this->viewModel;
@@ -148,11 +147,11 @@ echo $sql;
 
         $targets = $this->get_targets();
         $selected_target = $activity->target_id;
-        $this->viewModel->set("target_options", $this->html_select_options($targets, $selected_target));
+        $this->viewModel->set("target_options", html_select_options($targets, $selected_target));
 
         $priority_types = $this->get_priority_types();
         $selected_priority = $activity->priority_type_id;
-        $this->viewModel->set("priority_options", $this->html_select_options($priority_types, $selected_priority));
+        $this->viewModel->set("priority_options", html_select_options($priority_types, $selected_priority));
 
         return $this->viewModel;
     }
@@ -180,6 +179,7 @@ echo $sql;
         return $this->viewModel;
     }
 
+
     public function archive($logged_in_user) {
         //@todo academic_year move to global constant
         $academic_year = "2012/09/03 00:00:00";
@@ -201,6 +201,7 @@ echo $sql;
 
         return $this->viewModel;
     }
+
 
 }
 
