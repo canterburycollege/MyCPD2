@@ -35,7 +35,9 @@ class AdminManagerController extends BaseController {
     public function authorisation(){
         $USER = $_SESSION['USER'];
         $logged_in_user = $USER->id;
-        $admin_users = array(2);
+        //$admin_users = array(2);
+        $admin_users = array("2528","43");
+        var_dump($admin_users);
         if(!in_array($logged_in_user,$admin_users)){
             echo '<h3>Error: You [' . $USER->username . '] are not authorised to view this page</h3>';
             exit;
