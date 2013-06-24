@@ -10,9 +10,9 @@ class ActivityModel extends BaseModel {
         $html = '';
         foreach ($options as $option) {
             if ($option->id == $selected_id) {
-                $html .= '<option id="' . $option->id . '" selected>';
+                $html .= '<option value="' . $option->id . '" selected>';
             } else {
-                $html .= '<option id="' . $option->id . '">';
+                $html .= '<option value="' . $option->id . '">';
             }
             $html .= $option->description . '</option>';
         }
@@ -21,11 +21,17 @@ class ActivityModel extends BaseModel {
 
    public function create() {
         $this->viewModel->set("pageTitle", "Create Activity");
-        $employee_id = 1;
+        $moodle_user_id = 1;
 
-        $sql = "SELECT * FROM target_status";
+
+
+        $priority_types = $this->get_priority_types();
+        
+        $this->viewModel->set("priority_options", $this->html_select_options($priority_types, NULL));
+        
+        $Targetsql = "select id, title, moodle_user_id from target;";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
-        $results = $dbConn->get_all($sql, 'OBJECT');
+        $results = $dbConn->get_all($Targetsql, 'OBJECT');
 
         if (empty($results)) {
             // initialize array to prevent php warning msg.
@@ -39,27 +45,57 @@ class ActivityModel extends BaseModel {
     }
 
     public function created() {
-        $moodle_user_id = $_SESSION['USER']->id;
-        $this->viewModel->set("pageTitle", "Create Target");
-        $employee_id = $_SESSION['USER']->id;
+           $moodle_user_id = $_SESSION['USER']->id; 
+        $this->viewModel->set("pageTitle", "MyCPD Hub");
 
         $title = $_POST['title'];
-        $title_ext = $_POST['title_ext'];
+        $target_id = $_POST['target_id'];
         $description = $_POST['description'];
-        $target_date = $_POST['target_date'];
-        $status = $_POST['status'];
+        $cpdtitle = $_POST['cpdtitle'];
+        $teacherOutcome = $_POST['teacherOutcome'];
+        $studentOutcome = $_POST['studentOutcome'];
+        $priority = $_POST['priority'];
+        $activity_date = $_POST['activity_date'];
+        
 
-        $sql = "INSERT INTO target 
-                (title,
-                title_ext,
-                description,
-                target_date,
-                status_id,
-                moodle_user_id) VALUES ('{$title}','{$title_ext}','{$description}', '{$target_date}', '{$status}', '{$moodle_user_id}')";
+echo "1) ".$title."<br>";
+echo "2) ".$description."<br>";
+echo "3) ".$target_id."<br>";
+echo "4) ".$cpdtitle."<br>";
+echo "5) ".$teacherOutcome."<br>";
+echo "6) ".$studentOutcome."<br>";
+echo "7) ".$priority."<br>";
+echo "8) ".$activity_date."<br>";
+
+
+
+ $sql = "INSERT INTO activity 
+                (
+                moodle_user_id,
+                title,
+                target_id,
+                provider,
+                learning_outcomes,
+                impact,
+                priority_type_id,
+                planned_date
+                ) VALUES (
+               '{$moodle_user_id}',
+                '{$title}',
+                '{$target_id}',
+                '{$cpdtitle}',
+                '{$teacherOutcome}',
+                '{$studentOutcome}',
+                '{$priority}',
+                '{$activity_date}')";
 
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
-        $dbConn->execute($sql);
-        header('Location: /moodle/MyCPD/target/view/');
+echo $sql;       
+ $dbConn->execute($sql);
+
+
+
+
     }
 
     public function delete() {
@@ -128,8 +164,8 @@ class ActivityModel extends BaseModel {
         $sql = "
             SELECT  * 
             FROM    v_activity 
-            WHERE   employee_id = '{$logged_in_user}'
-                    AND planned_date > '{$academic_year}' 
+            WHERE   moodle_user_id = '{$logged_in_user}'
+                    
                     ";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
@@ -150,7 +186,7 @@ class ActivityModel extends BaseModel {
         $sql = "
             SELECT  * 
             FROM    v_activity 
-            WHERE   employee_id = '{$logged_in_user}' 
+            WHERE   moodle_user_id = '{$logged_in_user}' 
                     AND planned_date < '{$academic_year}'
                 ";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
