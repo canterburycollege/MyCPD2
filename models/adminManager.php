@@ -126,29 +126,6 @@ class AdminManagerModel extends BaseModel {
     }
 
     /**
-     * return an array of options to be used in html select
-     * 
-     * @return array
-     */
-    private function getSectionOptions() {
-        $sql = "
-            SELECT  s.id, 
-                    CONCAT(s.description,' (',f.description,')') AS description
-            FROM    section s
-                    JOIN faculty f
-                        ON s.faculty = f.id
-            ORDER BY 2";
-        $dbConn = DbConnectionRegistry::getInstance('mycpd');
-        $results = $dbConn->get_all($sql, 'OBJECT');
-        if (empty($results)) {
-            // initialize array to prevent php warning msg.
-            $results = Array();
-        }
-
-        return $results;
-    }
-
-    /**
      * Retrieve details from moodle db, for given id
      * 
      * @param integer $moodle_user_id
@@ -357,6 +334,41 @@ class AdminManagerModel extends BaseModel {
                 
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $dbConn->execute($sql);
+    }
+    
+    public function deleteFaculty($id){
+        $sql = "DELETE FROM faculty WHERE id ='{$id}'";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $dbConn->execute($sql);
+    }
+    
+    public function deleteSection($id){
+        $sql = "DELETE FROM section WHERE id ='{$id}'";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $dbConn->execute($sql);
+    }
+    
+    /**
+     * return an array of options to be used in html select
+     * 
+     * @return array
+     */
+    private function getSectionOptions() {
+        $sql = "
+            SELECT  s.id, 
+                    CONCAT(s.description,' (',f.description,')') AS description
+            FROM    section s
+                    JOIN faculty f
+                        ON s.faculty = f.id
+            ORDER BY 2";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results = $dbConn->get_all($sql, 'OBJECT');
+        if (empty($results)) {
+            // initialize array to prevent php warning msg.
+            $results = Array();
+        }
+
+        return $results;
     }
 
 }

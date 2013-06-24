@@ -157,26 +157,40 @@ class AdminManagerController extends BaseController {
     
     public function deleteFaculty(){
         $id = $_GET['id'];
+        $this->model->deleteFaculty($id);
     }
     
     public function deleteSection(){
         $id = $_GET['id'];
+        $this->model->deleteSection($id);
     }
 
     public function updateFaculty(){
         $id = $_GET['id'];
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $this->model->updateFaculty($id);
+            header('Location: ' . BASEURL . 'adminManager/viewFaculties/');
+        } else {
+            $this->view->output($this->model->updateFacultyForm($id));
+        }
     }
     
     public function updateSection(){
         $id = $_GET['id'];
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $this->model->updateSection($id);
+            header('Location: ' . BASEURL . 'adminManager/viewSections/');
+        } else {
+            $this->view->output($this->model->updateSectionForm($id));
+        }
     }
     
     public function viewFaculties(){
-        
+        $this->view->output($this->model->viewFaculties());
     }
     
     public function viewSections(){
-        $faculty = $_GET['id'];
+        $this->view->output($this->model->viewSections());
     }
     
 }
