@@ -1,8 +1,5 @@
 <!-- Todo: check you have permission to edit -->
 
-<?php
-$status_options = $viewModel->get('status_options');
-?>
 
 <script type="text/javascript" src="<?= BASEURL . '/assets/js/tiny_mce/tiny_mce.js' ?>"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
@@ -46,7 +43,7 @@ $status_options = $viewModel->get('status_options');
                 <tr>
                     <td><label>Date: </label><input name="target_date" name="target_date" id="target_date" value="<?= $row->target_date ?>"></td>
                 </tr>                <tr>
-                    <td><label>Status: </label><select name="status"><?= $status_options ?></select></td>
+                    <td><label>Status: </label><select name="status"><?= $viewModel->get('status_options') ?></select></td>
                 </tr>
             <?php endforeach; ?>
                 <tr>
