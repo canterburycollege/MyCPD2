@@ -11,10 +11,10 @@
  */
 
 // define file paths
-##define('CONFIGPATH', '/srv/www/mycpd_config/'); // path for config files
-define('CONFIGPATH', 'C:/wamp/mycpd2_config/'); // rh local test version
-define('MOODLECONFIGFILE','C:/wamp/www/moodle/config.php'); // rh local test version
-##define('MOODLECONFIGFILE','/srv/www/htdocs/moodle/config.php'); 
+define('CONFIGPATH', '/srv/www/mycpd_config/'); // path for config files
+##define('CONFIGPATH', 'C:/wamp/mycpd2_config/'); // rh local test version
+##define('MOODLECONFIGFILE','C:/wamp/www/moodle/config.php'); // rh local test version
+define('MOODLECONFIGFILE','/srv/www/htdocs/moodle/config.php'); 
 
 define('DS', DIRECTORY_SEPARATOR); // window & linux ude different seperators
 define('BASEPATH', __DIR__ . DS); // path to this directory
@@ -22,8 +22,8 @@ define('SYSPATH', BASEPATH . 'system' . DS);
 define('TEMPLATEPATH', BASEPATH . 'views' . DS . 'templates' . DS);
 
 // define url paths
-define('BASEURL', 'http://localhost/moodle/MyCPD/'); // rh local test
-##define('BASEURL', '/moodle/MyCPD/'); // webdev-04
+##define('BASEURL', 'http://localhost/moodle/MyCPD/'); // rh local test
+define('BASEURL', '/moodle/MyCPD/'); // webdev-04
 // load system files
 require(SYSPATH . 'Authentication.php');
 require(SYSPATH . 'BaseController.php');  
