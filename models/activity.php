@@ -19,9 +19,47 @@ class ActivityModel extends BaseModel {
         return $html;
     }
 
-    public function create() {
-        $this->viewModel->set("pageTitle", "MyCPD Hub");
+   public function create() {
+        $this->viewModel->set("pageTitle", "Create Activity");
+        $employee_id = 1;
+
+        $sql = "SELECT * FROM target_status";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results = $dbConn->get_all($sql, 'OBJECT');
+
+        if (empty($results)) {
+            // initialize array to prevent php warning msg.
+            $results = Array();
+        }
+
+        $this->viewModel->set("pageTitle", "Create Activity");
+        $this->viewModel->set("heading1", "Create Activity");
+        $this->viewModel->set("targets", $results);
         return $this->viewModel;
+    }
+
+    public function created() {
+        $moodle_user_id = $_SESSION['USER']->id;
+        $this->viewModel->set("pageTitle", "Create Target");
+        $employee_id = $_SESSION['USER']->id;
+
+        $title = $_POST['title'];
+        $title_ext = $_POST['title_ext'];
+        $description = $_POST['description'];
+        $target_date = $_POST['target_date'];
+        $status = $_POST['status'];
+
+        $sql = "INSERT INTO target 
+                (title,
+                title_ext,
+                description,
+                target_date,
+                status_id,
+                moodle_user_id) VALUES ('{$title}','{$title_ext}','{$description}', '{$target_date}', '{$status}', '{$moodle_user_id}')";
+
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $dbConn->execute($sql);
+        header('Location: /moodle/MyCPD/target/view/');
     }
 
     public function delete() {
