@@ -37,6 +37,8 @@ class ActivityModel extends BaseModel {
         $this->viewModel->set("pageTitle", "Create Activity");
         $this->viewModel->set("heading1", "Create Activity");
         $this->viewModel->set("targets", $results);
+        return $this->viewModel;
+
    }
    
    
