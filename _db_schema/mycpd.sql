@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.5.6
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 17, 2013 at 12:58 PM
--- Server version: 5.5.24-log
--- PHP Version: 5.3.13
+-- Generation Time: Jun 24, 2013 at 08:46 AM
+-- Server version: 5.1.66-community-log
+-- PHP Version: 5.3.10
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -53,13 +53,13 @@ CREATE TABLE IF NOT EXISTS `activity` (
 --
 
 INSERT INTO `activity` (`id`, `employee_id`, `title`, `provider`, `learning_outcomes`, `planned_date`, `cpd_type_id`, `target_id`, `impact`, `priority_type_id`, `completed_date`, `evaluation_url`, `hours_of_cpd`, `rating`) VALUES
-(1, 1, 'Rise and Shine', '', 'Creative assessment techniques to implement in to practice', '2013-02-26', 1, 1, 'Lessons will be structured with regular assessment activities so students are on task and know their progress rate', 7, '2013-03-12', ' ', '0.00', 0),
 (2, 1, 'Rise and Shine            ', '', 'Effective questioning technique            ', '2013-02-26', 1, 2, 'Questions will encourage students to think independently, keep them engaged and included', 8, '2013-03-22', ' ', '0.00', 0),
 (3, 1, ' Parents evening            ', '', 'Some really important learning outcomes                        ', '2013-03-01', 1, 4, 'Review dyslexia strategies', 8, '2013-03-19', '', '0.00', 0),
 (4, 1, 'Claro read training', '', 'Understand the uses of Claro read, how to integrate into lessons and basic awareness of features', '2013-04-19', 1, 4, 'Integration of learning support technology for dyslexic students', 7, NULL, NULL, '0.00', NULL),
 (5, 1, 'Peer Observation', '', 'See Colleague C teaching level 1 class using Interactive whiteboard', '2013-03-27', 1, 1, 'Transfer good practice to my level 1 session next Wednesday as part of group assessment task', 8, NULL, NULL, '0.00', NULL),
 (6, 1, 'Visit Stakeholder X', '', 'Organise enrichment activity for level 3 following meeting with Colleagues A and B', '2013-06-01', 1, 2, 'Experience a day in the life at Stakeholder X, gain employability skills and experience', 8, NULL, NULL, '0.00', NULL),
-(7, 1, 'An old activity', '0 ', 'Just a test', '2011-06-01', 1, 2, 'Test data', 8, '2012-11-09', NULL, '0.00', 0);
+(7, 1, 'An old activity', '0 ', 'Just a test', '2011-06-01', 1, 2, 'Test data', 8, '2012-11-09', NULL, '0.00', 0),
+(2528, 1, 'Rise and Shine', '', 'Creative assessment techniques to implement in to practice', '2013-02-26', 1, 1, 'Lessons will be structured with regular assessment activities so students are on task and know their progress rate', 7, '2013-03-12', ' ', '0.00', 0);
 
 -- --------------------------------------------------------
 
@@ -280,8 +280,8 @@ CREATE TABLE IF NOT EXISTS `v_activity` (
 CREATE TABLE IF NOT EXISTS `v_scores` (
 `title` varchar(255)
 ,`value` longtext
-,`course` bigint(10)
-,`userid` bigint(10)
+,`course` bigint(10) unsigned
+,`userid` bigint(10) unsigned
 );
 -- --------------------------------------------------------
 
@@ -289,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `v_scores` (
 -- Stand-in structure for view `v_staff`
 --
 CREATE TABLE IF NOT EXISTS `v_staff` (
-`id` bigint(10)
+`id` bigint(10) unsigned
 ,`username` varchar(100)
 ,`firstname` varchar(100)
 ,`lastname` varchar(100)
@@ -314,6 +314,21 @@ CREATE TABLE IF NOT EXISTS `v_targets_with_status` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `v_targets_with_status_and_name`
+--
+CREATE TABLE IF NOT EXISTS `v_targets_with_status_and_name` (
+`id` int(11)
+,`title` varchar(150)
+,`title_ext` varchar(150)
+,`description` varchar(600)
+,`status` varchar(50)
+,`firstname` varchar(100)
+,`lastname` varchar(100)
+,`target_date` varchar(20)
+);
+-- --------------------------------------------------------
+
+--
 -- Structure for view `v_activity`
 --
 DROP TABLE IF EXISTS `v_activity`;
@@ -327,7 +342,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`%` SQL SECURITY DEFINER VIEW `
 --
 DROP TABLE IF EXISTS `v_scores`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`%` SQL SECURITY DEFINER VIEW `v_scores` AS select `moodle`.`mdl_scorm_scoes`.`title` AS `title`,`moodle`.`mdl_scorm_scoes_track`.`value` AS `value`,`moodle`.`mdl_scorm`.`course` AS `course`,`moodle`.`mdl_scorm_scoes_track`.`userid` AS `userid` from ((`moodle`.`mdl_scorm_scoes_track` join `moodle`.`mdl_scorm_scoes` on((`moodle`.`mdl_scorm_scoes_track`.`scoid` = `moodle`.`mdl_scorm_scoes`.`id`))) join `moodle`.`mdl_scorm` on((`moodle`.`mdl_scorm_scoes_track`.`scormid` = `moodle`.`mdl_scorm`.`id`))) where ((`moodle`.`mdl_scorm_scoes_track`.`element` = 'cmi.core.score.raw') and ((`moodle`.`mdl_scorm`.`course` = '328') or (`moodle`.`mdl_scorm`.`course` = '333') or (`moodle`.`mdl_scorm`.`course` = '334') or (`moodle`.`mdl_scorm`.`course` = '335') or (`moodle`.`mdl_scorm`.`course` = '336') or (`moodle`.`mdl_scorm`.`course` = '337') or (`moodle`.`mdl_scorm`.`course` = '338') or (`moodle`.`mdl_scorm`.`course` = '339') or (`moodle`.`mdl_scorm`.`course` = '340') or (`moodle`.`mdl_scorm`.`course` = '1910')));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_scores` AS select `moodle`.`mdl_scorm_scoes`.`title` AS `title`,`moodle`.`mdl_scorm_scoes_track`.`value` AS `value`,`moodle`.`mdl_scorm`.`course` AS `course`,`moodle`.`mdl_scorm_scoes_track`.`userid` AS `userid` from ((`moodle`.`mdl_scorm_scoes_track` join `moodle`.`mdl_scorm_scoes` on((`moodle`.`mdl_scorm_scoes_track`.`scoid` = `moodle`.`mdl_scorm_scoes`.`id`))) join `moodle`.`mdl_scorm` on((`moodle`.`mdl_scorm_scoes_track`.`scormid` = `moodle`.`mdl_scorm`.`id`))) where ((`moodle`.`mdl_scorm_scoes_track`.`element` = 'cmi.core.score.raw') and ((`moodle`.`mdl_scorm`.`course` = '328') or (`moodle`.`mdl_scorm`.`course` = '333') or (`moodle`.`mdl_scorm`.`course` = '334') or (`moodle`.`mdl_scorm`.`course` = '335') or (`moodle`.`mdl_scorm`.`course` = '336') or (`moodle`.`mdl_scorm`.`course` = '337') or (`moodle`.`mdl_scorm`.`course` = '338') or (`moodle`.`mdl_scorm`.`course` = '339') or (`moodle`.`mdl_scorm`.`course` = '340') or (`moodle`.`mdl_scorm`.`course` = '1910')));
 
 -- --------------------------------------------------------
 
@@ -346,6 +361,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `v_targets_with_status`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`%` SQL SECURITY DEFINER VIEW `v_targets_with_status` AS select `target`.`id` AS `id`,`target`.`title` AS `title`,`target`.`title_ext` AS `title_ext`,`target`.`description` AS `description`,`target`.`status_id` AS `status_id`,`target`.`moodle_user_id` AS `moodle_user_id`,`target`.`target_date` AS `target_date`,`target_status`.`title` AS `status` from (`target` join `target_status` on((`target`.`status_id` = `target_status`.`id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_targets_with_status_and_name`
+--
+DROP TABLE IF EXISTS `v_targets_with_status_and_name`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_targets_with_status_and_name` AS select `target`.`id` AS `id`,`target`.`title` AS `title`,`target`.`title_ext` AS `title_ext`,`target`.`description` AS `description`,`target_status`.`title` AS `status`,`moodle`.`mdl_user`.`firstname` AS `firstname`,`moodle`.`mdl_user`.`lastname` AS `lastname`,`target`.`target_date` AS `target_date` from ((`target` join `target_status` on((`target`.`status_id` = `target_status`.`id`))) join `moodle`.`mdl_user` on((`target`.`moodle_user_id` = `moodle`.`mdl_user`.`id`)));
 
 --
 -- Constraints for dumped tables
