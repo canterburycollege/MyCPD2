@@ -370,6 +370,36 @@ class AdminManagerModel extends BaseModel {
 
         return $results;
     }
+    
+    public function viewFaculties(){
+       $sql = "
+           ";
+       $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results = $dbConn->get_all($sql, 'OBJECT');
+        if (empty($results)) {
+            // initialize array to prevent php warning msg.
+            $results = Array();
+        }
+        $this->viewModel->set("pageTitle", "MyCPD Admin");
+        $this->viewModel->set("faculties", $results);
+
+        return $this->viewModel;
+    }
+    
+    public function viewSections(){
+        $sql = "
+           ";
+       $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results = $dbConn->get_all($sql, 'OBJECT');
+        if (empty($results)) {
+            // initialize array to prevent php warning msg.
+            $results = Array();
+        }
+        $this->viewModel->set("pageTitle", "MyCPD Admin");
+        $this->viewModel->set("sections", $results);
+
+        return $this->viewModel;
+    }
 
 }
 

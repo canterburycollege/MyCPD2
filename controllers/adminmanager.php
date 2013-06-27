@@ -34,9 +34,8 @@ class AdminManagerController extends BaseController {
      */
     public function authorisation() {
         if (!$this->model->authorisation($_SESSION['USER'])) {
-            echo '<h3>Error: You [' . $_SESSION['USER']->username .
-            '] are not authorised to view this page</h3>';
-            exit;
+            exit('<h3>Error: You [' . $_SESSION['USER']->username .
+            '] are not authorised to view this page</h3>');
         }
     }
 
