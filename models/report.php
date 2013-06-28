@@ -24,7 +24,7 @@ class ReportModel extends BaseModel {
         return $this->viewModel;
     }
     
-        public function allstaff() {
+    public function allstaff() {
         $moodle_user_id = $_SESSION['USER']->id;
 
         $sql = "SELECT * FROM v_targets_with_status_and_name";

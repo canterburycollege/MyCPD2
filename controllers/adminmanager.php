@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Controller for manager admin, e.g. assigning moodle users as managers, 
+ * Controller for admin, e.g. assigning moodle users as managers, 
  * creating groups and assigning users to these groups.
  * 
  * Also for maintaining organisational structure i.e. faculties & sections. 
  * @todo Consider moving organisational structure to it's own Controller
  * 
- * Loads models and views required by manager
+ * Loads models and views required by admin
  */
 class AdminManagerController extends BaseController {
 
