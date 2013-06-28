@@ -12,11 +12,17 @@
 </script>
  
 <?php include_once TEMPLATEPATH . 'nav_bar_manager.php'; ?>
- <h1><img src="<?= BASEURL . '/assets/pix/plan2.png' ?>" alt="Target icon"><?= $viewModel->get('heading1'); ?></h1><a href="<?= BASEURL ?>activity/archive/">Archive</a> | Current
-<div id="div_activities">
+ <h1><img src="<?= BASEURL . '/assets/pix/plan2.png' ?>" alt="Target icon"><?= $viewModel->get('heading1'); ?></h1>
+ <h2>Manager: <?= $viewModel->get('manager') ?></h2>
+ <br/>
+ <div id="div_activities">
     <table id="table_detail">
         <thead>
             <tr>
+                <th>Faculty</th>
+                <th>Section</th>
+                <th>Group</th>
+                <th>Staff Name</th>
                 <th>Target this CPD addresses</th>
                 <th>Title of CPD activity/event</th>
                 <th>Intended Learning Outcomes for teacher</th>
@@ -30,6 +36,10 @@
         <tbody>
             <?php foreach ($viewModel->get('activities') as $row): ?>
                 <tr>
+                    <td><?= $row->faculty ?></td>
+                    <td><?= $row->section ?></td>
+                    <td><?= $row->group ?></td>
+                    <td><?= $row->staff_displayname ?></td>
                     <td><?= $row->target ?></td>
                     <td><?= $row->title ?></td>
                     <td><?= $row->learning_outcomes ?></td>

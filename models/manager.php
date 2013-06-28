@@ -21,14 +21,8 @@ class AdminManagerModel extends BaseModel {
     public function viewActivities($manager){
         $sql = "
             SELECT  * 
-            FROM    v_activity 
-            WHERE   moodle_user_id IN (
-                        SELECT  mgd.moodle_user_id
-                        FROM    manager_group_detail mgd
-                                JOIN manager_group mg
-                                    ON mgd.manager_group = mg.id
-                        WHERE   mg.manager = '{$manager}'
-                        )";
+            FROM    v_activity_group
+            WHERE   manager_id = '{$manager}'";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
         if (empty($results)) {
@@ -37,6 +31,7 @@ class AdminManagerModel extends BaseModel {
         }
         $this->viewModel->set("pageTitle", "MyCPD Hub");
         $this->viewModel->set("heading1", "Activities");
+        $this->viewModel->set("manager", $results[0]->manager_displayname);
         $this->viewModel->set("activities", $results);
 
         return $this->viewModel;

@@ -34,9 +34,8 @@ class ManagerController extends BaseController {
     }
     
     public function viewActivities(){
-        $manager = $this->model->authorisation($_SESSION['USER']);
-        echo $manager;
-        //$this->view->output($this->model->viewActivities($manager));
+        $manager = $_SESSION['USER']->id;
+        $this->view->output($this->model->viewActivities($manager));
     }
 }
 
