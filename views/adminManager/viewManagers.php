@@ -10,6 +10,8 @@
     });
 </script>
 
+<?php include_once TEMPLATEPATH . 'nav_bar_admin.php'; ?>
+
 <h1>Maintain Managers</h1>
 <div id="div_managers">
     <table id="table_detail">
