@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.6
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 28, 2013 at 10:18 AM
+-- Generation Time: Jun 28, 2013 at 01:27 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -299,7 +299,7 @@ CREATE TABLE IF NOT EXISTS `section` (
   `description` varchar(100) NOT NULL,
   `faculty` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='college organisational structure' AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='college organisational structure' AUTO_INCREMENT=64 ;
 
 --
 -- Dumping data for table `section`
@@ -365,7 +365,8 @@ INSERT INTO `section` (`id`, `description`, `faculty`) VALUES
 (56, 'Computing Support', 16),
 (57, 'Estates', 16),
 (58, 'Finance', 16),
-(59, 'Funding & Performance Review', 16);
+(59, 'Funding & Performance Review', 16),
+(63, 'NEW TEST', 7);
 
 -- --------------------------------------------------------
 
@@ -455,8 +456,8 @@ DROP VIEW IF EXISTS `v_scores`;
 CREATE TABLE IF NOT EXISTS `v_scores` (
 `title` varchar(255)
 ,`value` longtext
-,`course` bigint(10) unsigned
-,`userid` bigint(10) unsigned
+,`course` bigint(10)
+,`userid` bigint(10)
 );
 -- --------------------------------------------------------
 
@@ -465,7 +466,7 @@ CREATE TABLE IF NOT EXISTS `v_scores` (
 --
 DROP VIEW IF EXISTS `v_staff`;
 CREATE TABLE IF NOT EXISTS `v_staff` (
-`id` bigint(10) unsigned
+`id` bigint(10)
 ,`username` varchar(100)
 ,`firstname` varchar(100)
 ,`lastname` varchar(100)
@@ -493,6 +494,7 @@ CREATE TABLE IF NOT EXISTS `v_targets_with_status` (
 --
 -- Stand-in structure for view `v_targets_with_status_and_name`
 --
+DROP VIEW IF EXISTS `v_targets_with_status_and_name`;
 CREATE TABLE IF NOT EXISTS `v_targets_with_status_and_name` (
 `id` int(11)
 ,`title` varchar(150)
@@ -546,7 +548,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`%` SQL SECURITY DEFINER VIEW `
 --
 DROP TABLE IF EXISTS `v_targets_with_status_and_name`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_targets_with_status_and_name` AS select `target`.`id` AS `id`,`target`.`title` AS `title`,`target`.`title_ext` AS `title_ext`,`target`.`description` AS `description`,`target_status`.`title` AS `status`,`moodle`.`mdl_user`.`firstname` AS `firstname`,`moodle`.`mdl_user`.`lastname` AS `lastname`,`target`.`target_date` AS `target_date` from ((`target` join `target_status` on((`target`.`status_id` = `target_status`.`id`))) join `moodle`.`mdl_user` on((`target`.`moodle_user_id` = `moodle`.`mdl_user`.`id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_targets_with_status_and_name` AS select `target`.`id` AS `id`,`target`.`title` AS `title`,`target`.`title_ext` AS `title_ext`,`target`.`description` AS `description`,`target_status`.`title` AS `status`,`v_staff`.`firstname` AS `firstname`,`v_staff`.`lastname` AS `lastname`,`target`.`target_date` AS `target_date` from ((`target` join `target_status` on((`target`.`status_id` = `target_status`.`id`))) join `v_staff` on((`target`.`moodle_user_id` = `v_staff`.`id`)));
 
 --
 -- Constraints for dumped tables
