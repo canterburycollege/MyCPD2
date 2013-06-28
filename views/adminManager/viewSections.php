@@ -12,31 +12,29 @@
 
 <?php include_once TEMPLATEPATH . 'nav_bar_admin.php'; ?>
 
-<h1>Maintain Managers</h1>
-<div id="div_managers">
+<h1>Maintain Sections</h1>
+<div id="div_sections">
     <table id="table_detail">
         <thead>
             <tr>
-                <th>Manager</th>
-                <th>Description</th>
+                <th>Section</th>
+                <th>Faculty</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($viewModel->get('managers') as $row): ?>
+            <?php foreach ($viewModel->get('sections') as $row): ?>
                 <tr>
-                    <td><?= $row->displayname ?></td>
-                    <td><?= $row->description ?></td>
-                    <td><a href="<?= BASEURL ?>adminManager/updateManager/<?= $row->moodle_user_id ?>">Update</a> 
+                    <td><?= $row->section ?></td>
+                    <td><?= $row->faculty ?></td>
+                    <td width="15%"><a href="<?= BASEURL ?>adminManager/updateSection/<?= $row->id ?>">Update</a> 
                         | 
-                        <a href="<?= BASEURL ?>adminManager/deleteManager/<?= $row->moodle_user_id ?>">Delete</a>
-                        | 
-                        <a href="<?= BASEURL ?>adminManager/viewGroups/<?= $row->moodle_user_id ?>">View Groups</a> 
+                        <a href="<?= BASEURL ?>adminManager/deleteSection/<?= $row->id ?>">Delete</a>
                     </td>
                 </tr>
                 <?php endforeach; ?>
         </tbody>
     </table>
     <br/>
-    <a href="<?= BASEURL ?>adminManager/createManager/">Add New Manager</a>
+    <a href="<?= BASEURL ?>adminManager/createSection/">Add New Section</a>
 </div>
