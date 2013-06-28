@@ -9,6 +9,15 @@
         filter.fnFilter( '<?php echo $_GET['id']; ?>' ); 
     });
     
+    function confirmPost()
+{
+var agree=confirm("Are you sure you want to delete this activity?");
+if (agree)
+return true ;
+else
+return false ;
+}
+    
 </script>
  
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
@@ -25,7 +34,8 @@
                 <th>Target Date</th>
                 <th>Completed?</th>
                 <th>Evaluation</th>
-                <th>Actions</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -39,10 +49,9 @@
                     <td><?= $row->planned_date ?></td>
                     <td><?= $row->completed_date ?></td>
                     <td><?= $row->evaluation_url ?></td>
-                    <td><a href="<?= BASEURL ?>activity/update/<?= $row->id ?>">Update</a> 
-                        | 
-                        <a href="<?= BASEURL ?>activity/delete/<?= $row->id ?>">Delete</a> 
-                    </td>
+                    <td><a href="<?= BASEURL ?>activity/update/<?= $row->id ?>">(Update)</a></td> 
+                    <td><a href="../delete/<?= $row->id ?>" onClick="return confirmPost()">(Delete)</a></td>
+                    
                     
                 </tr>
             <?php endforeach; ?>
