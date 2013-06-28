@@ -395,7 +395,8 @@ class AdminManagerModel extends BaseModel {
                     f.description as faculty
            FROM     section s
                     JOIN faculty f
-                        ON s.faculty = f.id";
+                        ON s.faculty = f.id
+           ORDER BY s.description";
        $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
         if (empty($results)) {
