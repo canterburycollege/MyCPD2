@@ -27,8 +27,8 @@ class AdminManagerModel extends BaseModel {
     public function authorisation($USER) {
         $sql = "
             SELECT  count(*) as row_count
-            FROM    v_staff
-            WHERE   id = '{$USER->id}'";
+            FROM    admin_user
+            WHERE   moodle_user_id = '{$USER->id}'";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
         if ($results[0]->row_count > 0) {
