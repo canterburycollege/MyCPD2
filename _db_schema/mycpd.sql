@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 28, 2013 at 01:25 PM
+-- Generation Time: Jun 28, 2013 at 02:54 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `manager_group` (
 --
 
 INSERT INTO `manager_group` (`id`, `manager`, `section`, `description`) VALUES
-(1, 43, 0, 'test group A'),
+(1, 43, 10, 'test group A'),
 (2, 43, 16, 'test group X'),
 (4, 12859, 0, 'test group A'),
 (5, 12859, 0, 'test group'),
@@ -234,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `manager_group_detail` (
   `moodle_user_id` bigint(10) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `manager_group` (`manager_group`,`moodle_user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `manager_group_detail`
@@ -244,7 +244,9 @@ INSERT INTO `manager_group_detail` (`id`, `manager_group`, `moodle_user_id`) VAL
 (3, 1, 2887),
 (4, 1, 10225),
 (2, 4, 1746),
-(1, 4, 2181);
+(1, 4, 2181),
+(6, 7, 2528),
+(5, 7, 5475);
 
 -- --------------------------------------------------------
 
@@ -450,6 +452,37 @@ CREATE TABLE IF NOT EXISTS `v_activity` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `v_activity_group`
+--
+DROP VIEW IF EXISTS `v_activity_group`;
+CREATE TABLE IF NOT EXISTS `v_activity_group` (
+`id` int(11)
+,`staff_id` int(11)
+,`staff_displayname` varchar(201)
+,`manager_id` bigint(10)
+,`manager_displayname` varchar(201)
+,`group` varchar(100)
+,`section` varchar(100)
+,`faculty` varchar(100)
+,`title` varchar(250)
+,`impact` varchar(250)
+,`provider` varchar(250)
+,`learning_outcomes` varchar(250)
+,`planned_date` date
+,`cpd_type_id` int(11)
+,`cpd_type` varchar(50)
+,`target_id` int(11)
+,`target` varchar(150)
+,`priority_type_id` int(11)
+,`priority_type` varchar(50)
+,`completed_date` date
+,`evaluation_url` varchar(50)
+,`hours_of_cpd` decimal(7,2)
+,`rating` int(1)
+);
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `v_scores`
 --
 DROP VIEW IF EXISTS `v_scores`;
@@ -513,6 +546,15 @@ CREATE TABLE IF NOT EXISTS `v_targets_with_status_and_name` (
 DROP TABLE IF EXISTS `v_activity`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`%` SQL SECURITY DEFINER VIEW `v_activity` AS (select `activity`.`id` AS `id`,`activity`.`moodle_user_id` AS `moodle_user_id`,`activity`.`title` AS `title`,`activity`.`impact` AS `impact`,`activity`.`provider` AS `provider`,`activity`.`learning_outcomes` AS `learning_outcomes`,`activity`.`planned_date` AS `planned_date`,`activity`.`cpd_type_id` AS `cpd_type_id`,`cpd_type`.`description` AS `cpd_type`,`activity`.`target_id` AS `target_id`,`target`.`title` AS `target`,`activity`.`priority_type_id` AS `priority_type_id`,`priority_type`.`description` AS `priority_type`,`activity`.`completed_date` AS `completed_date`,`activity`.`evaluation_url` AS `evaluation_url`,`activity`.`hours_of_cpd` AS `hours_of_cpd`,`activity`.`rating` AS `rating` from (((`activity` left join `cpd_type` on((`activity`.`cpd_type_id` = `cpd_type`.`id`))) left join `priority_type` on((`activity`.`priority_type_id` = `priority_type`.`id`))) left join `target` on((`activity`.`target_id` = `target`.`id`))));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_activity_group`
+--
+DROP TABLE IF EXISTS `v_activity_group`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_activity_group` AS select `activity`.`id` AS `id`,`activity`.`moodle_user_id` AS `staff_id`,`staff`.`displayname` AS `staff_displayname`,`staff_manager`.`id` AS `manager_id`,`staff_manager`.`displayname` AS `manager_displayname`,`manager_group`.`description` AS `group`,`section`.`description` AS `section`,`faculty`.`description` AS `faculty`,`activity`.`title` AS `title`,`activity`.`impact` AS `impact`,`activity`.`provider` AS `provider`,`activity`.`learning_outcomes` AS `learning_outcomes`,`activity`.`planned_date` AS `planned_date`,`activity`.`cpd_type_id` AS `cpd_type_id`,`cpd_type`.`description` AS `cpd_type`,`activity`.`target_id` AS `target_id`,`target`.`title` AS `target`,`activity`.`priority_type_id` AS `priority_type_id`,`priority_type`.`description` AS `priority_type`,`activity`.`completed_date` AS `completed_date`,`activity`.`evaluation_url` AS `evaluation_url`,`activity`.`hours_of_cpd` AS `hours_of_cpd`,`activity`.`rating` AS `rating` from (((((((((`activity` left join `cpd_type` on((`activity`.`cpd_type_id` = `cpd_type`.`id`))) left join `priority_type` on((`activity`.`priority_type_id` = `priority_type`.`id`))) left join `target` on((`activity`.`target_id` = `target`.`id`))) join `v_staff` `staff` on((`activity`.`moodle_user_id` = `staff`.`id`))) join `manager_group_detail` on((`manager_group_detail`.`moodle_user_id` = `activity`.`moodle_user_id`))) left join `manager_group` on((`manager_group_detail`.`manager_group` = `manager_group`.`id`))) left join `v_staff` `staff_manager` on((`manager_group`.`manager` = `staff_manager`.`id`))) left join `section` on((`manager_group`.`section` = `section`.`id`))) left join `faculty` on((`section`.`faculty` = `faculty`.`id`)));
 
 -- --------------------------------------------------------
 
