@@ -373,7 +373,9 @@ class AdminManagerModel extends BaseModel {
     
     public function viewFaculties(){
        $sql = "
-           ";
+           SELECT   *
+           FROM     faculty
+           ORDER BY description";
        $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
         if (empty($results)) {
@@ -388,7 +390,12 @@ class AdminManagerModel extends BaseModel {
     
     public function viewSections(){
         $sql = "
-           ";
+           SELECT   s.id,
+                    s.description as section,
+                    f.description as faculty
+           FROM     section s
+                    JOIN faculty f
+                        ON s.faculty = f.id";
        $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
         if (empty($results)) {
