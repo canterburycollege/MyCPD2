@@ -28,8 +28,6 @@
                     <td><a href="<?= BASEURL ?>adminManager/updateFaculty/<?= $row->id ?>">Update</a> 
                         | 
                         <a href="<?= BASEURL ?>adminManager/deleteFaculty/<?= $row->id ?>">Delete</a>
-                        | 
-                        <a href="<?= BASEURL ?>adminManager/viewSections/<?= $row->id ?>">View Sections</a> 
                     </td>
                 </tr>
                 <?php endforeach; ?>

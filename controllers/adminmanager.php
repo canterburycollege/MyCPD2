@@ -157,6 +157,7 @@ class AdminManagerController extends BaseController {
     public function deleteFaculty(){
         $id = $_GET['id'];
         $this->model->deleteFaculty($id);
+        header('Location: ' . BASEURL . 'adminManager/viewFaculties/');
     }
     
     public function deleteSection(){

@@ -27,11 +27,9 @@
                 <tr>
                     <td><?= $row->section ?></td>
                     <td><?= $row->faculty ?></td>
-                    <td><a href="<?= BASEURL ?>adminManager/updateSection/<?= $row->moodle_user_id ?>">Update</a> 
+                    <td width="15%"><a href="<?= BASEURL ?>adminManager/updateSection/<?= $row->moodle_user_id ?>">Update</a> 
                         | 
                         <a href="<?= BASEURL ?>adminManager/deleteSection/<?= $row->moodle_user_id ?>">Delete</a>
-                        | 
-                        <a href="<?= BASEURL ?>adminManager/viewGroups/<?= $row->moodle_user_id ?>">ViewGroups</a> 
                     </td>
                 </tr>
                 <?php endforeach; ?>
