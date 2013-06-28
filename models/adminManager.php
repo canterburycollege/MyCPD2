@@ -326,13 +326,11 @@ class AdminManagerModel extends BaseModel {
         $sql = "
             INSERT INTO section (
                 faculty,
-                description,
-                manager
+                description
                 )
             VALUES (
                 '{$_POST['faculty']}',
-                '{$_POST['description']}',
-                '{$_POST['manager']}'
+                '{$_POST['description']}'
             )";
                 
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
@@ -341,6 +339,7 @@ class AdminManagerModel extends BaseModel {
     
     public function createSectionForm() {
         $this->viewModel->set("pageTitle", "MyCPD Admin");
+        $this->viewModel->set("faculty_options", html_select_options($this->getFacultyOptions()));
         return $this->viewModel;
     }
     
@@ -379,6 +378,27 @@ class AdminManagerModel extends BaseModel {
         return $results;
     }
     
+    /**
+     * return an array of options to be used in html select
+     * 
+     * @return array
+     */
+    private function getFacultyOptions() {
+        $sql = "
+            SELECT  id, 
+                    description
+            FROM    faculty
+            ORDER BY 2";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results = $dbConn->get_all($sql, 'OBJECT');
+        if (empty($results)) {
+            // initialize array to prevent php warning msg.
+            $results = Array();
+        }
+
+        return $results;
+    }
+    
     public function updateFaculty($id){
         $description = $_POST['description'];
         $sql = "
@@ -400,6 +420,34 @@ class AdminManagerModel extends BaseModel {
         $results = $dbConn->get_all($sql, 'OBJECT');
         $this->viewModel->set("pageTitle", "MyCPD Admin");
         $this->viewModel->set("faculty", $results[0]);
+        return $this->viewModel;
+    }
+    
+    public function updateSection($id){
+        $description = $_POST['description'];
+        $faculty = $_POST['faculty'];
+        $sql = "
+            UPDATE  section 
+            SET     description = '{$description}',
+                    faculty = '{$faculty}'
+            WHERE   id = {$id}
+            ";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $dbConn->execute($sql);
+    }
+    
+    public function updateSectionForm($id){
+        $sql = "
+            SELECT  description,
+                    faculty
+            FROM    section
+            WHERE   id = {$id}
+            ";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results = $dbConn->get_all($sql, 'OBJECT');
+        $this->viewModel->set("pageTitle", "MyCPD Admin");
+        $this->viewModel->set("section", $results[0]);
+        $this->viewModel->set("faculty_options", html_select_options($this->getFacultyOptions(),$results[0]->faculty));
         return $this->viewModel;
     }
 
