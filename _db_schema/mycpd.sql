@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 23, 2013 at 09:07 PM
+-- Generation Time: Jun 28, 2013 at 10:18 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `activity` (
   KEY `priority_type_id` (`priority_type_id`),
   KEY `employee_id` (`employee_id`),
   KEY `cpd_type_id` (`cpd_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `activity`
@@ -60,7 +60,14 @@ INSERT INTO `activity` (`id`, `employee_id`, `title`, `provider`, `learning_outc
 (4, 43, 'Claro read training', '', 'Understand the uses of Claro read, how to integrate into lessons and basic awareness of features', '2013-04-19', 1, 4, 'Integration of learning support technology for dyslexic students', 7, NULL, NULL, '0.00', NULL),
 (5, 43, 'Peer Observation', '', 'See Colleague C teaching level 1 class using Interactive whiteboard', '2013-03-27', 1, 1, 'Transfer good practice to my level 1 session next Wednesday as part of group assessment task', 8, NULL, NULL, '0.00', NULL),
 (6, 43, 'Visit Stakeholder X', '', 'Organise enrichment activity for level 3 following meeting with Colleagues A and B', '2013-06-01', 1, 2, 'Experience a day in the life at Stakeholder X, gain employability skills and experience', 8, NULL, NULL, '0.00', NULL),
-(7, 43, 'An old activity', '0 ', 'Just a test', '2011-06-01', 1, 2, 'Test data', 8, '2012-11-09', NULL, '0.00', 0);
+(7, 43, 'An old activity', '0 ', 'Just a test', '2011-06-01', 1, 2, 'Test data', 8, '2012-11-09', NULL, '0.00', 0),
+(8, 2528, 'Rise and Shine', '', 'Creative assessment techniques to implement in to practice', '2013-02-26', 1, 1, 'Lessons will be structured with regular assessment activities so students are on task and know their progress rate', 7, '2013-03-12', ' ', '0.00', 0),
+(9, 2528, 'Rise and Shine            ', '', 'Effective questioning technique            ', '2013-02-26', 1, 2, 'Questions will encourage students to think independently, keep them engaged and included', 8, '2013-03-22', ' ', '0.00', 0),
+(10, 2528, ' Parents evening            ', '', 'Some really important learning outcomes                        ', '2013-03-01', 1, 4, 'Review dyslexia strategies', 8, '2013-03-19', '', '0.00', 0),
+(11, 2528, 'Claro read training', '', 'Understand the uses of Claro read, how to integrate into lessons and basic awareness of features', '2013-04-19', 1, 4, 'Integration of learning support technology for dyslexic students', 7, NULL, NULL, '0.00', NULL),
+(12, 2528, 'Peer Observation', '', 'See Colleague C teaching level 1 class using Interactive whiteboard', '2013-03-27', 1, 1, 'Transfer good practice to my level 1 session next Wednesday as part of group assessment task', 8, NULL, NULL, '0.00', NULL),
+(13, 2528, 'Visit Stakeholder X', '', 'Organise enrichment activity for level 3 following meeting with Colleagues A and B', '2013-06-01', 1, 2, 'Experience a day in the life at Stakeholder X, gain employability skills and experience', 8, NULL, NULL, '0.00', NULL),
+(14, 2528, 'An old activity', '0 ', 'Just a test', '2011-06-01', 1, 2, 'Test data', 8, '2012-11-09', NULL, '0.00', 0);
 
 -- --------------------------------------------------------
 
@@ -139,14 +146,13 @@ CREATE TABLE IF NOT EXISTS `faculty` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='College organisational structure' AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='College organisational structure' AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `faculty`
 --
 
 INSERT INTO `faculty` (`id`, `description`) VALUES
-(0, 'Unknown Faculty'),
 (1, 'Business Services'),
 (2, 'Faculty of Higher Education'),
 (3, 'Faculty of Science & Humanities'),
@@ -293,7 +299,7 @@ CREATE TABLE IF NOT EXISTS `section` (
   `description` varchar(100) NOT NULL,
   `faculty` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='college organisational structure' AUTO_INCREMENT=62 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='college organisational structure' AUTO_INCREMENT=63 ;
 
 --
 -- Dumping data for table `section`
@@ -379,7 +385,7 @@ CREATE TABLE IF NOT EXISTS `target` (
   PRIMARY KEY (`id`),
   KEY `targets_ibfk_2` (`status_id`),
   KEY `targets_ibfk_1` (`moodle_user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `target`
@@ -388,7 +394,10 @@ CREATE TABLE IF NOT EXISTS `target` (
 INSERT INTO `target` (`id`, `title`, `title_ext`, `description`, `status_id`, `moodle_user_id`, `target_date`) VALUES
 (1, '1 Teaching and Learning', 'Assessment and Feedback', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<div>&middot; Use a range of assessment methods which evaluate the learning in the classroom every 10 minutes.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Provide effective written feedback for assignments within 4 days of submission.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Use verbal praise and recognition in the classroom environment...</div>\r\n</body>\r\n</html>', 7, 43, '14/05/2013'),
 (2, '2 ACR/Departmental', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>&middot; Liaise with Christine Bunting in ALS regarding the adjustments for dyslexia needed for resources.</p>\r\n<p>&middot; Ensure all lesson plans include the differentiated activities and assessments for students X and Y.</p>\r\n<p>&middot; Share the lesson plan in advance with their LSP.</p>\r\n</body>\r\n</html>', 8, 43, '30/04/2013'),
-(4, '3 Student focus', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html>\n<head>\n</head>\n<body>\n<p>&middot; Feedback states students leave due to lack of enrichment activities and resources available on the VLE.</p>\n<p>&middot; Work with manager to identify good practice</p>\n<p>&middot; peer observe colleague with desired use of ILT</p>\n<p>&middot; Work with colleagues A and B to design 3 enrichment activities and trips which address the employability skills of teamwork, problem solving and communication.</p>\n</body>\n</html>', 7, 43, '18/07/2013');
+(4, '3 Student focus', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html>\n<head>\n</head>\n<body>\n<p>&middot; Feedback states students leave due to lack of enrichment activities and resources available on the VLE.</p>\n<p>&middot; Work with manager to identify good practice</p>\n<p>&middot; peer observe colleague with desired use of ILT</p>\n<p>&middot; Work with colleagues A and B to design 3 enrichment activities and trips which address the employability skills of teamwork, problem solving and communication.</p>\n</body>\n</html>', 7, 43, '18/07/2013'),
+(5, '1 Teaching and Learning', 'Assessment and Feedback', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<div>&middot; Use a range of assessment methods which evaluate the learning in the classroom every 10 minutes.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Provide effective written feedback for assignments within 4 days of submission.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Use verbal praise and recognition in the classroom environment...</div>\r\n</body>\r\n</html>', 7, 2528, '14/05/2013'),
+(6, '2 ACR/Departmental', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>&middot; Liaise with Christine Bunting in ALS regarding the adjustments for dyslexia needed for resources.</p>\r\n<p>&middot; Ensure all lesson plans include the differentiated activities and assessments for students X and Y.</p>\r\n<p>&middot; Share the lesson plan in advance with their LSP.</p>\r\n</body>\r\n</html>', 8, 2528, '30/04/2013'),
+(7, '3 Student focus', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html>\n<head>\n</head>\n<body>\n<p>&middot; Feedback states students leave due to lack of enrichment activities and resources available on the VLE.</p>\n<p>&middot; Work with manager to identify good practice</p>\n<p>&middot; peer observe colleague with desired use of ILT</p>\n<p>&middot; Work with colleagues A and B to design 3 enrichment activities and trips which address the employability skills of teamwork, problem solving and communication.</p>\n</body>\n</html>', 7, 2528, '18/07/2013');
 
 -- --------------------------------------------------------
 
