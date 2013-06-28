@@ -21,14 +21,12 @@ class ActivityModel extends BaseModel {
 
    public function create() {
         $this->viewModel->set("pageTitle", "Create Activity");
-        $priority_types = $this->get_priority_types();
-        
-        $this->viewModel->set("priority_options", $this->html_select_options($priority_types, NULL));
         
         $Targetsql = "select id, title, moodle_user_id from target;";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($Targetsql, 'OBJECT');
 
+        
         if (empty($results)) {
             // initialize array to prevent php warning msg.
             $results = Array();
@@ -37,6 +35,10 @@ class ActivityModel extends BaseModel {
         $this->viewModel->set("pageTitle", "Create Activity");
         $this->viewModel->set("heading1", "Create Activity");
         $this->viewModel->set("targets", $results);
+        
+        $priority_types = $this->get_priority_types();
+        $this->viewModel->set("priority_options", html_select_options($priority_types, NULL));
+        
         return $this->viewModel;
 
    }
@@ -57,7 +59,6 @@ class ActivityModel extends BaseModel {
         $studentOutcome = $_POST['studentOutcome'];
         $priority = $_POST['priority'];
         $activity_date = $_POST['activity_date'];
-        
 
 echo "1) ".$title."<br>";
 echo "2) ".$description."<br>";
@@ -94,14 +95,17 @@ echo "8) ".$activity_date."<br>";
 echo $sql;       
  $dbConn->execute($sql);
 
-
+header('Location: /moodle/MyCPD/activity/view/');
 
 
     }
 
-    public function delete() {
-        $this->viewModel->set("pageTitle", "MyCPD Hub");
-        return $this->viewModel;
+    public function delete($id) {
+        $sql = "DELETE FROM activity WHERE id = '{$id}'";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $dbConn->execute($sql);
+
+        header('Location: /moodle/MyCPD/activity/view/');
     }
     
     private function get_priority_types() {
