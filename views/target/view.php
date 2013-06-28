@@ -54,4 +54,4 @@ return false ;
         </table>
     </form>
     
-    <a href ="../../target/create">Create a new target</a>
+    <a href ="../create">Create a new target</a>

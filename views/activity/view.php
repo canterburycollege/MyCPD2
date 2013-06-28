@@ -48,4 +48,5 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+        <a href ="../create">Create a new activity</a>
 </div>

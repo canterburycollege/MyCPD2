@@ -1,5 +1,5 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.5.6
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
@@ -455,8 +455,8 @@ DROP VIEW IF EXISTS `v_scores`;
 CREATE TABLE IF NOT EXISTS `v_scores` (
 `title` varchar(255)
 ,`value` longtext
-,`course` bigint(10)
-,`userid` bigint(10)
+,`course` bigint(10) unsigned
+,`userid` bigint(10) unsigned
 );
 -- --------------------------------------------------------
 
@@ -465,7 +465,7 @@ CREATE TABLE IF NOT EXISTS `v_scores` (
 --
 DROP VIEW IF EXISTS `v_staff`;
 CREATE TABLE IF NOT EXISTS `v_staff` (
-`id` bigint(10)
+`id` bigint(10) unsigned
 ,`username` varchar(100)
 ,`firstname` varchar(100)
 ,`lastname` varchar(100)
@@ -491,6 +491,21 @@ CREATE TABLE IF NOT EXISTS `v_targets_with_status` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `v_targets_with_status_and_name`
+--
+CREATE TABLE IF NOT EXISTS `v_targets_with_status_and_name` (
+`id` int(11)
+,`title` varchar(150)
+,`title_ext` varchar(150)
+,`description` varchar(600)
+,`status` varchar(50)
+,`firstname` varchar(100)
+,`lastname` varchar(100)
+,`target_date` varchar(20)
+);
+-- --------------------------------------------------------
+
+--
 -- Structure for view `v_activity`
 --
 DROP TABLE IF EXISTS `v_activity`;
@@ -504,7 +519,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`%` SQL SECURITY DEFINER VIEW `
 --
 DROP TABLE IF EXISTS `v_scores`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`%` SQL SECURITY DEFINER VIEW `v_scores` AS select `moodle`.`mdl_scorm_scoes`.`title` AS `title`,`moodle`.`mdl_scorm_scoes_track`.`value` AS `value`,`moodle`.`mdl_scorm`.`course` AS `course`,`moodle`.`mdl_scorm_scoes_track`.`userid` AS `userid` from ((`moodle`.`mdl_scorm_scoes_track` join `moodle`.`mdl_scorm_scoes` on((`moodle`.`mdl_scorm_scoes_track`.`scoid` = `moodle`.`mdl_scorm_scoes`.`id`))) join `moodle`.`mdl_scorm` on((`moodle`.`mdl_scorm_scoes_track`.`scormid` = `moodle`.`mdl_scorm`.`id`))) where ((`moodle`.`mdl_scorm_scoes_track`.`element` = 'cmi.core.score.raw') and ((`moodle`.`mdl_scorm`.`course` = '328') or (`moodle`.`mdl_scorm`.`course` = '333') or (`moodle`.`mdl_scorm`.`course` = '334') or (`moodle`.`mdl_scorm`.`course` = '335') or (`moodle`.`mdl_scorm`.`course` = '336') or (`moodle`.`mdl_scorm`.`course` = '337') or (`moodle`.`mdl_scorm`.`course` = '338') or (`moodle`.`mdl_scorm`.`course` = '339') or (`moodle`.`mdl_scorm`.`course` = '340') or (`moodle`.`mdl_scorm`.`course` = '1910')));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_scores` AS select `moodle`.`mdl_scorm_scoes`.`title` AS `title`,`moodle`.`mdl_scorm_scoes_track`.`value` AS `value`,`moodle`.`mdl_scorm`.`course` AS `course`,`moodle`.`mdl_scorm_scoes_track`.`userid` AS `userid` from ((`moodle`.`mdl_scorm_scoes_track` join `moodle`.`mdl_scorm_scoes` on((`moodle`.`mdl_scorm_scoes_track`.`scoid` = `moodle`.`mdl_scorm_scoes`.`id`))) join `moodle`.`mdl_scorm` on((`moodle`.`mdl_scorm_scoes_track`.`scormid` = `moodle`.`mdl_scorm`.`id`))) where ((`moodle`.`mdl_scorm_scoes_track`.`element` = 'cmi.core.score.raw') and ((`moodle`.`mdl_scorm`.`course` = '328') or (`moodle`.`mdl_scorm`.`course` = '333') or (`moodle`.`mdl_scorm`.`course` = '334') or (`moodle`.`mdl_scorm`.`course` = '335') or (`moodle`.`mdl_scorm`.`course` = '336') or (`moodle`.`mdl_scorm`.`course` = '337') or (`moodle`.`mdl_scorm`.`course` = '338') or (`moodle`.`mdl_scorm`.`course` = '339') or (`moodle`.`mdl_scorm`.`course` = '340') or (`moodle`.`mdl_scorm`.`course` = '1910')));
 
 -- --------------------------------------------------------
 
@@ -523,6 +538,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `v_targets_with_status`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`%` SQL SECURITY DEFINER VIEW `v_targets_with_status` AS select `target`.`id` AS `id`,`target`.`title` AS `title`,`target`.`title_ext` AS `title_ext`,`target`.`description` AS `description`,`target`.`status_id` AS `status_id`,`target`.`moodle_user_id` AS `moodle_user_id`,`target`.`target_date` AS `target_date`,`target_status`.`title` AS `status` from (`target` join `target_status` on((`target`.`status_id` = `target_status`.`id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_targets_with_status_and_name`
+--
+DROP TABLE IF EXISTS `v_targets_with_status_and_name`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_targets_with_status_and_name` AS select `target`.`id` AS `id`,`target`.`title` AS `title`,`target`.`title_ext` AS `title_ext`,`target`.`description` AS `description`,`target_status`.`title` AS `status`,`moodle`.`mdl_user`.`firstname` AS `firstname`,`moodle`.`mdl_user`.`lastname` AS `lastname`,`target`.`target_date` AS `target_date` from ((`target` join `target_status` on((`target`.`status_id` = `target_status`.`id`))) join `moodle`.`mdl_user` on((`target`.`moodle_user_id` = `moodle`.`mdl_user`.`id`)));
 
 --
 -- Constraints for dumped tables

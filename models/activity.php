@@ -5,31 +5,98 @@ require_once SYSPATH . 'formHelper.php';
 
 class ActivityModel extends BaseModel {
     
-    public function archive($logged_in_user) {
-        //@todo academic_year move to global constant
-        $academic_year = "2012/09/03 00:00:00";
-        $sql = "
-            SELECT  * 
-            FROM    v_activity 
-            WHERE   employee_id = '{$logged_in_user}' 
-                    AND planned_date < '{$academic_year}'
-                ";
+
+// @todo move to own helper file
+    private function html_select_options($options, $selected_id) {
+        $html = '';
+        foreach ($options as $option) {
+            if ($option->id == $selected_id) {
+                $html .= '<option value="' . $option->id . '" selected>';
+            } else {
+                $html .= '<option value="' . $option->id . '">';
+            }
+            $html .= $option->description . '</option>';
+    }}
+
+
+   public function create() {
+        $this->viewModel->set("pageTitle", "Create Activity");
+        $priority_types = $this->get_priority_types();
+        
+        $this->viewModel->set("priority_options", $this->html_select_options($priority_types, NULL));
+        
+        $Targetsql = "select id, title, moodle_user_id from target;";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
-        $results = $dbConn->get_all($sql, 'OBJECT');
+        $results = $dbConn->get_all($Targetsql, 'OBJECT');
+
         if (empty($results)) {
             // initialize array to prevent php warning msg.
             $results = Array();
         }
-        $this->viewModel->set("pageTitle", "MyCPD Hub");
-        $this->viewModel->set("heading1", "Activities");
-        $this->viewModel->set("activities", $results);
 
+        $this->viewModel->set("pageTitle", "Create Activity");
+        $this->viewModel->set("heading1", "Create Activity");
+        $this->viewModel->set("targets", $results);
         return $this->viewModel;
-    }
 
-    public function create($logged_in_user) {
+   }
+   
+   
+   
+
+
+    public function created() {
+           $moodle_user_id = $_SESSION['USER']->id; 
         $this->viewModel->set("pageTitle", "MyCPD Hub");
-        return $this->viewModel;
+
+        $title = $_POST['title'];
+        $target_id = $_POST['target_id'];
+        $description = $_POST['description'];
+        $cpdtitle = $_POST['cpdtitle'];
+        $teacherOutcome = $_POST['teacherOutcome'];
+        $studentOutcome = $_POST['studentOutcome'];
+        $priority = $_POST['priority'];
+        $activity_date = $_POST['activity_date'];
+        
+
+echo "1) ".$title."<br>";
+echo "2) ".$description."<br>";
+echo "3) ".$target_id."<br>";
+echo "4) ".$cpdtitle."<br>";
+echo "5) ".$teacherOutcome."<br>";
+echo "6) ".$studentOutcome."<br>";
+echo "7) ".$priority."<br>";
+echo "8) ".$activity_date."<br>";
+
+
+
+ $sql = "INSERT INTO activity 
+                (
+                moodle_user_id,
+                title,
+                target_id,
+                provider,
+                learning_outcomes,
+                impact,
+                priority_type_id,
+                planned_date
+                ) VALUES (
+               '{$moodle_user_id}',
+                '{$title}',
+                '{$target_id}',
+                '{$cpdtitle}',
+                '{$teacherOutcome}',
+                '{$studentOutcome}',
+                '{$priority}',
+                '{$activity_date}')";
+
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+echo $sql;       
+ $dbConn->execute($sql);
+
+
+
+
     }
 
     public function delete() {
@@ -98,8 +165,8 @@ class ActivityModel extends BaseModel {
         $sql = "
             SELECT  * 
             FROM    v_activity 
-            WHERE   employee_id = '{$logged_in_user}'
-                    AND planned_date > '{$academic_year}' 
+            WHERE   moodle_user_id = '{$logged_in_user}'
+                    
                     ";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
@@ -113,6 +180,30 @@ class ActivityModel extends BaseModel {
 
         return $this->viewModel;
     }
+
+
+    public function archive($logged_in_user) {
+        //@todo academic_year move to global constant
+        $academic_year = "2012/09/03 00:00:00";
+        $sql = "
+            SELECT  * 
+            FROM    v_activity 
+            WHERE   moodle_user_id = '{$logged_in_user}' 
+                    AND planned_date < '{$academic_year}'
+                ";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results = $dbConn->get_all($sql, 'OBJECT');
+        if (empty($results)) {
+            // initialize array to prevent php warning msg.
+            $results = Array();
+        }
+        $this->viewModel->set("pageTitle", "MyCPD Hub");
+        $this->viewModel->set("heading1", "Activities");
+        $this->viewModel->set("activities", $results);
+
+        return $this->viewModel;
+    }
+
 
 }
 

@@ -21,7 +21,15 @@ class ActivityController extends BaseController {
     }
 
     public function create() {
+
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $this->view->output($this->model->created());
+        }
+        else
+           // $this->view->output($this->model->create());
+
         $this->view->output($this->model->create($this->logged_in_user));
+
     }
 
     public function delete() {

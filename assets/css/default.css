@@ -36,7 +36,7 @@ td,th  {
 #standard label { 
     display: block;  /* block float the labels to left column, set a width */
     float: left; 
-    width: 150px; 
+    width: 400px; 
     padding: 0; 
     margin: 5px 0 0; /* set top margin same as form input - textarea etc. elements */
     text-align: right; 
@@ -46,6 +46,7 @@ form {  /* set width in form, not fieldset (still takes up more room w/ fieldset
     font:100% verdana,arial,sans-serif;
     margin: 0;
     padding: 0;
+
 
 }
 
@@ -173,7 +174,7 @@ tr.even {
 }
 
 #edit {
-    width: 900px;
+    width: 1000px;
 }
 
 #title_ext {
@@ -191,4 +192,13 @@ p{
 
 .dataTables_info {
     font-size: 10px;
+}
+
+h2 {
+    margin-bottom: 0px;
+    color: #5C5C5C;
+}
+
+ul {
+    margin-top: 1px;
 }
