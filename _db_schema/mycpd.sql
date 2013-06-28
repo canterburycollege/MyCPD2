@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 17, 2013 at 12:58 PM
+-- Generation Time: Jun 28, 2013 at 10:18 AM
 -- Server version: 5.5.24-log
--- PHP Version: 5.3.13
+-- PHP Version: 5.4.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `activity`
 --
 
+DROP TABLE IF EXISTS `activity`;
 CREATE TABLE IF NOT EXISTS `activity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(11) NOT NULL,
@@ -46,20 +47,46 @@ CREATE TABLE IF NOT EXISTS `activity` (
   KEY `priority_type_id` (`priority_type_id`),
   KEY `employee_id` (`employee_id`),
   KEY `cpd_type_id` (`cpd_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `activity`
 --
 
 INSERT INTO `activity` (`id`, `employee_id`, `title`, `provider`, `learning_outcomes`, `planned_date`, `cpd_type_id`, `target_id`, `impact`, `priority_type_id`, `completed_date`, `evaluation_url`, `hours_of_cpd`, `rating`) VALUES
-(1, 1, 'Rise and Shine', '', 'Creative assessment techniques to implement in to practice', '2013-02-26', 1, 1, 'Lessons will be structured with regular assessment activities so students are on task and know their progress rate', 7, '2013-03-12', ' ', '0.00', 0),
-(2, 1, 'Rise and Shine            ', '', 'Effective questioning technique            ', '2013-02-26', 1, 2, 'Questions will encourage students to think independently, keep them engaged and included', 8, '2013-03-22', ' ', '0.00', 0),
-(3, 1, ' Parents evening            ', '', 'Some really important learning outcomes                        ', '2013-03-01', 1, 4, 'Review dyslexia strategies', 8, '2013-03-19', '', '0.00', 0),
-(4, 1, 'Claro read training', '', 'Understand the uses of Claro read, how to integrate into lessons and basic awareness of features', '2013-04-19', 1, 4, 'Integration of learning support technology for dyslexic students', 7, NULL, NULL, '0.00', NULL),
-(5, 1, 'Peer Observation', '', 'See Colleague C teaching level 1 class using Interactive whiteboard', '2013-03-27', 1, 1, 'Transfer good practice to my level 1 session next Wednesday as part of group assessment task', 8, NULL, NULL, '0.00', NULL),
-(6, 1, 'Visit Stakeholder X', '', 'Organise enrichment activity for level 3 following meeting with Colleagues A and B', '2013-06-01', 1, 2, 'Experience a day in the life at Stakeholder X, gain employability skills and experience', 8, NULL, NULL, '0.00', NULL),
-(7, 1, 'An old activity', '0 ', 'Just a test', '2011-06-01', 1, 2, 'Test data', 8, '2012-11-09', NULL, '0.00', 0);
+(1, 43, 'Rise and Shine', '', 'Creative assessment techniques to implement in to practice', '2013-02-26', 1, 1, 'Lessons will be structured with regular assessment activities so students are on task and know their progress rate', 7, '2013-03-12', ' ', '0.00', 0),
+(2, 43, 'Rise and Shine            ', '', 'Effective questioning technique            ', '2013-02-26', 1, 2, 'Questions will encourage students to think independently, keep them engaged and included', 8, '2013-03-22', ' ', '0.00', 0),
+(3, 43, ' Parents evening            ', '', 'Some really important learning outcomes                        ', '2013-03-01', 1, 4, 'Review dyslexia strategies', 8, '2013-03-19', '', '0.00', 0),
+(4, 43, 'Claro read training', '', 'Understand the uses of Claro read, how to integrate into lessons and basic awareness of features', '2013-04-19', 1, 4, 'Integration of learning support technology for dyslexic students', 7, NULL, NULL, '0.00', NULL),
+(5, 43, 'Peer Observation', '', 'See Colleague C teaching level 1 class using Interactive whiteboard', '2013-03-27', 1, 1, 'Transfer good practice to my level 1 session next Wednesday as part of group assessment task', 8, NULL, NULL, '0.00', NULL),
+(6, 43, 'Visit Stakeholder X', '', 'Organise enrichment activity for level 3 following meeting with Colleagues A and B', '2013-06-01', 1, 2, 'Experience a day in the life at Stakeholder X, gain employability skills and experience', 8, NULL, NULL, '0.00', NULL),
+(7, 43, 'An old activity', '0 ', 'Just a test', '2011-06-01', 1, 2, 'Test data', 8, '2012-11-09', NULL, '0.00', 0),
+(8, 2528, 'Rise and Shine', '', 'Creative assessment techniques to implement in to practice', '2013-02-26', 1, 1, 'Lessons will be structured with regular assessment activities so students are on task and know their progress rate', 7, '2013-03-12', ' ', '0.00', 0),
+(9, 2528, 'Rise and Shine            ', '', 'Effective questioning technique            ', '2013-02-26', 1, 2, 'Questions will encourage students to think independently, keep them engaged and included', 8, '2013-03-22', ' ', '0.00', 0),
+(10, 2528, ' Parents evening            ', '', 'Some really important learning outcomes                        ', '2013-03-01', 1, 4, 'Review dyslexia strategies', 8, '2013-03-19', '', '0.00', 0),
+(11, 2528, 'Claro read training', '', 'Understand the uses of Claro read, how to integrate into lessons and basic awareness of features', '2013-04-19', 1, 4, 'Integration of learning support technology for dyslexic students', 7, NULL, NULL, '0.00', NULL),
+(12, 2528, 'Peer Observation', '', 'See Colleague C teaching level 1 class using Interactive whiteboard', '2013-03-27', 1, 1, 'Transfer good practice to my level 1 session next Wednesday as part of group assessment task', 8, NULL, NULL, '0.00', NULL),
+(13, 2528, 'Visit Stakeholder X', '', 'Organise enrichment activity for level 3 following meeting with Colleagues A and B', '2013-06-01', 1, 2, 'Experience a day in the life at Stakeholder X, gain employability skills and experience', 8, NULL, NULL, '0.00', NULL),
+(14, 2528, 'An old activity', '0 ', 'Just a test', '2011-06-01', 1, 2, 'Test data', 8, '2012-11-09', NULL, '0.00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_user`
+--
+
+DROP TABLE IF EXISTS `admin_user`;
+CREATE TABLE IF NOT EXISTS `admin_user` (
+  `moodle_user_id` int(11) NOT NULL,
+  PRIMARY KEY (`moodle_user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='identifies users with admin privileges';
+
+--
+-- Dumping data for table `admin_user`
+--
+
+INSERT INTO `admin_user` (`moodle_user_id`) VALUES
+(2);
 
 -- --------------------------------------------------------
 
@@ -67,6 +94,7 @@ INSERT INTO `activity` (`id`, `employee_id`, `title`, `provider`, `learning_outc
 -- Table structure for table `cpd_type`
 --
 
+DROP TABLE IF EXISTS `cpd_type`;
 CREATE TABLE IF NOT EXISTS `cpd_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(50) NOT NULL,
@@ -90,13 +118,14 @@ INSERT INTO `cpd_type` (`id`, `description`, `sort_order`) VALUES
 -- Table structure for table `employee`
 --
 
+DROP TABLE IF EXISTS `employee`;
 CREATE TABLE IF NOT EXISTS `employee` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `display_name` varchar(50) NOT NULL,
   `moodle_user_id` int(11) NOT NULL,
   `mycpd_access_group` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `employee`
@@ -109,9 +138,46 @@ INSERT INTO `employee` (`id`, `display_name`, `moodle_user_id`, `mycpd_access_gr
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `faculty`
+--
+
+DROP TABLE IF EXISTS `faculty`;
+CREATE TABLE IF NOT EXISTS `faculty` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='College organisational structure' AUTO_INCREMENT=22 ;
+
+--
+-- Dumping data for table `faculty`
+--
+
+INSERT INTO `faculty` (`id`, `description`) VALUES
+(1, 'Business Services'),
+(2, 'Faculty of Higher Education'),
+(3, 'Faculty of Science & Humanities'),
+(4, 'Student Services'),
+(5, 'HE/Access Arts, Health & Education'),
+(6, 'HE/Access Business & Technology'),
+(7, 'Estates'),
+(8, 'Principal'),
+(9, 'Additional Learning Support '),
+(10, 'Additional Learning Support - Swale'),
+(11, 'Assistant Principal Teaching & Learning'),
+(12, 'Faculty of Creative Arts'),
+(13, 'Faculty of Engineering & Construction'),
+(14, 'Faculty of Retail & Commercial '),
+(15, 'Swale Campus'),
+(16, 'Finance & Corporate Services'),
+(17, 'Faculty of Health, Uniformed Public Services, Early Childhood Education & Supported Learning');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `manager`
 --
 
+DROP TABLE IF EXISTS `manager`;
 CREATE TABLE IF NOT EXISTS `manager` (
   `moodle_user_id` bigint(10) NOT NULL,
   `description` varchar(100) NOT NULL,
@@ -123,7 +189,9 @@ CREATE TABLE IF NOT EXISTS `manager` (
 --
 
 INSERT INTO `manager` (`moodle_user_id`, `description`) VALUES
-(43, 'test 123');
+(0, ''),
+(43, 'manager of test faculty A'),
+(12859, 'abc');
 
 -- --------------------------------------------------------
 
@@ -131,20 +199,27 @@ INSERT INTO `manager` (`moodle_user_id`, `description`) VALUES
 -- Table structure for table `manager_group`
 --
 
+DROP TABLE IF EXISTS `manager_group`;
 CREATE TABLE IF NOT EXISTS `manager_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `manager` bigint(10) NOT NULL COMMENT 'also moodle user id',
+  `section` int(11) NOT NULL,
   `description` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `manager` (`manager`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  KEY `manager` (`manager`),
+  KEY `section` (`section`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `manager_group`
 --
 
-INSERT INTO `manager_group` (`id`, `manager`, `description`) VALUES
-(1, 43, 'test group');
+INSERT INTO `manager_group` (`id`, `manager`, `section`, `description`) VALUES
+(1, 43, 0, 'test group A'),
+(2, 43, 16, 'test group X'),
+(4, 12859, 0, 'test group A'),
+(5, 12859, 0, 'test group'),
+(7, 43, 30, 'group z');
 
 -- --------------------------------------------------------
 
@@ -152,13 +227,24 @@ INSERT INTO `manager_group` (`id`, `manager`, `description`) VALUES
 -- Table structure for table `manager_group_detail`
 --
 
+DROP TABLE IF EXISTS `manager_group_detail`;
 CREATE TABLE IF NOT EXISTS `manager_group_detail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `manager_group` int(11) NOT NULL,
   `moodle_user_id` bigint(10) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `manager_group` (`manager_group`,`moodle_user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `manager_group_detail`
+--
+
+INSERT INTO `manager_group_detail` (`id`, `manager_group`, `moodle_user_id`) VALUES
+(3, 1, 2887),
+(4, 1, 10225),
+(2, 4, 1746),
+(1, 4, 2181);
 
 -- --------------------------------------------------------
 
@@ -166,6 +252,7 @@ CREATE TABLE IF NOT EXISTS `manager_group_detail` (
 -- Table structure for table `news`
 --
 
+DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `description` varchar(1024) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -183,6 +270,7 @@ INSERT INTO `news` (`description`) VALUES
 -- Table structure for table `priority_type`
 --
 
+DROP TABLE IF EXISTS `priority_type`;
 CREATE TABLE IF NOT EXISTS `priority_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(50) NOT NULL,
@@ -202,9 +290,90 @@ INSERT INTO `priority_type` (`id`, `description`, `sort_order`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `section`
+--
+
+DROP TABLE IF EXISTS `section`;
+CREATE TABLE IF NOT EXISTS `section` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(100) NOT NULL,
+  `faculty` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='college organisational structure' AUTO_INCREMENT=63 ;
+
+--
+-- Dumping data for table `section`
+--
+
+INSERT INTO `section` (`id`, `description`, `faculty`) VALUES
+(0, 'Unknown Section', 0),
+(1, 'Business Training Centre', 1),
+(2, 'Commercial Catering', 1),
+(3, 'CTR', 1),
+(4, 'Employer Responsive', 1),
+(5, 'International Provision', 1),
+(6, 'Marketing', 1),
+(7, 'HE/Access Arts, Health & Education', 2),
+(8, 'HE/Access Business & Technology', 2),
+(9, 'Higher Education', 2),
+(10, 'A Levels', 3),
+(11, 'Equine & Animal Care', 3),
+(12, 'Maths, Science, Agriculture & Floristry', 3),
+(13, 'Higher Education', 0),
+(14, 'Additional Learning Support', 4),
+(15, 'Children''s Centre', 4),
+(16, 'Information & Guidance', 4),
+(17, 'Learning Resource Centre', 4),
+(18, 'Registry', 4),
+(19, 'Student Activities', 4),
+(20, 'Additional Learning Support', 0),
+(21, 'Information & Guidance', 0),
+(22, 'Learning Resource Centre', 0),
+(23, 'Registry', 0),
+(24, 'Student Activities', 0),
+(25, 'HE/Access Arts, Health & Education', 5),
+(26, 'HE/Access Business & Technology', 6),
+(27, 'Capital Projects', 7),
+(28, 'Human Resources', 8),
+(29, 'KAFEC', 8),
+(30, 'Additional Learning Support', 8),
+(31, 'Additional Learning Support - Swale', 9),
+(32, 'Dance/Dramatic Arts', 10),
+(33, 'Fine Arts/Crafts/Design', 11),
+(34, 'Media', 12),
+(35, 'Music', 12),
+(36, 'Building Services', 13),
+(37, 'Construction Craft', 13),
+(38, 'Engineering/Manufacturing', 13),
+(39, 'Motor Vehicle', 13),
+(40, 'Early Childhood Education', 17),
+(41, 'Health & Social Care', 17),
+(42, 'Supported Learning', 17),
+(43, 'Uniformed Public Services', 17),
+(44, 'Beauty', 14),
+(45, 'Business & ICT', 14),
+(46, 'Hair', 14),
+(47, 'Sports, Leisure, Travel & Tourism & Catering', 14),
+(48, 'Additional Learning Support - Swale', 15),
+(49, 'Business & Finance - Swale', 15),
+(50, 'Catering - Swale', 15),
+(51, 'Central Support - Swale', 15),
+(52, 'Construction - Swale', 15),
+(53, 'Hair & Beauty - Swale', 15),
+(54, 'ICT', 15),
+(55, 'Learning Resources - Swale', 15),
+(56, 'Computing Support', 16),
+(57, 'Estates', 16),
+(58, 'Finance', 16),
+(59, 'Funding & Performance Review', 16);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `target`
 --
 
+DROP TABLE IF EXISTS `target`;
 CREATE TABLE IF NOT EXISTS `target` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(150) DEFAULT NULL,
@@ -216,16 +385,19 @@ CREATE TABLE IF NOT EXISTS `target` (
   PRIMARY KEY (`id`),
   KEY `targets_ibfk_2` (`status_id`),
   KEY `targets_ibfk_1` (`moodle_user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `target`
 --
 
 INSERT INTO `target` (`id`, `title`, `title_ext`, `description`, `status_id`, `moodle_user_id`, `target_date`) VALUES
-(1, '1 Teaching and Learning', 'Assessment and Feedback', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<div>&middot; Use a range of assessment methods which evaluate the learning in the classroom every 10 minutes.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Provide effective written feedback for assignments within 4 days of submission.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Use verbal praise and recognition in the classroom environment...</div>\r\n</body>\r\n</html>', 7, 2528, '14/05/2013'),
-(2, '2 ACR/Departmental', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>&middot; Liaise with Christine Bunting in ALS regarding the adjustments for dyslexia needed for resources.</p>\r\n<p>&middot; Ensure all lesson plans include the differentiated activities and assessments for students X and Y.</p>\r\n<p>&middot; Share the lesson plan in advance with their LSP.</p>\r\n</body>\r\n</html>', 8, 2528, '30/04/2013'),
-(4, '3 Student focus', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html>\n<head>\n</head>\n<body>\n<p>&middot; Feedback states students leave due to lack of enrichment activities and resources available on the VLE.</p>\n<p>&middot; Work with manager to identify good practice</p>\n<p>&middot; peer observe colleague with desired use of ILT</p>\n<p>&middot; Work with colleagues A and B to design 3 enrichment activities and trips which address the employability skills of teamwork, problem solving and communication.</p>\n</body>\n</html>', 7, 2528, '18/07/2013');
+(1, '1 Teaching and Learning', 'Assessment and Feedback', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<div>&middot; Use a range of assessment methods which evaluate the learning in the classroom every 10 minutes.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Provide effective written feedback for assignments within 4 days of submission.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Use verbal praise and recognition in the classroom environment...</div>\r\n</body>\r\n</html>', 7, 43, '14/05/2013'),
+(2, '2 ACR/Departmental', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>&middot; Liaise with Christine Bunting in ALS regarding the adjustments for dyslexia needed for resources.</p>\r\n<p>&middot; Ensure all lesson plans include the differentiated activities and assessments for students X and Y.</p>\r\n<p>&middot; Share the lesson plan in advance with their LSP.</p>\r\n</body>\r\n</html>', 8, 43, '30/04/2013'),
+(4, '3 Student focus', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html>\n<head>\n</head>\n<body>\n<p>&middot; Feedback states students leave due to lack of enrichment activities and resources available on the VLE.</p>\n<p>&middot; Work with manager to identify good practice</p>\n<p>&middot; peer observe colleague with desired use of ILT</p>\n<p>&middot; Work with colleagues A and B to design 3 enrichment activities and trips which address the employability skills of teamwork, problem solving and communication.</p>\n</body>\n</html>', 7, 43, '18/07/2013'),
+(5, '1 Teaching and Learning', 'Assessment and Feedback', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<div>&middot; Use a range of assessment methods which evaluate the learning in the classroom every 10 minutes.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Provide effective written feedback for assignments within 4 days of submission.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Use verbal praise and recognition in the classroom environment...</div>\r\n</body>\r\n</html>', 7, 2528, '14/05/2013'),
+(6, '2 ACR/Departmental', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>&middot; Liaise with Christine Bunting in ALS regarding the adjustments for dyslexia needed for resources.</p>\r\n<p>&middot; Ensure all lesson plans include the differentiated activities and assessments for students X and Y.</p>\r\n<p>&middot; Share the lesson plan in advance with their LSP.</p>\r\n</body>\r\n</html>', 8, 2528, '30/04/2013'),
+(7, '3 Student focus', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html>\n<head>\n</head>\n<body>\n<p>&middot; Feedback states students leave due to lack of enrichment activities and resources available on the VLE.</p>\n<p>&middot; Work with manager to identify good practice</p>\n<p>&middot; peer observe colleague with desired use of ILT</p>\n<p>&middot; Work with colleagues A and B to design 3 enrichment activities and trips which address the employability skills of teamwork, problem solving and communication.</p>\n</body>\n</html>', 7, 2528, '18/07/2013');
 
 -- --------------------------------------------------------
 
@@ -233,6 +405,7 @@ INSERT INTO `target` (`id`, `title`, `title_ext`, `description`, `status_id`, `m
 -- Table structure for table `target_status`
 --
 
+DROP TABLE IF EXISTS `target_status`;
 CREATE TABLE IF NOT EXISTS `target_status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) DEFAULT NULL,
@@ -253,6 +426,7 @@ INSERT INTO `target_status` (`id`, `title`, `sort_order`) VALUES
 --
 -- Stand-in structure for view `v_activity`
 --
+DROP VIEW IF EXISTS `v_activity`;
 CREATE TABLE IF NOT EXISTS `v_activity` (
 `id` int(11)
 ,`employee_id` int(11)
@@ -277,6 +451,7 @@ CREATE TABLE IF NOT EXISTS `v_activity` (
 --
 -- Stand-in structure for view `v_scores`
 --
+DROP VIEW IF EXISTS `v_scores`;
 CREATE TABLE IF NOT EXISTS `v_scores` (
 `title` varchar(255)
 ,`value` longtext
@@ -288,6 +463,7 @@ CREATE TABLE IF NOT EXISTS `v_scores` (
 --
 -- Stand-in structure for view `v_staff`
 --
+DROP VIEW IF EXISTS `v_staff`;
 CREATE TABLE IF NOT EXISTS `v_staff` (
 `id` bigint(10)
 ,`username` varchar(100)
@@ -301,6 +477,7 @@ CREATE TABLE IF NOT EXISTS `v_staff` (
 --
 -- Stand-in structure for view `v_targets_with_status`
 --
+DROP VIEW IF EXISTS `v_targets_with_status`;
 CREATE TABLE IF NOT EXISTS `v_targets_with_status` (
 `id` int(11)
 ,`title` varchar(150)
@@ -356,9 +533,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`%` SQL SECURITY DEFINER VIEW `
 --
 ALTER TABLE `activity`
   ADD CONSTRAINT `activity_ibfk_1` FOREIGN KEY (`cpd_type_id`) REFERENCES `cpd_type` (`id`),
-  ADD CONSTRAINT `activity_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`),
   ADD CONSTRAINT `Learning_plan_detail_ibfk_2` FOREIGN KEY (`target_id`) REFERENCES `target` (`id`),
   ADD CONSTRAINT `Learning_plan_detail_ibfk_3` FOREIGN KEY (`priority_type_id`) REFERENCES `priority_type` (`id`);
+
+--
+-- Constraints for table `manager_group`
+--
+ALTER TABLE `manager_group`
+  ADD CONSTRAINT `manager_group_ibfk_2` FOREIGN KEY (`section`) REFERENCES `section` (`id`),
+  ADD CONSTRAINT `manager_group_ibfk_1` FOREIGN KEY (`manager`) REFERENCES `manager` (`moodle_user_id`);
 
 --
 -- Constraints for table `target`

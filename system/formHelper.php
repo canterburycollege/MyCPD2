@@ -12,9 +12,9 @@ function html_select_options($options, $selected_id = NULL) {
     $html = '';
     foreach ($options as $option) {
         if ($option->id == $selected_id) {
-            $html .= '<option id="' . $option->id . '" selected>';
+            $html .= '<option value="' . $option->id . '" selected>';
         } else {
-            $html .= '<option id="' . $option->id . '">';
+            $html .= '<option value="' . $option->id . '">';
         }
         $html .= $option->description . '</option>';
     }
