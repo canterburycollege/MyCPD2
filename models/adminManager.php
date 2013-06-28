@@ -307,16 +307,19 @@ class AdminManagerModel extends BaseModel {
     public function createFaculty(){
         $sql = "
             INSERT INTO faculty (
-                description,
-                manager
+                description
                 )
             VALUES (
-                '{$_POST['description']}',
-                '{$_POST['manager']}'
+                '{$_POST['description']}'
             )";
                 
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $dbConn->execute($sql);
+    }
+    
+    public function createFacultyForm() {
+        $this->viewModel->set("pageTitle", "MyCPD Admin");
+        return $this->viewModel;
     }
     
     public function createSection(){
@@ -334,6 +337,11 @@ class AdminManagerModel extends BaseModel {
                 
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $dbConn->execute($sql);
+    }
+    
+    public function createSectionForm() {
+        $this->viewModel->set("pageTitle", "MyCPD Admin");
+        return $this->viewModel;
     }
     
     public function deleteFaculty($id){
@@ -371,6 +379,30 @@ class AdminManagerModel extends BaseModel {
         return $results;
     }
     
+    public function updateFaculty($id){
+        $description = $_POST['description'];
+        $sql = "
+            UPDATE  faculty 
+            SET     description = '{$description}'
+            WHERE   id = {$id}
+            ";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $dbConn->execute($sql);
+    }
+    
+    public function updateFacultyForm($id){
+        $sql = "
+            SELECT  description
+            FROM    faculty
+            WHERE   id = {$id}
+            ";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results = $dbConn->get_all($sql, 'OBJECT');
+        $this->viewModel->set("pageTitle", "MyCPD Admin");
+        $this->viewModel->set("faculty", $results[0]);
+        return $this->viewModel;
+    }
+
     public function viewFaculties(){
        $sql = "
            SELECT   *

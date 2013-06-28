@@ -25,11 +25,11 @@
             <?php foreach ($viewModel->get('faculties') as $row): ?>
                 <tr>
                     <td><?= $row->description ?></td>
-                    <td><a href="<?= BASEURL ?>adminManager/updateFaculty/<?= $row->moodle_user_id ?>">Update</a> 
+                    <td><a href="<?= BASEURL ?>adminManager/updateFaculty/<?= $row->id ?>">Update</a> 
                         | 
-                        <a href="<?= BASEURL ?>adminManager/deleteFaculty/<?= $row->moodle_user_id ?>">Delete</a>
+                        <a href="<?= BASEURL ?>adminManager/deleteFaculty/<?= $row->id ?>">Delete</a>
                         | 
-                        <a href="<?= BASEURL ?>adminManager/viewSections/<?= $row->moodle_user_id ?>">View Sections</a> 
+                        <a href="<?= BASEURL ?>adminManager/viewSections/<?= $row->id ?>">View Sections</a> 
                     </td>
                 </tr>
                 <?php endforeach; ?>
