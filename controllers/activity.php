@@ -33,7 +33,8 @@ class ActivityController extends BaseController {
     }
 
     public function delete() {
-        $this->view->output($this->model->delete());
+        $id = $_GET['id'];
+        $this->view->output($this->model->delete($id));
     }
 
     //default method

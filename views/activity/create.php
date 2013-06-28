@@ -2,7 +2,6 @@
 
 <script type="text/javascript" src="<?= BASEURL . '/assets/js/tiny_mce/tiny_mce.js' ?>"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-<?php $priority_options = $viewModel->get('priority_options'); ?>
 <script type="text/javascript">
 
     tinyMCE.init({
@@ -15,12 +14,14 @@
     });
 
     $(function() {
-        $("#activity_date").datepicker({dateFormat: 'dd/mm/yy'});
+        $("#activity_date").datepicker({dateFormat: 'yy/mm/dd'});
     });
 
 </script>
 
-<?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
+<?php include_once TEMPLATEPATH . 'nav_bar.php'; 
+
+$priority_options = $viewModel->get('priority_options');?>
 <h1><img src="<?= BASEURL . '/assets/pix/plan2.png' ?>" alt="Activity icon"><?= $viewModel->get('heading1'); ?></h1>
 
 <div>
@@ -73,7 +74,8 @@
 
 
 
-                    <select name="priority">
+            
+                <select name="priority">
                         <?= $priority_options ?>
                     </select>
 
