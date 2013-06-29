@@ -78,9 +78,19 @@ class AdminManagerController extends BaseController {
         }
     }
 
+    /**
+     * @todo delete orphan group detail rows
+     */
     public function deleteGroup() {
         $id = $_GET['id'];
         $this->model->deleteGroup($id);
+        header('Location: ' . BASEURL . 'adminManager/viewManagers');
+    }
+    
+    public function deleteGroupDetail(){
+        $id = $_GET['id'];
+        $this->model->deleteGroupDetail($id);
+        header('Location: ' . BASEURL . 'adminManager/viewManagers');
     }
 
     public function deleteManager() {
@@ -101,7 +111,7 @@ class AdminManagerController extends BaseController {
         $id = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->updateGroup($id);
-            header('Location: ' . BASEURL . 'adminManager/viewManagers/');
+            header('Location: ' . BASEURL . 'adminManager/viewGroupDetails/'.$id);
         } else {
             $this->view->output($this->model->updateGroupForm($id));
         }
@@ -111,7 +121,7 @@ class AdminManagerController extends BaseController {
         $moodle_user_id = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->updateManager($moodle_user_id);
-            header('Location: ' . BASEURL . 'adminManager/viewManagers');
+            header('Location: ' . BASEURL . 'adminManager/viewGroups/'.$moodle_user_id);
         } else {
             $this->view->output($this->model->updateManagerForm($moodle_user_id));
         }

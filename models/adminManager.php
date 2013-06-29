@@ -116,6 +116,12 @@ class AdminManagerModel extends BaseModel {
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $dbConn->execute($sql);
     }
+    
+    public function deleteGroupDetail($id){
+        $sql = "DELETE FROM manager_group_detail WHERE id ='{$id}'";
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $dbConn->execute($sql);
+    }
 
     public function deleteManager($moodle_user_id) {
         $sql = "

@@ -38,7 +38,6 @@ class Loader {
         if (file_exists("controllers/" . $this->controllerName . ".php")) {
             require("controllers/" . $this->controllerName . ".php");
         } else {
-            echo 'x' . $this->controllerName;
             require("controllers/error.php");
             return new ErrorController("badurl",$this->urlValues);
         }
@@ -61,13 +60,11 @@ class Loader {
                 }
             } else {
                 //bad controller error
-                echo 'y';
                 require("controllers/error.php");
                 return new ErrorController("badurl",$this->urlValues);
             }
         } else {
             //bad controller error
-            echo 'z';
             require("controllers/error.php");
             return new ErrorController("badurl",$this->urlValues);
         }

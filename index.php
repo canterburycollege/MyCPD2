@@ -36,7 +36,7 @@ require(SYSPATH . 'Loader.php');
 // force login to moodle and save required moodle vars to session
 $auth = new Authentication(); 
 $loader = new Loader(); 
-$controller = $loader->createController(); 
+$controller = $loader->createController();
 $controller->executeAction(); 
 
 ?>
