@@ -215,12 +215,13 @@ class AdminManagerModel extends BaseModel {
     public function viewGroupDetails($group) {
         // sql to get staff rows
         $sql1 = "
-            SELECT  s.displayname
+            SELECT  d.id,
+                    s.displayname
             FROM    manager_group_detail d
                     JOIN v_staff s
                         ON d.moodle_user_id = s.id
             WHERE   d.manager_group = {$group}";
-
+            
         // sql to get group row
         $sql2 = "
             SELECT  m.displayname as managerName,
