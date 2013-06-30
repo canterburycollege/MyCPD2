@@ -2,7 +2,7 @@
 
 require_once SYSPATH . 'DbConnectionRegistry.php';
 
-class AdminManagerModel extends BaseModel {
+class ManagerModel extends BaseModel {
     
     public function authorisation($USER) {
         $sql = "

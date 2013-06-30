@@ -13,7 +13,7 @@ class ManagerController extends BaseController {
         parent::__construct($action, $urlValues);
         //create the model object
         require("models/manager.php");
-        $this->model = new AdminManagerModel();
+        $this->model = new ManagerModel();
         // check that logged in user is authorised for this controller
         $this->authorisation();
     }
