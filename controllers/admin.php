@@ -9,13 +9,13 @@
  * 
  * Loads models and views required by admin
  */
-class AdminManagerController extends BaseController {
+class AdminController extends BaseController {
 
     public function __construct($action, $urlValues) {
         parent::__construct($action, $urlValues);
         //create the model object
-        require("models/adminManager.php");
-        $this->model = new AdminManagerModel();
+        require("models/admin.php");
+        $this->model = new AdminModel();
         // check that logged in user is authorised for this controller
         $this->authorisation();
     }
@@ -46,7 +46,7 @@ class AdminManagerController extends BaseController {
         $manager = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->createGroup($manager);
-            header('Location: ' . BASEURL . 'adminManager/viewGroups/' . $manager);
+            header('Location: ' . BASEURL . 'admin/viewGroups/' . $manager);
         } else {
             $this->view->output($this->model->createGroupForm($manager));
         }
@@ -59,7 +59,7 @@ class AdminManagerController extends BaseController {
         $group = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->createGroupDetail($group);
-            header('Location: ' . BASEURL . 'adminManager/viewGroupDetails/' . $group);
+            header('Location: ' . BASEURL . 'admin/viewGroupDetails/' . $group);
         } else {
             $this->view->output($this->model->createGroupDetailForm($group));
         }
@@ -72,7 +72,7 @@ class AdminManagerController extends BaseController {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->createManager();
             $manager = $_POST['moodle_user_id'];
-            header('Location: ' . BASEURL . 'adminManager/createGroup/' . $manager);
+            header('Location: ' . BASEURL . 'admin/createGroup/' . $manager);
         } else {
             $this->view->output($this->model->createManagerForm());
         }
@@ -84,24 +84,24 @@ class AdminManagerController extends BaseController {
     public function deleteGroup() {
         $id = $_GET['id'];
         $manager_id = $this->model->deleteGroup($id);
-        header('Location: ' . BASEURL . 'adminManager/viewGroups/'.$manager_id);
+        header('Location: ' . BASEURL . 'admin/viewGroups/'.$manager_id);
     }
     
     public function deleteGroupDetail(){
         $id = $_GET['id'];
         $group_id = $this->model->deleteGroupDetail($id);
-        header('Location: ' . BASEURL . 'adminManager/viewGroupDetails/'.$group_id);
+        header('Location: ' . BASEURL . 'admin/viewGroupDetails/'.$group_id);
     }
 
     public function deleteManager() {
         $moodle_user_id = $_GET['id'];
         $this->model->deleteManager($moodle_user_id);
-        header('Location: ' . BASEURL . 'adminManager/viewManagers');
+        header('Location: ' . BASEURL . 'admin/viewManagers');
     }
 
     //default method
     protected function index() {
-        header('Location: ' . BASEURL . 'adminManager/viewManagers');
+        header('Location: ' . BASEURL . 'admin/viewManagers');
     }
 
     /**
@@ -112,7 +112,7 @@ class AdminManagerController extends BaseController {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->updateGroup($id);
             $manager_id = $_POST['manager_id'];
-            header('Location: ' . BASEURL . 'adminManager/viewGroups/'.$manager_id);
+            header('Location: ' . BASEURL . 'admin/viewGroups/'.$manager_id);
         } else {
             $this->view->output($this->model->updateGroupForm($id));
         }
@@ -122,7 +122,7 @@ class AdminManagerController extends BaseController {
         $moodle_user_id = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->updateManager($moodle_user_id);
-            header('Location: ' . BASEURL . 'adminManager/viewManagers/');
+            header('Location: ' . BASEURL . 'admin/viewManagers/');
         } else {
             $this->view->output($this->model->updateManagerForm($moodle_user_id));
         }
@@ -150,7 +150,7 @@ class AdminManagerController extends BaseController {
     public function createFaculty() {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->createFaculty();
-            header('Location: ' . BASEURL . 'adminManager/viewFaculties/');
+            header('Location: ' . BASEURL . 'admin/viewFaculties/');
         } else {
             $this->view->output($this->model->createFacultyForm());
         }
@@ -159,7 +159,7 @@ class AdminManagerController extends BaseController {
     public function createSection() {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->createSection();
-            header('Location: ' . BASEURL . 'adminManager/viewSections/');
+            header('Location: ' . BASEURL . 'admin/viewSections/');
         } else {
             $this->view->output($this->model->createSectionForm());
         }
@@ -168,20 +168,20 @@ class AdminManagerController extends BaseController {
     public function deleteFaculty(){
         $id = $_GET['id'];
         $this->model->deleteFaculty($id);
-        header('Location: ' . BASEURL . 'adminManager/viewFaculties/');
+        header('Location: ' . BASEURL . 'admin/viewFaculties/');
     }
     
     public function deleteSection(){
         $id = $_GET['id'];
         $this->model->deleteSection($id);
-        header('Location: ' . BASEURL . 'adminManager/viewSections/');
+        header('Location: ' . BASEURL . 'admin/viewSections/');
     }
 
     public function updateFaculty(){
         $id = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->updateFaculty($id);
-            header('Location: ' . BASEURL . 'adminManager/viewFaculties/');
+            header('Location: ' . BASEURL . 'admin/viewFaculties/');
         } else {
             $this->view->output($this->model->updateFacultyForm($id));
         }
@@ -191,7 +191,7 @@ class AdminManagerController extends BaseController {
         $id = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->updateSection($id);
-            header('Location: ' . BASEURL . 'adminManager/viewSections/');
+            header('Location: ' . BASEURL . 'admin/viewSections/');
         } else {
             $this->view->output($this->model->updateSectionForm($id));
         }
@@ -207,5 +207,5 @@ class AdminManagerController extends BaseController {
     
 }
 
-/* End of file adminManager.php */
-/* Location: ./adminManager.php */
+/* End of file admin.php */
+/* Location: ./admin.php */

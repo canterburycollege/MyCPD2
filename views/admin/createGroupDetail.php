@@ -5,7 +5,7 @@
         $("#displayname").autocomplete({
            // use full url - to avoid conflict with routing
            // note that &term= is appended
-           source: BASE_URL + "index.php?controller=adminManager&action=ajaxStaffList",
+           source: BASE_URL + "index.php?controller=admin&action=ajaxStaffList",
            minLength: 2,
            noCache: true,
            select: function(event, ui) {

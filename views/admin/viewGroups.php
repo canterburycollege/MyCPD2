@@ -19,16 +19,16 @@
                     <td><?= $row->section ?></td> 
                     <td><?= $row->description ?></td>
                     <td><?= $row->num_of_staff ?></td>
-                    <td><a href="<?= BASEURL ?>adminManager/updateGroup/<?= $row->id ?>">Update</a> 
+                    <td><a href="<?= BASEURL ?>admin/updateGroup/<?= $row->id ?>">Update</a> 
                         | 
-                        <a href="<?= BASEURL ?>adminManager/deleteGroup/<?= $row->id ?>">Delete</a>
+                        <a href="<?= BASEURL ?>admin/deleteGroup/<?= $row->id ?>">Delete</a>
                         | 
-                        <a href="<?= BASEURL ?>adminManager/viewGroupDetails/<?= $row->id ?>">View Staff</a> 
+                        <a href="<?= BASEURL ?>admin/viewGroupDetails/<?= $row->id ?>">View Staff</a> 
                     </td>
                 </tr>
                 <?php endforeach; ?>
         </tbody>
     </table>
     <br/>
-    <a href="<?= BASEURL ?>adminManager/createGroup/<?= $manager->id ?>">Add New Group</a>
+    <a href="<?= BASEURL ?>admin/createGroup/<?= $manager->id ?>">Add New Group</a>
 </div>

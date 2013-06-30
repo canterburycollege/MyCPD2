@@ -14,11 +14,11 @@
             <?php foreach ($viewModel->get('staffRows') as $row): ?>
                 <tr>
                     <td><?= $row->displayname ?></td>
-                    <td><a href="<?= BASEURL ?>adminManager/deleteGroupDetail/<?= $row->id ?>">Delete</a></td>
+                    <td><a href="<?= BASEURL ?>admin/deleteGroupDetail/<?= $row->id ?>">Delete</a></td>
                 </tr>
                 <?php endforeach; ?>
         </tbody>
     </table>
     <br/>
-    <a href="<?= BASEURL ?>adminManager/createGroupDetail/<?= $viewModel->get('group_id') ?>">Add Staff</a>
+    <a href="<?= BASEURL ?>admin/createGroupDetail/<?= $viewModel->get('group_id') ?>">Add Staff</a>
 </div>

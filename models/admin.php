@@ -3,7 +3,7 @@
 require_once SYSPATH . 'DbConnectionRegistry.php';
 require_once SYSPATH . 'formHelper.php';
 
-class AdminManagerModel extends BaseModel {
+class AdminModel extends BaseModel {
 
     /**
      * get array of staff for populating autocomplete
@@ -515,4 +515,6 @@ class AdminManagerModel extends BaseModel {
 
 }
 
-?>
+/* End of file admin.php */
+/* Location: ./models/admin.php */
+
