@@ -153,17 +153,17 @@ header('Location: /moodle/MyCPD/activity/view/');
         $sql = "
             UPDATE  activity
             SET     title = '{$_POST['title']}',
-                    provider = '{$_POST['provider']}',
+                    /*provider = '{$_POST['provider']}',*/
                     learning_outcomes = '{$_POST['learning_outcomes']}',
                     planned_date = '{$_POST['planned_date']}',
-                    cpd_type_id = '{$_POST['cpd_type_id']}',
+                    /*cpd_type_id = '{$_POST['cpd_type_id']}',*/
                     target_id = '{$_POST['target_id']}',
                     impact = '{$_POST['impact']}',
                     priority_type_id = '{$_POST['priority_type_id']}',
-                    completed_date = '{$_POST['completed_date']}',
-                    evaluation_url = '{$_POST['evaluation_url']}',
-                    hours_of_cpd = '{$_POST['hours_of_cpd']}',
-                    rating = '{$_POST['rating']}'
+                    /*evaluation_url = '{$_POST['evaluation_url']}',*/
+                    /*hours_of_cpd = '{$_POST['hours_of_cpd']}',*/
+                    /*rating = '{$_POST['rating']}'*/
+                    completed_date = '{$_POST['completed_date']}'
             WHERE   id = {$id}";
         $dbConn->execute($sql);
     }
