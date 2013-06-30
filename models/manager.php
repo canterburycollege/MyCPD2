@@ -7,8 +7,8 @@ class ManagerModel extends BaseModel {
     public function authorisation($USER) {
         $sql = "
             SELECT  count(*) as row_count
-            FROM    manager_group
-            WHERE   manager = '{$USER->id}'";
+            FROM    manager
+            WHERE   moodle_user_id = '{$USER->id}'";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($sql, 'OBJECT');
         if ($results[0]->row_count > 0) {

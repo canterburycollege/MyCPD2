@@ -19,7 +19,7 @@ class ManagerController extends BaseController {
     }
 
     /**
-     * Check that logged-in user has any groups attached
+     * Check that logged-in user is in manager table
      */
     public function authorisation() {
         if (!$this->model->authorisation($_SESSION['USER'])) {
