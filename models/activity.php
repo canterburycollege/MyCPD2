@@ -147,9 +147,29 @@ header('Location: /moodle/MyCPD/activity/view/');
         $this->viewModel->set("heading1", "Activities");
         return $this->viewModel;
     }
-
-    public function update($id) {
+    
+    public function update($id){
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $sql = "
+            UPDATE  activity
+            SET     title = '{$_POST['title']}',
+                    provider = '{$_POST['provider']}',
+                    learning_outcomes = '{$_POST['learning_outcomes']}',
+                    planned_date = '{$_POST['planned_date']}',
+                    cpd_type_id = '{$_POST['cpd_type_id']}',
+                    target_id = '{$_POST['target_id']}',
+                    impact = '{$_POST['impact']}',
+                    priority_type_id = '{$_POST['priority_type_id']}',
+                    completed_date = '{$_POST['completed_date']}',
+                    evaluation_url = '{$_POST['evaluation_url']}',
+                    hours_of_cpd = '{$_POST['hours_of_cpd']}',
+                    rating = '{$_POST['rating']}'
+            WHERE   id = {$id}";
+        $dbConn->execute($sql);
+    }
+
+    public function updateForm($id) {
+        $dbConn = DbConnectionRegistry::getInstance('mycpd'); 
         
         // first, check that activity belongs to logged-in user
         $sql = "
@@ -161,7 +181,7 @@ header('Location: /moodle/MyCPD/activity/view/');
         if ($row_count < 1) {
             return 'not_authorised';
         }
-            
+        
         $sql2 = "SELECT * FROM v_activity WHERE id = {$id}";
         $results2 = $dbConn->get_all($sql2, 'OBJECT');
         if (empty($results2)) {

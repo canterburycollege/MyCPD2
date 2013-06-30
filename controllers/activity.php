@@ -45,11 +45,16 @@ class ActivityController extends BaseController {
 
     public function update() {
         $id = $_GET['id'];
-        if($this->model->update($id) == 'not_authorised'){
+        if($this->model->updateForm($id) == 'not_authorised'){
             /* @todo create error view */
             echo "ERROR: You are not the owner of this activity";
         } else {
-            $this->view->output($this->model->update($id));
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                $this->model->update($id);
+                header('Location:' . BASEURL . 'activity/view/');
+            } else {
+                $this->view->output($this->model->updateForm($id));
+            }
         }
     }
 
