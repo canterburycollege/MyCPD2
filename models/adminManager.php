@@ -112,15 +112,31 @@ class AdminManagerModel extends BaseModel {
     }
 
     public function deleteGroup($id) {
-        $sql = "DELETE FROM manager_group WHERE id ='{$id}'";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        
+        // get manager_id to use as routing parameter in controller
+        $sql2 = "SELECT manager FROM manager_group WHERE id='{$id}'";
+        $results2 = $dbConn->get_all($sql2,'OBJECT');
+        $manager_id = $results2[0]->manager;
+        
+        $sql = "DELETE FROM manager_group WHERE id ='{$id}'";
         $dbConn->execute($sql);
+        
+        return $manager_id;
     }
     
     public function deleteGroupDetail($id){
-        $sql = "DELETE FROM manager_group_detail WHERE id ='{$id}'";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        
+        // get group_id to use as routing parameter in controller
+        $sql2 = "SELECT manager_group FROM manager_group_detail WHERE id = '{$id}'";
+        $results2 = $dbConn->get_all($sql2,'OBJECT');
+        $group_id = $results2[0]->manager_group;
+        
+        $sql = "DELETE FROM manager_group_detail WHERE id ='{$id}'";
         $dbConn->execute($sql);
+        
+        return $group_id;
     }
 
     public function deleteManager($moodle_user_id) {
@@ -168,6 +184,7 @@ class AdminManagerModel extends BaseModel {
         $sql = "
             SELECT  g.description,
                     g.section AS section_id,
+                    g.manager AS manager_id,
                     (
                     SELECT  m.displayname
                     FROM    v_staff m

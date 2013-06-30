@@ -2,6 +2,7 @@
 
 <h1>Update Group</h1>
 <form method="POST" action="">
+    <input type="hidden" name="manager_id" value="<?= $group->manager_id ?>" />
     <table>
         <tr>
             <td>Manager: </td>

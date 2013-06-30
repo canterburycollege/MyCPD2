@@ -83,14 +83,14 @@ class AdminManagerController extends BaseController {
      */
     public function deleteGroup() {
         $id = $_GET['id'];
-        $this->model->deleteGroup($id);
-        header('Location: ' . BASEURL . 'adminManager/viewManagers');
+        $manager_id = $this->model->deleteGroup($id);
+        header('Location: ' . BASEURL . 'adminManager/viewGroups/'.$manager_id);
     }
     
     public function deleteGroupDetail(){
         $id = $_GET['id'];
-        $this->model->deleteGroupDetail($id);
-        header('Location: ' . BASEURL . 'adminManager/viewManagers');
+        $group_id = $this->model->deleteGroupDetail($id);
+        header('Location: ' . BASEURL . 'adminManager/viewGroupDetails/'.$group_id);
     }
 
     public function deleteManager() {
@@ -111,7 +111,8 @@ class AdminManagerController extends BaseController {
         $id = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->updateGroup($id);
-            header('Location: ' . BASEURL . 'adminManager/viewGroupDetails/'.$id);
+            $manager_id = $_POST['manager_id'];
+            header('Location: ' . BASEURL . 'adminManager/viewGroups/'.$manager_id);
         } else {
             $this->view->output($this->model->updateGroupForm($id));
         }
@@ -121,7 +122,7 @@ class AdminManagerController extends BaseController {
         $moodle_user_id = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->model->updateManager($moodle_user_id);
-            header('Location: ' . BASEURL . 'adminManager/viewGroups/'.$moodle_user_id);
+            header('Location: ' . BASEURL . 'adminManager/viewManagers/');
         } else {
             $this->view->output($this->model->updateManagerForm($moodle_user_id));
         }
