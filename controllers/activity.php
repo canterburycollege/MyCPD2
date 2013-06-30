@@ -21,30 +21,36 @@ class ActivityController extends BaseController {
     }
 
     public function create() {
-
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->view->output($this->model->created());
+        } else {
+            $this->view->output($this->model->create($this->logged_in_user));
         }
-        else
-           // $this->view->output($this->model->create());
-
-        $this->view->output($this->model->create($this->logged_in_user));
-
     }
 
     public function delete() {
         $id = $_GET['id'];
-        $this->view->output($this->model->delete($id));
+        if($this->model->delete($id) == 'not_authorised'){
+            /* @todo create error view */
+            echo "ERROR: You are not the owner of this activity";
+        } else {
+            header('Location:' . BASEURL . 'activity/view/');
+        }
     }
 
     //default method
     protected function index() {
-        $this->view->output($this->model->index($this->logged_in_user));
+        header('Location:' . BASEURL . 'activity/view/');
     }
 
     public function update() {
         $id = $_GET['id'];
-        $this->view->output($this->model->update($id));
+        if($this->model->update($id) == 'not_authorised'){
+            /* @todo create error view */
+            echo "ERROR: You are not the owner of this activity";
+        } else {
+            $this->view->output($this->model->update($id));
+        }
     }
 
     public function view() {

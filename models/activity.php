@@ -101,11 +101,21 @@ header('Location: /moodle/MyCPD/activity/view/');
     }
 
     public function delete($id) {
-        $sql = "DELETE FROM activity WHERE id = '{$id}'";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
-        $dbConn->execute($sql);
-
-        header('Location: /moodle/MyCPD/activity/view/');
+        
+        // first, check that activity belongs to logged-in user
+        $sql = "
+            SELECT  count(*) AS row_count
+            FROM    activity 
+            WHERE   id = {$id} AND moodle_user_id = {$_SESSION['USER']->id}";
+        $results = $dbConn->get_all($sql,'OBJECT');
+        $row_count = $results[0]->row_count;
+        if ($row_count < 1) {
+            return 'not_authorised';
+        }
+        
+        $sql2 = "DELETE FROM activity WHERE id = '{$id}'";
+        $dbConn->execute($sql2);
     }
     
     private function get_priority_types() {
@@ -139,15 +149,26 @@ header('Location: /moodle/MyCPD/activity/view/');
     }
 
     public function update($id) {
-        $sql = "SELECT * FROM v_activity WHERE id = {$id}";
-
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
-        $results = $dbConn->get_all($sql, 'OBJECT');
-        if (empty($results)) {
-            // initialize array to prevent php warning msg.
-            $results = Array();
+        
+        // first, check that activity belongs to logged-in user
+        $sql = "
+            SELECT  count(*) AS row_count
+            FROM    activity 
+            WHERE   id = {$id} AND moodle_user_id = {$_SESSION['USER']->id}";
+        $results = $dbConn->get_all($sql,'OBJECT');
+        $row_count = $results[0]->row_count;
+        if ($row_count < 1) {
+            return 'not_authorised';
         }
-        $activity = $results[0];
+            
+        $sql2 = "SELECT * FROM v_activity WHERE id = {$id}";
+        $results2 = $dbConn->get_all($sql2, 'OBJECT');
+        if (empty($results2)) {
+            // initialize array to prevent php warning msg.
+            $results2 = Array();
+        }
+        $activity = $results2[0];
         $this->viewModel->set("pageTitle", "MyCPD Hub");
         $this->viewModel->set("activity", $activity);
 
