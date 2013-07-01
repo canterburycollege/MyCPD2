@@ -12,27 +12,29 @@
 
 <?php include_once TEMPLATEPATH . 'nav_bar_admin.php'; ?>
 
-<h1>Maintain Faculties</h1>
-<div id="div_faculties">
+<h1>Maintain Sections</h1>
+<div id="div_sections">
     <table id="table_detail">
         <thead>
             <tr>
+                <th>Section</th>
                 <th>Faculty</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($viewModel->get('faculties') as $row): ?>
+            <?php foreach ($viewModel->get('sections') as $row): ?>
                 <tr>
-                    <td><?= $row->description ?></td>
-                    <td><a href="<?= BASEURL ?>adminManager/updateFaculty/<?= $row->id ?>">Update</a> 
+                    <td><?= $row->section ?></td>
+                    <td><?= $row->faculty ?></td>
+                    <td width="15%"><a href="<?= BASEURL ?>admin/updateSection/<?= $row->id ?>">Update</a> 
                         | 
-                        <a href="<?= BASEURL ?>adminManager/deleteFaculty/<?= $row->id ?>">Delete</a>
+                        <a href="<?= BASEURL ?>admin/deleteSection/<?= $row->id ?>">Delete</a>
                     </td>
                 </tr>
                 <?php endforeach; ?>
         </tbody>
     </table>
     <br/>
-    <a href="<?= BASEURL ?>adminManager/createFaculty/">Add New Faculty</a>
+    <a href="<?= BASEURL ?>admin/createSection/">Add New Section</a>
 </div>

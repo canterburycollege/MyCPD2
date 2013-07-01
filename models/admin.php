@@ -3,7 +3,7 @@
 require_once SYSPATH . 'DbConnectionRegistry.php';
 require_once SYSPATH . 'formHelper.php';
 
-class AdminManagerModel extends BaseModel {
+class AdminModel extends BaseModel {
 
     /**
      * get array of staff for populating autocomplete
@@ -112,9 +112,31 @@ class AdminManagerModel extends BaseModel {
     }
 
     public function deleteGroup($id) {
-        $sql = "DELETE FROM manager_group WHERE id ='{$id}'";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        
+        // get manager_id to use as routing parameter in controller
+        $sql2 = "SELECT manager FROM manager_group WHERE id='{$id}'";
+        $results2 = $dbConn->get_all($sql2,'OBJECT');
+        $manager_id = $results2[0]->manager;
+        
+        $sql = "DELETE FROM manager_group WHERE id ='{$id}'";
         $dbConn->execute($sql);
+        
+        return $manager_id;
+    }
+    
+    public function deleteGroupDetail($id){
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        
+        // get group_id to use as routing parameter in controller
+        $sql2 = "SELECT manager_group FROM manager_group_detail WHERE id = '{$id}'";
+        $results2 = $dbConn->get_all($sql2,'OBJECT');
+        $group_id = $results2[0]->manager_group;
+        
+        $sql = "DELETE FROM manager_group_detail WHERE id ='{$id}'";
+        $dbConn->execute($sql);
+        
+        return $group_id;
     }
 
     public function deleteManager($moodle_user_id) {
@@ -162,6 +184,7 @@ class AdminManagerModel extends BaseModel {
         $sql = "
             SELECT  g.description,
                     g.section AS section_id,
+                    g.manager AS manager_id,
                     (
                     SELECT  m.displayname
                     FROM    v_staff m
@@ -209,12 +232,13 @@ class AdminManagerModel extends BaseModel {
     public function viewGroupDetails($group) {
         // sql to get staff rows
         $sql1 = "
-            SELECT  s.displayname
+            SELECT  d.id,
+                    s.displayname
             FROM    manager_group_detail d
                     JOIN v_staff s
                         ON d.moodle_user_id = s.id
             WHERE   d.manager_group = {$group}";
-
+            
         // sql to get group row
         $sql2 = "
             SELECT  m.displayname as managerName,
@@ -491,4 +515,6 @@ class AdminManagerModel extends BaseModel {
 
 }
 
-?>
+/* End of file admin.php */
+/* Location: ./models/admin.php */
+

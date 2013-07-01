@@ -12,31 +12,27 @@
 
 <?php include_once TEMPLATEPATH . 'nav_bar_admin.php'; ?>
 
-<h1>Maintain Managers</h1>
-<div id="div_managers">
+<h1>Maintain Faculties</h1>
+<div id="div_faculties">
     <table id="table_detail">
         <thead>
             <tr>
-                <th>Manager</th>
-                <th>Description</th>
+                <th>Faculty</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($viewModel->get('managers') as $row): ?>
+            <?php foreach ($viewModel->get('faculties') as $row): ?>
                 <tr>
-                    <td><?= $row->displayname ?></td>
                     <td><?= $row->description ?></td>
-                    <td><a href="<?= BASEURL ?>adminManager/updateManager/<?= $row->moodle_user_id ?>">Update</a> 
+                    <td><a href="<?= BASEURL ?>admin/updateFaculty/<?= $row->id ?>">Update</a> 
                         | 
-                        <a href="<?= BASEURL ?>adminManager/deleteManager/<?= $row->moodle_user_id ?>">Delete</a>
-                        | 
-                        <a href="<?= BASEURL ?>adminManager/viewGroups/<?= $row->moodle_user_id ?>">View Groups</a> 
+                        <a href="<?= BASEURL ?>admin/deleteFaculty/<?= $row->id ?>">Delete</a>
                     </td>
                 </tr>
                 <?php endforeach; ?>
         </tbody>
     </table>
     <br/>
-    <a href="<?= BASEURL ?>adminManager/createManager/">Add New Manager</a>
+    <a href="<?= BASEURL ?>admin/createFaculty/">Add New Faculty</a>
 </div>
