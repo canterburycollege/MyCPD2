@@ -1,16 +1,25 @@
-<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-<script type="text/javascript">
-    $(function() {
-        $("#planned_date").datepicker({dateFormat: 'yy-mm-dd'});
-        $("#completd_date").datepicker({dateFormat: 'yy-mm-dd'});
-    });
-</script>
-
 <?php
 $activity = $viewModel->get('activity');
 $target_options = $viewModel->get('target_options');
 $priority_options = $viewModel->get('priority_options');
 ?>
+
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script type="text/javascript" src="<?= BASEURL ?>assets/js/raty/lib/jquery.raty.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        
+        $("#planned_date").datepicker({dateFormat: 'yy-mm-dd'});
+        $("#completed_date").datepicker({dateFormat: 'yy-mm-dd'});
+    
+        $('#star').raty({ 
+            scoreName : 'rating',
+            path : '<?= BASEURL ?>assets/js/raty/lib/img' ,
+            cancel : true,
+            score : <?= $activity->rating ?>
+        });
+    });
+</script>
 
 <h1>Update Activity</h1>
 <form method="post" action="">
@@ -49,6 +58,10 @@ $priority_options = $viewModel->get('priority_options');
             <tr>
                 <td>Completed? </td>
                 <td><input name="completed_date" id="completed_date" value="<?= $activity->completed_date ?>" /></td>
+            </tr>
+            <tr>
+                <td>Rating: </td>
+                <td><div id="star"></div></td>
             </tr>
         </tbody>
     </table>

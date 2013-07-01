@@ -162,7 +162,7 @@ header('Location: /moodle/MyCPD/activity/view/');
                     priority_type_id = '{$_POST['priority_type_id']}',
                     /*evaluation_url = '{$_POST['evaluation_url']}',*/
                     /*hours_of_cpd = '{$_POST['hours_of_cpd']}',*/
-                    /*rating = '{$_POST['rating']}'*/
+                    rating = '{$_POST['rating']}',
                     completed_date = '{$_POST['completed_date']}'
             WHERE   id = {$id}";
         $dbConn->execute($sql);
