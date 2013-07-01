@@ -22,4 +22,7 @@ function html_select_options($options, $selected_id = NULL) {
 }
 
 ?>
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/canterburycollege/MyCPD2.git
