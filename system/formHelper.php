@@ -23,6 +23,9 @@ function html_select_options($options, $selected_id = NULL) {
 
 ?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/canterburycollege/MyCPD2.git
 =======
 >>>>>>> branch 'master' of https://github.com/canterburycollege/MyCPD2.git
