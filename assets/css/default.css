@@ -37,10 +37,16 @@ td,th  {
     display: block;  /* block float the labels to left column, set a width */
     float: left; 
     width: 400px; 
-    padding: 0; 
+    padding-bottom: 10px; 
     margin: 5px 0 0; /* set top margin same as form input - textarea etc. elements */
     text-align: right; 
 }
+
+#standard td {
+    vertical-align: top;
+    padding-bottom: 10px;
+}
+
 
 form {  /* set width in form, not fieldset (still takes up more room w/ fieldset width */
     font:100% verdana,arial,sans-serif;
@@ -202,3 +208,9 @@ h2 {
 ul {
     margin-top: 1px;
 }
+
+#star {
+    width: 200px !important;
+    margin-top: 6px;
+}
+
