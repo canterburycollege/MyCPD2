@@ -6,12 +6,23 @@ $priority_options = $viewModel->get('priority_options');
 
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script type="text/javascript" src="<?= BASEURL ?>assets/js/raty/lib/jquery.raty.min.js"></script>
+<script type="text/javascript" src="<?= BASEURL . '/assets/js/tiny_mce/tiny_mce.js' ?>"></script>
+
+
 <script type="text/javascript">
-    $(document).ready(function(){
-        
+
+    tinyMCE.init({
+        theme: "advanced",
+        mode: "textareas",
+        plugins: "fullpage",
+        theme_advanced_toolbar_location: "top",
+        theme_advanced_buttons3_add: "fullpage"
+
+    });
+
+    $(function() {
         $("#planned_date").datepicker({dateFormat: 'yy-mm-dd'});
         $("#completed_date").datepicker({dateFormat: 'yy-mm-dd'});
-    
         $('#star').raty({ 
             scoreName : 'rating',
             path : '<?= BASEURL ?>assets/js/raty/lib/img' ,
@@ -19,7 +30,13 @@ $priority_options = $viewModel->get('priority_options');
             score : <?= $activity->rating ?>
         });
     });
+
 </script>
+
+
+
+
+
 
 <h1>Update Activity</h1>
 <form method="post" action="">
