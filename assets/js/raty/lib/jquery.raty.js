@@ -443,7 +443,7 @@
     click         : undefined,
     half          : false,
     halfShow      : true,
-    hints         : ['bad', 'poor', 'regular', 'good', 'gorgeous'],
+    hints         : ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'],
     iconRange     : undefined,
     mouseout      : undefined,
     mouseover     : undefined,
