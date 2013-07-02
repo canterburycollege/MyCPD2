@@ -60,16 +60,6 @@ class ActivityModel extends BaseModel {
         $priority = $_POST['priority'];
         $activity_date = $_POST['activity_date'];
 
-echo "1) ".$title."<br>";
-echo "2) ".$description."<br>";
-echo "3) ".$target_id."<br>";
-echo "4) ".$cpdtitle."<br>";
-echo "5) ".$teacherOutcome."<br>";
-echo "6) ".$studentOutcome."<br>";
-echo "7) ".$priority."<br>";
-echo "8) ".$activity_date."<br>";
-
-
 
  $sql = "INSERT INTO activity 
                 (
@@ -163,12 +153,15 @@ header('Location: /moodle/MyCPD/activity/view/');
                     /*evaluation_url = '{$_POST['evaluation_url']}',*/
                     /*hours_of_cpd = '{$_POST['hours_of_cpd']}',*/
                     rating = '{$_POST['rating']}',
+                    evaluation_notes = '{$_POST['evaluation_notes']}',
                     completed_date = '{$_POST['completed_date']}'
             WHERE   id = {$id}";
         $dbConn->execute($sql);
     }
 
     public function updateForm($id) {
+                $this->viewModel->set("pageTitle", "MyCPD Hub");
+        $this->viewModel->set("heading1", "Update Activity");
         $dbConn = DbConnectionRegistry::getInstance('mycpd'); 
         
         // first, check that activity belongs to logged-in user
@@ -192,7 +185,7 @@ header('Location: /moodle/MyCPD/activity/view/');
         $this->viewModel->set("pageTitle", "MyCPD Hub");
         $this->viewModel->set("activity", $activity);
 
-        $targets = $this->get_targets();
+        $targets = $this->get_targets(NULL);
         $selected_target = $activity->target_id;
         $this->viewModel->set("target_options", html_select_options($targets, $selected_target));
 

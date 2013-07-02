@@ -1,5 +1,6 @@
 <script type="text/javascript" src="<?= BASEURL . '/assets/js/tiny_mce/tiny_mce.js' ?>"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+
 <script type="text/javascript">
 
     tinyMCE.init({
@@ -12,10 +13,18 @@
     });
 
     $(function() {
-        $("#activity_date").datepicker({dateFormat: 'yy/mm/dd'});
+        $("#planned_date").datepicker({dateFormat: 'dd/mm/yy'});
     });
 
 </script>
+
+<?php
+$activity = $viewModel->get('activity');
+$target_options = $viewModel->get('target_options');
+$priority_options = $viewModel->get('priority_options');
+?>
+
+
 
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; 
 
@@ -23,71 +32,45 @@ $priority_options = $viewModel->get('priority_options');?>
 <h1><img src="<?= BASEURL . '/assets/pix/plan2.png' ?>" alt="Activity icon"><?= $viewModel->get('heading1'); ?></h1>
 
 <div>
-    <form id="standard" method="post">
-
-        <table id="edit">
-
+<form id="standard" method="post" action="">
+      <table id="edit">
+        <tbody>
             <tr>
-                <td><label>Title: </label><input name="title" id="title_ext"></td>
-            </tr>
-            <tr>
-                <td><label>Description: </label>
-                    <textarea name="description" id="description" cols="80" rows="20" ></textarea></td>
-            </tr>
-
-            <tr>
-                <td><label>Target this CPD addresses: </label><select name="target_id" id="target_id">
-
-                        <?php foreach ($viewModel->get('targets') as $row): ?>
+                <td><label>Target this CPD addresses: </td>
+                <td><select name="target_id">
+                                                <?php foreach ($viewModel->get('targets') as $row): ?>
                             <option value="<?= $row->id ?>"><?= $row->title ?></option>
                         <?php endforeach; ?>
-
-                    </select></td>
-            </tr>
-
-            <tr>
-                <td>
-                    <label>Title of CPD activity/event :</label>
-                    <input name="cpdtitle" id="title_ext">
+                    </select>
+                    </label>
                 </td>
             </tr>
-
             <tr>
-                <td>
-                    <label>Intended Learning Outcomes for teacher :</label>
-                    <textarea name="teacherOutcome" id="teacherOutcome" cols="80" rows="20"></textarea>
-                </td>
+                <td><label>Title of CPD activity/event: </td>
+                <td><textarea name="title" cols="80" rows="5" ></textarea></label></td>
             </tr>
-
             <tr>
-                <td>
-                    <label>Intended impact on student outcomes :</label>
-                    <textarea name="studentOutcome" id="studentOutcome" cols="80" rows="20"></textarea>
-                </td>
+                <td><label>Intended learning outcomes for teacher: </td>
+                <td><textarea name="learning_outcomes" cols="80" rows="5" ></textarea></label></td>
             </tr>
-
             <tr>
-                <td>
-                    <label>Priority level :</label>
-
-
-
-            
-                <select name="priority">
+                <td><label>Intended impact on student outcomes: </td>
+                <td><textarea name="impact" cols="80" rows="5" ></textarea></label></td>
+            </tr>
+            <tr>
+                <td><label>Priority level: </td>
+                <td><select name="priority_type_id">
                         <?= $priority_options ?>
                     </select>
-
-                </td>
+                </label></td>
             </tr>
-
             <tr>
-                <td>
-                    <label>Target Date :</label><input name="activity_date" name="activity_date" id="activity_date">
-
-                </td>
+                <td><label>Target date: </td>
+                <td><input name="planned_date" id="planned_date" value="" /></label></td>
             </tr>
-
-            <tr>
-                <td align="center"><input type="submit" name="submit" value="Create Activity" /></td>
-            </tr> 
-    </form>
+        </tbody>
+    </table>
+    <br/>
+    <input type="submit" value="Create Activity" />
+    <input type="reset" value="Cancel" />
+</form>
