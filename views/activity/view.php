@@ -6,7 +6,7 @@
             "bJQueryUI": true,
             "sPaginationType": "full_numbers"});
         //auto fill fiter from get for linking. 
-        filter.fnFilter( '<?php echo $_GET['id']; ?>' ); 
+        filter.fnFilter( "<?php echo $viewModel->get('target_desc'); ?>" ); 
     });
     
     function confirmPost()
@@ -19,7 +19,7 @@ return false ;
 }
     
 </script>
- 
+
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
  <h1><img src="<?= BASEURL . '/assets/pix/plan2.png' ?>" alt="Target icon"><?= $viewModel->get('heading1'); ?></h1><a href="<?= BASEURL ?>activity/archive/">Archive</a> | Current
 <div id="div_activities">
@@ -48,7 +48,7 @@ return false ;
                     <td><?= $row->priority_type ?></td>
                     <td><?= $row->planned_date ?></td>
                     <td><?= $row->completed_date ?></td>
-                    <td><?= $row->evaluation_url ?></td>
+                    <td><?= $row->evaluation_notes ?></td>
                     <td><a href="<?= BASEURL ?>activity/update/<?= $row->id ?>">(Update)</a></td> 
                     <td><a href="../delete/<?= $row->id ?>" onClick="return confirmPost()">(Delete)</a></td>
                     

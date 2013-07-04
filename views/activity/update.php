@@ -19,8 +19,8 @@ $priority_options = $viewModel->get('priority_options');
     });
 
     $(function() {
-        $("#planned_date").datepicker({dateFormat: 'dd/mm/yy'});
-        $("#completed_date").datepicker({dateFormat: 'dd/mm/yy'});
+        $("#planned_date").datepicker({dateFormat: 'yy-mm-dd'});
+        $("#completed_date").datepicker({dateFormat: 'yy-mm-dd'});
         $('#star').raty({ 
             scoreName : 'rating',
             path : '<?= BASEURL ?>assets/js/raty/lib/img' ,

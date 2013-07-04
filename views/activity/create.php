@@ -13,7 +13,7 @@
     });
 
     $(function() {
-        $("#planned_date").datepicker({dateFormat: 'dd/mm/yy'});
+        $("#planned_date").datepicker({dateFormat: 'yy-mm-dd'});
     });
 
 </script>
