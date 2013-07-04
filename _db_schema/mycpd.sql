@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.5.6
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 28, 2013 at 02:54 PM
--- Server version: 5.5.24-log
--- PHP Version: 5.4.3
+-- Generation Time: Jul 04, 2013 at 03:35 PM
+-- Server version: 5.1.66-community-log
+-- PHP Version: 5.3.10
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -42,32 +42,32 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `evaluation_url` varchar(50) DEFAULT NULL,
   `hours_of_cpd` decimal(7,2) NOT NULL,
   `rating` int(1) DEFAULT NULL COMMENT 'rating out of 5',
+  `evaluation_notes` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `learning_plan_target_id` (`target_id`),
   KEY `priority_type_id` (`priority_type_id`),
   KEY `moodle_user_id` (`moodle_user_id`),
   KEY `cpd_type_id` (`cpd_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `activity`
 --
 
-INSERT INTO `activity` (`id`, `moodle_user_id`, `title`, `provider`, `learning_outcomes`, `planned_date`, `cpd_type_id`, `target_id`, `impact`, `priority_type_id`, `completed_date`, `evaluation_url`, `hours_of_cpd`, `rating`) VALUES
-(1, 43, 'Rise and Shine', '', 'Creative assessment techniques to implement in to practice', '2013-02-26', 1, 1, 'Lessons will be structured with regular assessment activities so students are on task and know their progress rate', 7, '2013-03-12', ' ', '0.00', 0),
-(2, 43, 'Rise and Shine            ', '', 'Effective questioning technique            ', '2013-02-26', 1, 2, 'Questions will encourage students to think independently, keep them engaged and included', 8, '2013-03-22', ' ', '0.00', 0),
-(3, 43, ' Parents evening            ', '', 'Some really important learning outcomes                        ', '2013-03-01', 1, 4, 'Review dyslexia strategies', 8, '2013-03-19', '', '0.00', 0),
-(4, 43, 'Claro read training', '', 'Understand the uses of Claro read, how to integrate into lessons and basic awareness of features', '2013-04-19', 1, 4, 'Integration of learning support technology for dyslexic students', 7, NULL, NULL, '0.00', NULL),
-(5, 43, 'Peer Observation', '', 'See Colleague C teaching level 1 class using Interactive whiteboard', '2013-03-27', 1, 1, 'Transfer good practice to my level 1 session next Wednesday as part of group assessment task', 8, NULL, NULL, '0.00', NULL),
-(6, 43, 'Visit Stakeholder X', '', 'Organise enrichment activity for level 3 following meeting with Colleagues A and B', '2013-06-01', 1, 2, 'Experience a day in the life at Stakeholder X, gain employability skills and experience', 8, NULL, NULL, '0.00', NULL),
-(7, 43, 'An old activity', '0 ', 'Just a test', '2011-06-01', 1, 2, 'Test data', 8, '2012-11-09', NULL, '0.00', 0),
-(8, 2528, 'Rise and Shine', '', 'Creative assessment techniques to implement in to practice', '2013-02-26', 1, 1, 'Lessons will be structured with regular assessment activities so students are on task and know their progress rate', 7, '2013-03-12', ' ', '0.00', 0),
-(9, 2528, 'Rise and Shine            ', '', 'Effective questioning technique            ', '2013-02-26', 1, 2, 'Questions will encourage students to think independently, keep them engaged and included', 8, '2013-03-22', ' ', '0.00', 0),
-(10, 2528, ' Parents evening            ', '', 'Some really important learning outcomes                        ', '2013-03-01', 1, 4, 'Review dyslexia strategies', 8, '2013-03-19', '', '0.00', 0),
-(11, 2528, 'Claro read training', '', 'Understand the uses of Claro read, how to integrate into lessons and basic awareness of features', '2013-04-19', 1, 4, 'Integration of learning support technology for dyslexic students', 7, NULL, NULL, '0.00', NULL),
-(12, 2528, 'Peer Observation', '', 'See Colleague C teaching level 1 class using Interactive whiteboard', '2013-03-27', 1, 1, 'Transfer good practice to my level 1 session next Wednesday as part of group assessment task', 8, NULL, NULL, '0.00', NULL),
-(13, 2528, 'Visit Stakeholder X', '', 'Organise enrichment activity for level 3 following meeting with Colleagues A and B', '2013-06-01', 1, 2, 'Experience a day in the life at Stakeholder X, gain employability skills and experience', 8, NULL, NULL, '0.00', NULL),
-(14, 2528, 'An old activity', '0 ', 'Just a test', '2011-06-01', 1, 2, 'Test data', 8, '2012-11-09', NULL, '0.00', 0);
+INSERT INTO `activity` (`id`, `moodle_user_id`, `title`, `provider`, `learning_outcomes`, `planned_date`, `cpd_type_id`, `target_id`, `impact`, `priority_type_id`, `completed_date`, `evaluation_url`, `hours_of_cpd`, `rating`, `evaluation_notes`) VALUES
+(1, 43, 'Rise and Shine', '', 'Creative assessment techniques to implement in to practice', '2013-02-26', 1, 1, 'Lessons will be structured with regular assessment activities so students are on task and know their progress rate', 7, '2013-03-12', ' ', '0.00', 0, NULL),
+(2, 43, 'Rise and Shine            ', '', 'Effective questioning technique            ', '2013-02-26', 1, 2, 'Questions will encourage students to think independently, keep them engaged and included', 8, '2013-03-22', ' ', '0.00', 0, NULL),
+(3, 43, ' Parents evening            ', '', 'Some really important learning outcomes                        ', '2013-03-01', 1, 4, 'Review dyslexia strategies', 8, '2013-03-19', '', '0.00', 0, NULL),
+(4, 43, 'Claro read training', '', 'Understand the uses of Claro read, how to integrate into lessons and basic awareness of features', '2013-04-19', 1, 4, 'Integration of learning support technology for dyslexic students', 7, NULL, NULL, '0.00', NULL, NULL),
+(5, 43, 'Peer Observation', '', 'See Colleague C teaching level 1 class using Interactive whiteboard', '2013-03-27', 1, 1, 'Transfer good practice to my level 1 session next Wednesday as part of group assessment task', 8, NULL, NULL, '0.00', NULL, NULL),
+(7, 43, 'An old activity', '0 ', 'Just a test', '2011-06-01', 1, 2, 'Test data', 8, '2012-11-09', NULL, '0.00', 0, NULL),
+(15, 2528, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Rise and Shine</p>\r\n</body>\r\n</html>', 'Rise and Shine2', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Creative assessment techniques to implement in to practice</p>\r\n</body>\r\n</html>', '2013-07-28', NULL, 1, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Lessons will be structured with regular assessment activities so students are on task.</p>\r', 7, '2013-07-29', NULL, '0.00', 2, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>abc</p>\r\n</body>\r\n</html>'),
+(33, 2528, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Rise and Shine</p>\r\n</body>\r\n</html>', '', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Creative assessment techniques to implement in to practice</p>\r\n</body>\r\n</html>', '2013-09-05', NULL, 1, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Lessons will be structured with regular assessment activities so students are on task and k', 7, '0000-00-00', NULL, '0.00', 5, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>123</p>\r\n</body>\r\n</html>'),
+(34, 2528, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Rise and Shine</p>\r\n</body>\r\n</html>', '', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Effective questioning technique</p>\r\n</body>\r\n</html>', '2013-11-22', NULL, 1, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Questions will encourage students to think independently, keep them engaged and included</p', 8, NULL, NULL, '0.00', NULL, NULL),
+(35, 2528, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Meeting with Dyslexia tutor</p>\r\n</body>\r\n</html>', '', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Review dyslexia strategies</p>\r\n</body>\r\n</html>', '2014-02-01', NULL, 1, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Readily accessible resources for dyslexic students to increase participation</p>\r\n</body>\r\n', 7, NULL, NULL, '0.00', NULL, NULL),
+(36, 2528, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Claro read training</p>\r\n</body>\r\n</html>', '', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Understand the uses of Claro read, how to integrate into lessons and basic awareness of fea', '2013-11-14', NULL, 4, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Integration of learning support technology for dyslexic students</p>\r\n</body>\r\n</html>', 8, NULL, NULL, '0.00', NULL, NULL),
+(37, 2528, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Peer Observation</p>\r\n</body>\r\n</html>', '', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>See Colleague C teaching level 1 class using Interactive whiteboard</p>\r\n</body>\r\n</html>', '2013-12-29', NULL, 1, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Transfer good practice to my level 1 session next Wednesday as part of group assessment tas', 8, NULL, NULL, '0.00', NULL, NULL),
+(38, 2528, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Visit Stakeholder X</p>\r\n</body>\r\n</html>', '', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Organise enrichment activity for level 3 following meeting with Colleagues A and B</p>\r\n</b', '2013-09-05', NULL, 2, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>Experience a day in the life at Stakeholder X, gain employability skills and experience</p>', 8, NULL, NULL, '0.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -86,7 +86,8 @@ CREATE TABLE IF NOT EXISTS `admin_user` (
 --
 
 INSERT INTO `admin_user` (`moodle_user_id`) VALUES
-(2);
+(2),
+(2528);
 
 -- --------------------------------------------------------
 
@@ -189,9 +190,7 @@ CREATE TABLE IF NOT EXISTS `manager` (
 --
 
 INSERT INTO `manager` (`moodle_user_id`, `description`) VALUES
-(0, ''),
-(43, 'manager of test faculty A'),
-(12859, 'abc');
+(0, '');
 
 -- --------------------------------------------------------
 
@@ -209,17 +208,6 @@ CREATE TABLE IF NOT EXISTS `manager_group` (
   KEY `manager` (`manager`),
   KEY `section` (`section`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
-
---
--- Dumping data for table `manager_group`
---
-
-INSERT INTO `manager_group` (`id`, `manager`, `section`, `description`) VALUES
-(1, 43, 10, 'test group A'),
-(2, 43, 16, 'test group X'),
-(4, 12859, 0, 'test group A'),
-(5, 12859, 0, 'test group'),
-(7, 43, 30, 'group z');
 
 -- --------------------------------------------------------
 
@@ -264,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `news` (
 --
 
 INSERT INTO `news` (`description`) VALUES
-('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html>\n<head>\n</head>\n<body>\n<p>A new mandatory online learning module is now available for all staff to complete from DisabledGo. These modules look at equality in both legal and practical terms as well as language, types of impairment and advice on accessible services. <a href="http://training.disabledgo.com/auth/register/canterbury-college" target="_blank">http://training.disabledgo.com/auth/register/canterbury-college</a> Please follow the link and login by registering an email, username and password. You''ll also be able to access this link via the VLE shortly by looking under Staff Training.</p>\n</body>\n</html>');
+('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>A new mandatory online learning module is now available for all staff to complete from DisabledGo. These modules look at equality in both legal and practical terms as well as language, types of impairment and advice on accessible services. <a href="http://training.disabledgo.com/auth/register/canterbury-college" target="_blank">http://training.disabledgo.com/auth/register/canterbury-college</a> Please follow the link and login by registering an email, username and password. You''ll also be able to access this link via the VLE shortly by looking under Staff Training....</p>\r\n</body>\r\n</html>');
 
 -- --------------------------------------------------------
 
@@ -388,7 +376,7 @@ CREATE TABLE IF NOT EXISTS `target` (
   PRIMARY KEY (`id`),
   KEY `targets_ibfk_2` (`status_id`),
   KEY `targets_ibfk_1` (`moodle_user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `target`
@@ -398,9 +386,9 @@ INSERT INTO `target` (`id`, `title`, `title_ext`, `description`, `status_id`, `m
 (1, '1 Teaching and Learning', 'Assessment and Feedback', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<div>&middot; Use a range of assessment methods which evaluate the learning in the classroom every 10 minutes.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Provide effective written feedback for assignments within 4 days of submission.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Use verbal praise and recognition in the classroom environment...</div>\r\n</body>\r\n</html>', 7, 43, '14/05/2013'),
 (2, '2 ACR/Departmental', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>&middot; Liaise with Christine Bunting in ALS regarding the adjustments for dyslexia needed for resources.</p>\r\n<p>&middot; Ensure all lesson plans include the differentiated activities and assessments for students X and Y.</p>\r\n<p>&middot; Share the lesson plan in advance with their LSP.</p>\r\n</body>\r\n</html>', 8, 43, '30/04/2013'),
 (4, '3 Student focus', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html>\n<head>\n</head>\n<body>\n<p>&middot; Feedback states students leave due to lack of enrichment activities and resources available on the VLE.</p>\n<p>&middot; Work with manager to identify good practice</p>\n<p>&middot; peer observe colleague with desired use of ILT</p>\n<p>&middot; Work with colleagues A and B to design 3 enrichment activities and trips which address the employability skills of teamwork, problem solving and communication.</p>\n</body>\n</html>', 7, 43, '18/07/2013'),
-(5, '1 Teaching and Learning', 'Assessment and Feedback', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<div>&middot; Use a range of assessment methods which evaluate the learning in the classroom every 10 minutes.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Provide effective written feedback for assignments within 4 days of submission.</div>\r\n<div>&nbsp;</div>\r\n<div>&middot; Use verbal praise and recognition in the classroom environment...</div>\r\n</body>\r\n</html>', 7, 2528, '14/05/2013'),
-(6, '2 ACR/Departmental', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>&middot; Liaise with Christine Bunting in ALS regarding the adjustments for dyslexia needed for resources.</p>\r\n<p>&middot; Ensure all lesson plans include the differentiated activities and assessments for students X and Y.</p>\r\n<p>&middot; Share the lesson plan in advance with their LSP.</p>\r\n</body>\r\n</html>', 8, 2528, '30/04/2013'),
-(7, '3 Student focus', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html>\n<head>\n</head>\n<body>\n<p>&middot; Feedback states students leave due to lack of enrichment activities and resources available on the VLE.</p>\n<p>&middot; Work with manager to identify good practice</p>\n<p>&middot; peer observe colleague with desired use of ILT</p>\n<p>&middot; Work with colleagues A and B to design 3 enrichment activities and trips which address the employability skills of teamwork, problem solving and communication.</p>\n</body>\n</html>', 7, 2528, '18/07/2013');
+(10, '1 Teaching and Learning', 'Assessment and Feedback', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>&middot; Use a range of assessment methods which evaluate the learning in the classroom every 10 minutes.</p>\r\n<p>&nbsp;</p>\r\n<p>&middot; Provide effective written feedback for assignments within 4 days of submission.</p>\r\n<p>&nbsp;</p>\r\n<p>&middot; Use verbal praise and recognition in the classroom environment...</p>\r\n</body>\r\n</html>', 7, 2528, '11/07/2013'),
+(11, '2 ACR/Departmental', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>&middot; Liaise with Christine Bunting in ALS regarding the adjustments for dyslexia needed for resources.</p>\r\n<p>&nbsp;</p>\r\n<p>&middot; Ensure all lesson plans include the differentiated activities and assessments for students X and Y.</p>\r\n<p>&nbsp;</p>\r\n<p>&middot; Share the lesson plan in advance with their LSP.</p>\r\n</body>\r\n</html>', 7, 2528, '27/07/2013'),
+(12, '3 Student focus', 'Raise retention on course ABX5689DHJ from 89% to 95%.', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p>&middot; Feedback states students leave due to lack of enrichment activities and resources available on the VLE.</p>\r\n<p>&nbsp;</p>\r\n<p>&middot; Work with manager to identify good practice</p>\r\n<p>&nbsp;</p>\r\n<p>&middot; peer observe colleague with desired use of ILT</p>\r\n<p>&nbsp;</p>\r\n<p>&middot; Work with colleagues A and B to design 3 enrichment activities and trips which address the employability skills of teamwork, problem solving ', 7, 2528, '31/07/2013');
 
 -- --------------------------------------------------------
 
@@ -434,6 +422,7 @@ CREATE TABLE IF NOT EXISTS `v_activity` (
 `id` int(11)
 ,`moodle_user_id` int(11)
 ,`title` varchar(250)
+,`evaluation_notes` varchar(500)
 ,`impact` varchar(250)
 ,`provider` varchar(250)
 ,`learning_outcomes` varchar(250)
@@ -459,7 +448,7 @@ CREATE TABLE IF NOT EXISTS `v_activity_group` (
 `id` int(11)
 ,`staff_id` int(11)
 ,`staff_displayname` varchar(201)
-,`manager_id` bigint(10)
+,`manager_id` bigint(10) unsigned
 ,`manager_displayname` varchar(201)
 ,`group` varchar(100)
 ,`section` varchar(100)
@@ -489,8 +478,8 @@ DROP VIEW IF EXISTS `v_scores`;
 CREATE TABLE IF NOT EXISTS `v_scores` (
 `title` varchar(255)
 ,`value` longtext
-,`course` bigint(10)
-,`userid` bigint(10)
+,`course` bigint(10) unsigned
+,`userid` bigint(10) unsigned
 );
 -- --------------------------------------------------------
 
@@ -499,10 +488,11 @@ CREATE TABLE IF NOT EXISTS `v_scores` (
 --
 DROP VIEW IF EXISTS `v_staff`;
 CREATE TABLE IF NOT EXISTS `v_staff` (
-`id` bigint(10)
+`id` bigint(10) unsigned
 ,`username` varchar(100)
 ,`firstname` varchar(100)
 ,`lastname` varchar(100)
+,`deleted` tinyint(1)
 ,`displayname` varchar(201)
 ,`email` varchar(100)
 );
@@ -545,7 +535,7 @@ CREATE TABLE IF NOT EXISTS `v_targets_with_status_and_name` (
 --
 DROP TABLE IF EXISTS `v_activity`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`%` SQL SECURITY DEFINER VIEW `v_activity` AS (select `activity`.`id` AS `id`,`activity`.`moodle_user_id` AS `moodle_user_id`,`activity`.`title` AS `title`,`activity`.`impact` AS `impact`,`activity`.`provider` AS `provider`,`activity`.`learning_outcomes` AS `learning_outcomes`,`activity`.`planned_date` AS `planned_date`,`activity`.`cpd_type_id` AS `cpd_type_id`,`cpd_type`.`description` AS `cpd_type`,`activity`.`target_id` AS `target_id`,`target`.`title` AS `target`,`activity`.`priority_type_id` AS `priority_type_id`,`priority_type`.`description` AS `priority_type`,`activity`.`completed_date` AS `completed_date`,`activity`.`evaluation_url` AS `evaluation_url`,`activity`.`hours_of_cpd` AS `hours_of_cpd`,`activity`.`rating` AS `rating` from (((`activity` left join `cpd_type` on((`activity`.`cpd_type_id` = `cpd_type`.`id`))) left join `priority_type` on((`activity`.`priority_type_id` = `priority_type`.`id`))) left join `target` on((`activity`.`target_id` = `target`.`id`))));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_activity` AS select `activity`.`id` AS `id`,`activity`.`moodle_user_id` AS `moodle_user_id`,`activity`.`title` AS `title`,`activity`.`evaluation_notes` AS `evaluation_notes`,`activity`.`impact` AS `impact`,`activity`.`provider` AS `provider`,`activity`.`learning_outcomes` AS `learning_outcomes`,`activity`.`planned_date` AS `planned_date`,`activity`.`cpd_type_id` AS `cpd_type_id`,`cpd_type`.`description` AS `cpd_type`,`activity`.`target_id` AS `target_id`,`target`.`title` AS `target`,`activity`.`priority_type_id` AS `priority_type_id`,`priority_type`.`description` AS `priority_type`,`activity`.`completed_date` AS `completed_date`,`activity`.`evaluation_url` AS `evaluation_url`,`activity`.`hours_of_cpd` AS `hours_of_cpd`,`activity`.`rating` AS `rating` from (((`activity` left join `cpd_type` on((`activity`.`cpd_type_id` = `cpd_type`.`id`))) left join `priority_type` on((`activity`.`priority_type_id` = `priority_type`.`id`))) left join `target` on((`activity`.`target_id` = `target`.`id`)));
 
 -- --------------------------------------------------------
 
@@ -572,7 +562,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_score
 --
 DROP TABLE IF EXISTS `v_staff`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_staff` AS select `moodle`.`mdl_user`.`id` AS `id`,`moodle`.`mdl_user`.`username` AS `username`,`moodle`.`mdl_user`.`firstname` AS `firstname`,`moodle`.`mdl_user`.`lastname` AS `lastname`,concat(`moodle`.`mdl_user`.`firstname`,' ',`moodle`.`mdl_user`.`lastname`) AS `displayname`,`moodle`.`mdl_user`.`email` AS `email` from `moodle`.`mdl_user` where (not((`moodle`.`mdl_user`.`email` like '%@student%')));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_staff` AS select `moodle`.`mdl_user`.`id` AS `id`,`moodle`.`mdl_user`.`username` AS `username`,`moodle`.`mdl_user`.`firstname` AS `firstname`,`moodle`.`mdl_user`.`lastname` AS `lastname`,`moodle`.`mdl_user`.`deleted` AS `deleted`,concat(`moodle`.`mdl_user`.`firstname`,' ',`moodle`.`mdl_user`.`lastname`) AS `displayname`,`moodle`.`mdl_user`.`email` AS `email` from `moodle`.`mdl_user` where ((not((`moodle`.`mdl_user`.`email` like '%@student%'))) and (`moodle`.`mdl_user`.`deleted` = '0'));
 
 -- --------------------------------------------------------
 
