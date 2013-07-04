@@ -20,8 +20,11 @@ td,th  {
 }
 
 .layout {
-    width: 100%;
+    padding-top: 10px;
+    width: 90%;
     border-style: none;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .right {
@@ -83,6 +86,8 @@ form br {
     margin-left: 3px;
     margin-right: 3px;
     margin-bottom: 10px;
+    width: 90%;
+    margin: auto;
 }
 
 .fieldset-auto-width {
@@ -212,5 +217,24 @@ ul {
 #star {
     width: 200px !important;
     margin-top: 6px;
+}
+
+#mytargets {
+    background-color: rgba(20,60,0,0.2);
+    border-style: solid;
+    border-color: darkgray;
+    border-width: 2px;
+    width:600px;
+   -moz-border-radius: 15px;
+border-radius: 15px;
+padding: 16px;
+}
+
+ a  {
+    color: #000000;
+}
+
+h2 {
+    margin: 0px;
 }
 

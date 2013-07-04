@@ -15,6 +15,9 @@ class HubController extends BaseController
         //create the model object
         require("models/hub.php");
         $this->model = new HubModel();
+        
+        require("models/target.php");
+        $this->model = new TargetModel();
     }
     
     //default method
