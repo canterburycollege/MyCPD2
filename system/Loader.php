@@ -26,7 +26,7 @@ class Loader {
         }
         
         if ($this->urlValues['action'] == "") {
-            $this->action = "index";
+            $this->action = "view";
         } else {
             $this->action = $this->urlValues['action'];
         }
