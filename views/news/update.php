@@ -14,7 +14,7 @@ tinyMCE.init({
 <?php foreach ($viewModel->get('news') as $row): ?>
 <?php endforeach; ?>
 
-<form>
+<form id="standard" method="post" action="">
  <fieldset class="fieldset-auto-width">          
             <legend>Update news banner</legend>
 <label for="description">Banner text</label><br>

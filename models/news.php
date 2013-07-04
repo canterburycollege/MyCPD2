@@ -31,7 +31,7 @@ class NewsModel extends BaseModel
         return $this->viewModel;
     }
     
-        public function edit(){
+        public function update(){
         $sql = "SELECT * FROM news";
         
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
@@ -45,6 +45,24 @@ class NewsModel extends BaseModel
      
         return $this->viewModel;
     }
+    
+    
+    public function updated() {
+        $description = mysql_real_escape_string($_POST['description']);
+
+        $sql = "UPDATE news SET
+                description = '{$description}'";
+
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $dbConn->execute($sql);
+        if (empty($results)) {
+            // initialize array to prevent php warning msg.
+            $results = Array();
+        }
+
+        header('Location: /moodle/MyCPD/');
+    }
+    
 }
 
 /* End of file activity.php */

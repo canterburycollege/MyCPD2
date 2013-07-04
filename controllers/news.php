@@ -17,9 +17,12 @@ class NewsController extends BaseController
         $this->model = new NewsModel();
     }
     
-    public function edit(){
-        //Todo: Check to ensure this is an MyCPD admin user.
-        $this->view->output($this->model->edit());
+    public function update() {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $this->view->output($this->model->updated());
+        }
+        else
+            $this->view->output($this->model->update());
     }
     
     public function delete(){
