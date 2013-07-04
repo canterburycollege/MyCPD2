@@ -4,7 +4,6 @@ require_once SYSPATH . 'DbConnectionRegistry.php';
 require_once SYSPATH . 'formHelper.php';
 
 class ActivityModel extends BaseModel {
-    
 
 // @todo move to own helper file
     private function html_select_options($options, $selected_id) {
@@ -16,17 +15,17 @@ class ActivityModel extends BaseModel {
                 $html .= '<option value="' . $option->id . '">';
             }
             $html .= $option->description . '</option>';
-    }}
+        }
+    }
 
-
-   public function create() {
+    public function create() {
         $this->viewModel->set("pageTitle", "Create Activity");
-        
+
         $Targetsql = "select id, title, moodle_user_id from target;";
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $results = $dbConn->get_all($Targetsql, 'OBJECT');
 
-        
+
         if (empty($results)) {
             // initialize array to prevent php warning msg.
             $results = Array();
@@ -35,20 +34,15 @@ class ActivityModel extends BaseModel {
         $this->viewModel->set("pageTitle", "Create Activity");
         $this->viewModel->set("heading1", "Create Activity");
         $this->viewModel->set("targets", $results);
-        
+
         $priority_types = $this->get_priority_types();
         $this->viewModel->set("priority_options", html_select_options($priority_types, NULL));
-        
+
         return $this->viewModel;
-
-   }
-   
-   
-   
-
+    }
 
     public function created() {
-           $moodle_user_id = $_SESSION['USER']->id; 
+        $moodle_user_id = $_SESSION['USER']->id;
         $this->viewModel->set("pageTitle", "MyCPD Hub");
 
         $title = $_POST['title'];
@@ -61,7 +55,7 @@ class ActivityModel extends BaseModel {
         $planned_date = $_POST['planned_date'];
 
 
- $sql = "INSERT INTO activity 
+        $sql = "INSERT INTO activity 
                 (
                 moodle_user_id,
                 title,
@@ -82,32 +76,30 @@ class ActivityModel extends BaseModel {
                 '{$planned_date}')";
 
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
-echo $sql;       
- $dbConn->execute($sql);
+        echo $sql;
+        $dbConn->execute($sql);
 
-header('Location: /moodle/MyCPD/activity/view/');
-
-
+        header('Location: /moodle/MyCPD/activity/view/');
     }
 
     public function delete($id) {
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
-        
+
         // first, check that activity belongs to logged-in user
         $sql = "
             SELECT  count(*) AS row_count
             FROM    activity 
             WHERE   id = {$id} AND moodle_user_id = {$_SESSION['USER']->id}";
-        $results = $dbConn->get_all($sql,'OBJECT');
+        $results = $dbConn->get_all($sql, 'OBJECT');
         $row_count = $results[0]->row_count;
         if ($row_count < 1) {
             return 'not_authorised';
         }
-        
+
         $sql2 = "DELETE FROM activity WHERE id = '{$id}'";
         $dbConn->execute($sql2);
     }
-    
+
     private function get_priority_types() {
         $sql = "SELECT id, description FROM priority_type ORDER BY sort_order";
 
@@ -132,29 +124,32 @@ header('Location: /moodle/MyCPD/activity/view/');
         return $results;
     }
 
-        private function get_target_desc($id) { 
-            if ($id == ' '){
-            $where = " WHERE id={$id} ";
-        } else {
-            $where = NULL;
-        }
+    private function get_target_desc($id) {
+
         /* @todo add IN clause to select only given user's targets */
-        $sql = "SELECT  id, title 
-                FROM    target $where ";
-        echo $sql;
-        $dbConn = DbConnectionRegistry::getInstance('mycpd');
-        $results = $dbConn->get_all($sql, 'OBJECT');
-       // var_dump($results);
-        return $results[0]->title;
+
+        if (!empty($id)) {
+            $sql = "SELECT  id, title 
+                FROM    target WHERE id={$id} ";
+
+            $dbConn = DbConnectionRegistry::getInstance('mycpd');
+            $results = $dbConn->get_all($sql, 'OBJECT');
+            // var_dump($results);
+            return $results[0]->title;
+        }
+
+
+
+        //echo $sql;
     }
-    
+
     public function index($logged_in_user) {
         $this->viewModel->set("pageTitle", "MyCPD Hub");
         $this->viewModel->set("heading1", "Activities");
         return $this->viewModel;
     }
-    
-    public function update($id){
+
+    public function update($id) {
         $dbConn = DbConnectionRegistry::getInstance('mycpd');
         $sql = "
             UPDATE  activity
@@ -176,21 +171,21 @@ header('Location: /moodle/MyCPD/activity/view/');
     }
 
     public function updateForm($id) {
-                $this->viewModel->set("pageTitle", "MyCPD Hub");
+        $this->viewModel->set("pageTitle", "MyCPD Hub");
         $this->viewModel->set("heading1", "Update Activity");
-        $dbConn = DbConnectionRegistry::getInstance('mycpd'); 
-        
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+
         // first, check that activity belongs to logged-in user
         $sql = "
             SELECT  count(*) AS row_count
             FROM    activity 
             WHERE   id = {$id} AND moodle_user_id = {$_SESSION['USER']->id}";
-        $results = $dbConn->get_all($sql,'OBJECT');
+        $results = $dbConn->get_all($sql, 'OBJECT');
         $row_count = $results[0]->row_count;
         if ($row_count < 1) {
             return 'not_authorised';
         }
-        
+
         $sql2 = "SELECT * FROM v_activity WHERE id = {$id}";
         $results2 = $dbConn->get_all($sql2, 'OBJECT');
         if (empty($results2)) {
@@ -213,7 +208,7 @@ header('Location: /moodle/MyCPD/activity/view/');
     }
 
     public function view($logged_in_user) {
-        
+
         //@todo academic_year move to global constant
         $academic_year = "2013/09/03 00:00:00";
         $sql = "
@@ -230,14 +225,13 @@ header('Location: /moodle/MyCPD/activity/view/');
             $results = Array();
         }
         $target_desc = $this->get_target_desc($_GET['id']);
-        $this->viewModel->set('target_desc',$target_desc);
+        $this->viewModel->set('target_desc', $target_desc);
         $this->viewModel->set("pageTitle", "MyCPD Hub");
         $this->viewModel->set("heading1", "Activities");
         $this->viewModel->set("activities", $results);
 
         return $this->viewModel;
     }
-
 
     public function archive($logged_in_user) {
         //@todo academic_year move to global constant
@@ -260,7 +254,6 @@ header('Location: /moodle/MyCPD/activity/view/');
 
         return $this->viewModel;
     }
-
 
 }
 
