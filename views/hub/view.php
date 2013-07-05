@@ -12,8 +12,8 @@
 </script>
 
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
-<h1><?= $viewModel->get('heading1'); ?></h1>
-<p>-- {Elain's MyCPD intoduction here} --</p>
+<h1>MyCPD Hub</h1>
+<p>-- {Elaine's MyCPD intoduction here} --</p>
 <br>
 <div id="mytargets">
 <h2>My Targets summary</h2>
@@ -41,4 +41,10 @@
     
     <a href ="target/create">Create a new target</a>
     
+</div>
+
+</div>
+
+<div id="activities">
+<a href ="activity/create">Create a new activity</a>
 </div>

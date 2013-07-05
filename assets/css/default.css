@@ -225,12 +225,13 @@ ul {
     border-color: darkgray;
     border-width: 2px;
     width:600px;
-   -moz-border-radius: 15px;
-border-radius: 15px;
-padding: 16px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    padding: 16px;
+    float: left;
 }
 
- a  {
+a  {
     color: #000000;
 }
 
@@ -238,3 +239,16 @@ h2 {
     margin: 0px;
 }
 
+#activities{
+    background-color: rgba(20,60,0,0.2);
+    border-style: solid;
+    border-color: darkgray;
+    border-width: 2px;
+    width:400px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    padding: 16px;
+    float: left;
+    padding-left: 20px;
+    margin-left: 20px;
+}
