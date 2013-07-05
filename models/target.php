@@ -83,9 +83,21 @@ class TargetModel extends BaseModel {
             // initialize array to prevent php warning msg.
             $results = Array();
         }
+
+                
+                $sql2 = "SELECT * FROM news_items";
+        
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results2 = $dbConn->get_all($sql2,'OBJECT');
+  
+
+        
+        
+        
         $this->viewModel->set("pageTitle", "MyCPD Hub");
         $this->viewModel->set("heading1", "Targets");
         $this->viewModel->set("targets", $results);
+        $this->viewModel->set("news_items",$results2);
 
         return $this->viewModel;
     }
@@ -138,7 +150,7 @@ class TargetModel extends BaseModel {
 
         header('Location: /moodle/MyCPD/target/view/');
     }
-
+  
 }
 
 /* End of file target.php */

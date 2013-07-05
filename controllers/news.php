@@ -6,8 +6,7 @@
  * Loads models and views required by activity
  * 
  */
-class NewsController extends BaseController
-{
+class NewsController extends BaseController {
 
     public function __construct($action, $urlValues) {
         parent::__construct($action, $urlValues);
@@ -16,28 +15,49 @@ class NewsController extends BaseController
         require("models/news.php");
         $this->model = new NewsModel();
     }
-    
+
     public function update() {
+        $id = $_GET['id'];
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $this->view->output($this->model->updated());
+            $this->view->output($this->model->updated($id));
         }
         else
-            $this->view->output($this->model->update());
+            $this->view->output($this->model->update($id));
     }
-    
-    public function delete(){
-        $this->view->output($this->model->delete());
+
+    public function updateni() {
+        $id = $_GET['id'];
+        // $this->view->output($this->model->updateni($id));
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $this->view->output($this->model->updatedni($id));
+        }
+        else
+            $this->view->output($this->model->updateni($id));
+    }
+
+    public function add() {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $this->view->output($this->model->added());
+        }
+        else
+            $this->view->output($this->model->add());
+    }
+
+    public function delete() {
+        $id = $_GET['id'];
+        $this->view->output($this->model->delete($id));
     }
 
     //default method
-    protected function index()
-    {
+    protected function index() {
         $this->view->output($this->model->index());
     }
-    
-    public function view(){
+
+    public function view() {
         $this->view->output($this->model->view());
     }
+
 }
+
 /* End of file activity.php */
 /* Location: ./activity.php */

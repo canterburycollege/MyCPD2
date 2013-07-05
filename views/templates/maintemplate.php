@@ -12,5 +12,8 @@
  <div class="news"><?= $row->description?></div>
 <?php endforeach; ?>
         <?php require($this->viewFile); ?>
+ 
+ 
+ 
     </body>
 </html>
