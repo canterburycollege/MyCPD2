@@ -27,6 +27,13 @@ class ReportController extends BaseController {
     public function allstaff() {
         $this->view->output($this->model->allstaff());
     }
+    
+      public function allManagerStaffTargets() {
+          $id = $_GET['id'];
+        $this->view->output($this->model->all_manager_staff_targets($id));
+    }
+    
+    
 
     public function section() {
         $this->view->output($this->model->section());
