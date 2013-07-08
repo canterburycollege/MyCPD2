@@ -21,8 +21,7 @@ return false ;
 </script>
 
 <?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
- <h1><img src="<?= BASEURL . '/assets/pix/plan2.png' ?>" alt="Target icon"><?= $viewModel->get('heading1'); ?></h1>
- <h2><img src="<?= BASEURL . '/assets/pix/target.gif' ?>" alt="Target icon">All Staff Activities - <?php foreach ($viewModel->get('section') as $row): ?><?= $row->description ?> <?php endforeach; ?></h2>
+ <h2><img src="<?= BASEURL . '/assets/pix/plan2.png' ?>" alt="Activitys icon">All Staff Activities - <?php foreach ($viewModel->get('section') as $row): ?><?= $row->description ?> <?php endforeach; ?></h2>
 
 <div id="div_activities">
     <table id="table_detail">

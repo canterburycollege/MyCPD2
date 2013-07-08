@@ -3,7 +3,7 @@
     $(document).ready(function() {
         filter = $('#table_detail').dataTable({
             "bJQueryUI": true,
-             "bPaginate": false });
+             "bPaginate": true });
         //auto fill fiter from get for linking. 
         filter.fnFilter('');
     });
@@ -23,6 +23,7 @@
                     <th width="500px">Course name</th>
                     <th>Score</th>
                     <th>Status</th>
+                    <th>Result</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,7 @@
                         <td><?= $row->value ?></td>
                         <?php //todo: add grey for not attempted. ?>
                         <td align='center'><?php if($row->value >=80){ echo "<img src='".BASEURL."assets/pix/green.png' height='24' width='24'>"; } else { echo "<img src='".BASEURL."assets/pix/red.png' height='24' width='24'>";} ?></td>
+                        <td align='center'><?php if($row->value >=80){ echo "Pass"; } else { echo "Fail";} ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

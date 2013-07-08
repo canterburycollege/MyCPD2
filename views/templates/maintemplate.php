@@ -9,8 +9,10 @@
     </head>
     <body>
         <?php foreach ($viewModel->get('news') as $row): ?>
+        <div id="news">
  <div class="news"><?= $row->description?></div>
 <?php endforeach; ?>
+ </div>
         <?php require($this->viewFile); ?>
  
  

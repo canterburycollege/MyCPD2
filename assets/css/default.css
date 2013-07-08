@@ -85,7 +85,7 @@ form br {
     margin-left: 3px;
     margin-right: 3px;
     margin-bottom: 10px;
-    width: 90%;
+    width: 99%;
     margin: auto;
 }
 
@@ -237,6 +237,18 @@ ul {
     border-color: darkgray;
     border-width: 2px;
     width:50%;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    padding: 16px;
+    float: left;
+}
+
+#news {
+    background-color: rgba(20,60,0,0.2);
+    ;
+    border-color: darkgray;
+    border-width: 2px;
+    width:93%;
     -moz-border-radius: 15px;
     border-radius: 15px;
     padding: 16px;

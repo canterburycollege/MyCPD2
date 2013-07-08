@@ -1,7 +1,4 @@
-<?php include_once TEMPLATEPATH . 'nav_bar.php'; ?>
-<h1><img src="<?= BASEURL . '/assets/pix/report.gif' ?>" alt="Report icon"><?= $viewModel->get('heading1'); ?></h1>
 <script type="text/javascript" src="<?= BASEURL ?>/assets/js/DataTables/media/js/jquery.dataTables.js"></script>
-
 <script>
     $(document).ready(function() {
         filter = $('#table_detail').dataTable({
