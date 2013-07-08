@@ -72,5 +72,5 @@ $priority_options = $viewModel->get('priority_options');?>
     </table>
     <br/>
     <input type="submit" value="Create Activity" />
-    <input type="reset" value="Cancel" />
+                <input type="reset" value="Cancel" onClick="history.go(-1);return true;"/>
 </form>

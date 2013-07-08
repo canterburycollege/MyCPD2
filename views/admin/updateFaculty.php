@@ -11,7 +11,7 @@ $faculty = $viewModel->get('faculty');
         <tr>
             <td colspan="2" align="center">
                 <input type="submit" value="Submit" />
-                <input type="reset" value="Cancel" />
+                <input type="reset" value="Cancel" onClick="history.go(-1);return true;"/>
             </td>
         </tr>
     </table>
