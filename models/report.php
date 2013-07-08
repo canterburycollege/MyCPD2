@@ -104,6 +104,29 @@ class ReportModel extends BaseModel {
     }
     
     
+        public function all_manager_staff_mandatory($id) {
+        $moodle_user_id = $_SESSION['USER']->id;
+
+        $sql = "SELECT * FROM v_manager_all_staff_mandatory where manager_group = '{$id}'";
+        $sql2 = "SELECT description FROM v_section_name where id = '{$id}'";
+
+        $dbConn = DbConnectionRegistry::getInstance('mycpd');
+        $results = $dbConn->get_all($sql, 'OBJECT');
+        $results2 = $dbConn->get_all($sql2, 'OBJECT');
+        if (empty($results)) {
+            // initialize array to prevent php warning msg.
+            $results = Array();
+        }
+        
+        
+        $this->viewModel->set("pageTitle", "MyCPD Hub");
+        $this->viewModel->set("heading1", "All Staff report");
+        $this->viewModel->set("mandatory", $results);
+        $this->viewModel->set("section", $results2);
+
+        return $this->viewModel;
+    }
+    
     public function section() {
         $this->viewModel->set("pageTitle", "MyCPD Hub");
         $this->viewModel->set("heading1", "Section/Faculty report");
