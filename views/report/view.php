@@ -5,20 +5,21 @@
 
 <h2>Targets</h2>
 <ul>
-    <li> <a href ="../../report/allstaff">View all staff</a></li>
-     <?php foreach ($viewModel->get('sections') as $row): ?>
-                    <a href="../../report/allManagerStaffTargets/<?= $row->id ?>"><?= $row->description ?></a><br>
-                <?php endforeach; ?>
+    <?php foreach ($viewModel->get('sections') as $row): ?>
+        <li><a href="../../report/allManagerStaffTargets/<?= $row->id ?>"><?= $row->description ?></a></li>
+    <?php endforeach; ?>
 </ul>
 
 <h2>Activities</h2>
 <ul>
-    <li> <a href ="../../report/allstaff">View all staff</a></li>
-    <li><a href='../../report/section'>View selected staff Section/Faculty</a></li>
+    <?php foreach ($viewModel->get('sections') as $row): ?>
+        <li><a href="../../report/allManagerStaffActivities/<?= $row->id ?>"><?= $row->description ?></a></li>
+    <?php endforeach; ?>
 </ul>
 
 <h2>Mandatory & Contractual Training</h2>
 <ul>
-    <li> <a href ="../../report/allstaff">View all staff</a></li>
-    <li><a href='../../report/section'>View selected staff Section/Faculty</a></li>
+    <?php foreach ($viewModel->get('sections') as $row): ?>
+        <li><a href="../../report/allManagerStaffMandatory/<?= $row->id ?>"><?= $row->description ?></a></li>
+    <?php endforeach; ?>
 </ul>

@@ -37,25 +37,19 @@ return false ;
                     <th>Description</th>
                     <th>Status</th>
                     <th>Date Due</th>
-                    <th></th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($viewModel->get('targets') as $row): ?>
                     <tr>
                         <td><?= $row->firstname ?> <?= $row->lastname ?></td>
-                        <td><a href="../../activity/view/<?= $row->id ?>"><?= $row->title ?></a></td>
+                        <td><?= $row->title ?></td>
                         <td><?= $row->title_ext ?></td>
                         <td><?= $row->description ?></td>
                         <td><?= $row->status ?></td>
                         <td><?= $row->target_date ?></td>
-                        <td><a href="../../target/update/<?= $row->id ?>">(Update)</a> </td>
-                        <td><a href="../../target/delete/<?= $row->id ?>" onClick="return confirmPost()">(Delete)</a> </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </form>
-    
-    <a href ="../../target/create">Create a new target</a>
